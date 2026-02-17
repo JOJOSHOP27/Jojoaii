@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* [CSS same as original – tidak ada perubahan] */
+        /* [CSS tetap sama seperti sebelumnya] */
         :root {
             --primary: #4285f4;
             --primary-glow: #4285f480;
@@ -1013,7 +1013,7 @@
                     <div class="model-desc">Connected to Google's Gemini AI with real-time multimodal responses and advanced reasoning.</div>
                     
                     <div class="api-key-display" id="apiKeyDisplay">
-                        AIzaSyAeEwPc2VLlAGH6XYmhieOK_hBQRFGI6iE
+                        AIzaSyDA5QcQrkZsVYOiV_g60An7pkAGpgIup_k
                     </div>
                     
                     <div class="api-actions">
@@ -1253,7 +1253,7 @@
 
     <script>
         // Konfigurasi API Gemini - Menggunakan API key baru
-        const GEMINI_API_KEY = "AIzaSyAeEwPc2VLlAGH6XYmhieOK_hBQRFGI6iE";
+        const GEMINI_API_KEY = "AIzaSyDA5QcQrkZsVYOiV_g60An7pkAGpgIup_k";
         const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent";
         
         // State global
@@ -1473,7 +1473,6 @@
                     conversationHistory.push({ role: "user", content: userMessage });
                     
                     // Bangun array contents untuk Gemini API
-                    // Format: [{"role": "user", "parts": [{"text": "..."}]}, {"role": "model", "parts": [{"text": "..."}]}, ...]
                     const contents = [];
                     for (let i = 0; i < conversationHistory.length; i++) {
                         const msg = conversationHistory[i];
@@ -1512,12 +1511,11 @@
                         throw new Error("Tidak ada respons dari Gemini");
                     }
                     
-                    // Ambil token usage jika tersedia (usageMetadata)
+                    // Ambil token usage jika tersedia
                     let tokenUsed = 0;
                     if (data.usageMetadata) {
                         tokenUsed = data.usageMetadata.totalTokenCount || 0;
                     } else {
-                        // Estimasi sederhana
                         tokenUsed = Math.ceil((userMessage.length + aiResponse.length) / 4);
                     }
                     
@@ -1572,7 +1570,6 @@
                         updateStats(result.tokens);
                         showNotification('Gemini Response Received', `AI responded with ${result.tokens} tokens.`, 'success');
                     } else {
-                        // Fallback response jika API gagal
                         const fallbackText = "Maaf, terjadi kesalahan koneksi ke Gemini API. Silakan coba lagi nanti.";
                         addMessage(`<strong>GEMINI AI:</strong> ${fallbackText}`, false, 0);
                         updateStats(0);
