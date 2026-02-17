@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemini Quantum - Ultra Modern AI Interface</title>
+    <title>Gemini Quantum - Real Google AI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* [CSS same as original – tidak ada perubahan] */
         :root {
             --primary: #4285f4;
             --primary-glow: #4285f480;
@@ -1012,7 +1013,7 @@
                     <div class="model-desc">Connected to Google's Gemini AI with real-time multimodal responses and advanced reasoning.</div>
                     
                     <div class="api-key-display" id="apiKeyDisplay">
-                        AIzaSyCA6LIBOOf57rUO3FS3IDpqXlJ9c7UIOp8
+                        AIzaSyAeEwPc2VLlAGH6XYmhieOK_hBQRFGI6iE
                     </div>
                     
                     <div class="api-actions">
@@ -1031,7 +1032,7 @@
                 </div>
                 
                 <div class="model-selector">
-                    <div class="model-name">GEMINI PRO 1.5</div>
+                    <div class="model-name">GEMINI 1.5 PRO</div>
                     <div class="model-desc">Advanced multimodal AI with 1M+ token context window, optimized for complex reasoning and creative tasks.</div>
                     <div class="model-stats">
                         <div class="stat">
@@ -1096,7 +1097,7 @@
                         <span style="color: var(--primary); font-family: 'Orbitron';" id="tokenCount">0</span>
                     </div>
                     <div style="height: 6px; background: rgba(66, 133, 244, 0.1); border-radius: 3px; overflow: hidden; margin-top: 10px;">
-                        <div style="width: 15%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary));" id="usageBar"></div>
+                        <div style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary));" id="usageBar"></div>
                     </div>
                 </div>
             </aside>
@@ -1251,14 +1252,14 @@
     </div>
 
     <script>
-        // Konfigurasi API Gemini
-        const GEMINI_API_KEY = "AIzaSyCA6LIBOOf57rUO3FS3IDpqXlJ9c7UIOp8";
-        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent`;
+        // Konfigurasi API Gemini - Menggunakan API key baru
+        const GEMINI_API_KEY = "AIzaSyAeEwPc2VLlAGH6XYmhieOK_hBQRFGI6iE";
+        const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent";
         
-        // Variabel state
+        // State global
         let requestCount = 0;
         let totalTokens = 0;
-        let conversationHistory = [];
+        let conversationHistory = []; // Menyimpan riwayat percakapan
         
         document.addEventListener('DOMContentLoaded', function() {
             // Update waktu sekarang
@@ -1267,7 +1268,6 @@
                 const timeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
                 document.getElementById('currentTime').textContent = `${timeString} • SYSTEM INIT`;
             }
-            
             setInterval(updateCurrentTime, 1000);
             updateCurrentTime();
             
@@ -1298,14 +1298,10 @@
                 notificationTitle.textContent = title;
                 notificationBody.textContent = message;
                 
-                // Reset classes
                 notification.className = 'notification';
                 notification.classList.add(type);
-                
-                // Show notification
                 notification.classList.add('show');
                 
-                // Auto hide after 5 seconds
                 setTimeout(() => {
                     notification.classList.remove('show');
                 }, 5000);
@@ -1332,21 +1328,18 @@
                 try {
                     const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             contents: [{
-                                parts: [{
-                                    text: "Hello, please respond with 'Gemini API Connection Successful' if you can read this."
-                                }]
+                                parts: [{ text: "Hello, please respond with 'Gemini API Connection Successful' if you can read this." }]
                             }]
                         })
                     });
                     
                     if (response.ok) {
                         const data = await response.json();
-                        showNotification('Gemini API Test Successful', 'Connection to Google Gemini API is working perfectly!', 'success');
+                        const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Success (no response text)';
+                        showNotification('Gemini API Test Successful', `Response: ${aiText}`, 'success');
                         apiStatus.innerHTML = '<i class="fas fa-check-circle"></i><span>GEMINI ACTIVE</span>';
                         apiStatus.style.background = 'rgba(52, 168, 83, 0.1)';
                         apiStatus.style.borderColor = 'var(--success)';
@@ -1393,33 +1386,22 @@
                 }
             });
             
-            // Auto-resize textarea function
+            // Auto-resize textarea
             function autoResizeTextarea() {
-                // Reset height to auto to get correct scrollHeight
                 messageInput.style.height = 'auto';
-                // Set height to scrollHeight (content height)
                 messageInput.style.height = messageInput.scrollHeight + 'px';
-                
-                // Limit max height to 200px
                 if (messageInput.scrollHeight > 200) {
                     messageInput.style.height = '200px';
                 }
-                
-                // Update character count
                 updateCharCount();
-                
-                // Estimate tokens (rough estimate: ~4 chars per token for English)
                 const text = messageInput.value;
                 const estimatedTokens = Math.ceil(text.length / 4);
                 tokenEstimate.textContent = `Tokens: ${estimatedTokens}`;
             }
             
-            // Update character count
             function updateCharCount() {
                 const length = messageInput.value.length;
                 charCount.textContent = `${length}/8000`;
-                
-                // Change color if approaching limit
                 if (length > 7000) {
                     charCount.style.color = '#ea4335';
                 } else if (length > 6000) {
@@ -1429,25 +1411,18 @@
                 }
             }
             
-            // Initialize auto-resize
             messageInput.addEventListener('input', autoResizeTextarea);
-            
-            // Initialize character count
             updateCharCount();
             
             // Update stats
             function updateStats(tokensUsed = 0) {
                 requestCount++;
                 totalTokens += tokensUsed;
-                
                 requestCountElement.textContent = requestCount;
                 tokenCountElement.textContent = totalTokens;
                 
-                // Update usage bar (simulated)
                 const usagePercentage = Math.min(100, (totalTokens / 10000) * 100);
                 usageBar.style.width = `${usagePercentage}%`;
-                
-                // Change color based on usage
                 if (usagePercentage > 80) {
                     usageBar.style.background = 'linear-gradient(90deg, #ea4335, #ff6b81)';
                 } else if (usagePercentage > 50) {
@@ -1487,26 +1462,29 @@
                 `;
                 
                 messagesContainer.appendChild(messageDiv);
-                
-                // Scroll to bottom
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                
                 return messageDiv;
             }
             
-            // Send message to Gemini API
+            // Send message to Gemini API dengan format riwayat percakapan yang benar
             async function sendMessageToGemini(userMessage) {
                 try {
                     // Simpan pesan user ke history
                     conversationHistory.push({ role: "user", content: userMessage });
                     
-                    // Siapkan request untuk Gemini API
+                    // Bangun array contents untuk Gemini API
+                    // Format: [{"role": "user", "parts": [{"text": "..."}]}, {"role": "model", "parts": [{"text": "..."}]}, ...]
+                    const contents = [];
+                    for (let i = 0; i < conversationHistory.length; i++) {
+                        const msg = conversationHistory[i];
+                        contents.push({
+                            role: msg.role === "user" ? "user" : "model",
+                            parts: [{ text: msg.content }]
+                        });
+                    }
+                    
                     const requestBody = {
-                        contents: [{
-                            parts: [{
-                                text: userMessage
-                            }]
-                        }],
+                        contents: contents,
                         generationConfig: {
                             temperature: 0.7,
                             topK: 40,
@@ -1515,53 +1493,41 @@
                         }
                     };
                     
-                    // Tambahkan history conversation jika ada
-                    if (conversationHistory.length > 1) {
-                        // Format history untuk Gemini
-                        const formattedHistory = conversationHistory.slice(0, -1).map(msg => {
-                            return {
-                                role: msg.role === "user" ? "user" : "model",
-                                parts: [{ text: msg.content }]
-                            };
-                        });
-                        
-                        requestBody.contents = [
-                            ...formattedHistory,
-                            {
-                                role: "user",
-                                parts: [{ text: userMessage }]
-                            }
-                        ];
-                    }
-                    
                     const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(requestBody)
                     });
                     
                     if (!response.ok) {
                         const errorData = await response.json();
-                        throw new Error(`Gemini API Error: ${errorData.error?.message || response.status}`);
+                        throw new Error(errorData.error?.message || `HTTP ${response.status}`);
                     }
                     
                     const data = await response.json();
                     
-                    // Extract AI response
-                    const aiResponse = data.candidates[0].content.parts[0].text;
+                    // Ambil teks respons
+                    const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (!aiResponse) {
+                        throw new Error("Tidak ada respons dari Gemini");
+                    }
                     
-                    // Simulasi token usage (Gemini API tidak memberikan info token secara langsung di response ini)
-                    const estimatedTokens = Math.ceil((userMessage.length + aiResponse.length) / 4);
+                    // Ambil token usage jika tersedia (usageMetadata)
+                    let tokenUsed = 0;
+                    if (data.usageMetadata) {
+                        tokenUsed = data.usageMetadata.totalTokenCount || 0;
+                    } else {
+                        // Estimasi sederhana
+                        tokenUsed = Math.ceil((userMessage.length + aiResponse.length) / 4);
+                    }
                     
-                    // Add AI response to conversation history
-                    conversationHistory.push({ role: "assistant", content: aiResponse });
+                    // Simpan respons AI ke history
+                    conversationHistory.push({ role: "model", content: aiResponse });
                     
                     return {
                         success: true,
                         response: aiResponse,
-                        tokens: estimatedTokens
+                        tokens: tokenUsed
                     };
                     
                 } catch (error) {
@@ -1573,97 +1539,50 @@
                 }
             }
             
-            // Fallback responses jika API error
-            function getFallbackResponse(userMessage) {
-                const lowerMessage = userMessage.toLowerCase();
-                
-                if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('halo')) {
-                    return "Hello! I'm Gemini AI, powered by Google's advanced language model. How can I assist you today?";
-                } else if (lowerMessage.includes('how are you')) {
-                    return "I'm functioning optimally within my quantum neural network! Ready to help with any questions or tasks you have.";
-                } else if (lowerMessage.includes('weather')) {
-                    return "I don't have real-time weather data, but I can help you understand meteorological concepts or write code to fetch weather data from APIs!";
-                } else if (lowerMessage.includes('code') || lowerMessage.includes('programming')) {
-                    return "I can help with coding in multiple languages! What programming language are you interested in? I can write, explain, or debug code for you.";
-                } else if (lowerMessage.includes('time') || lowerMessage.includes('date')) {
-                    const now = new Date();
-                    return `The current date and time is: ${now.toLocaleString()}. I'm here to help with any questions you have!`;
-                } else {
-                    const responses = [
-                        "I understand your query! As Google's Gemini AI, I can help with a wide range of topics including science, technology, creative writing, and problem-solving.",
-                        "That's an interesting question! I'm designed to handle complex reasoning tasks and provide helpful, accurate responses.",
-                        "I appreciate your message! I'm here to assist with information, analysis, creative projects, coding, and much more.",
-                        "Thanks for reaching out! I'm powered by Google's latest AI technology and ready to help with whatever you need."
-                    ];
-                    return responses[Math.floor(Math.random() * responses.length)];
-                }
-            }
-            
             // Send message function
             async function sendMessage() {
                 const message = messageInput.value.trim();
-                
                 if (message === '') {
                     showNotification('Empty Message', 'Please type a message before sending.', 'warning');
                     return;
                 }
-                
                 if (message.length > 8000) {
                     showNotification('Message Too Long', 'Please keep messages under 8000 characters for optimal performance.', 'error');
                     return;
                 }
                 
-                // Add user message
+                // Tampilkan pesan user
                 addMessage(message, true);
                 
-                // Clear input and reset height
+                // Clear input
                 messageInput.value = '';
                 messageInput.style.height = 'auto';
                 updateCharCount();
                 
-                // Show typing indicator
+                // Tampilkan typing indicator
                 typingIndicator.style.display = 'flex';
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
                 
                 try {
-                    // Send to Gemini API
                     const result = await sendMessageToGemini(message);
-                    
-                    // Hide typing indicator
                     typingIndicator.style.display = 'none';
                     
                     if (result.success) {
-                        // Add AI response
                         addMessage(`<strong>GEMINI AI:</strong> ${result.response}`, false, result.tokens);
-                        
-                        // Update stats
                         updateStats(result.tokens);
-                        
-                        // Show success notification
-                        showNotification('Gemini Response Received', `AI responded with estimated ${result.tokens} tokens.`, 'success');
+                        showNotification('Gemini Response Received', `AI responded with ${result.tokens} tokens.`, 'success');
                     } else {
-                        // Show error and use fallback
-                        console.error('API Error:', result.error);
-                        
-                        // Get fallback response
-                        const fallbackResponse = getFallbackResponse(message);
-                        addMessage(`<strong>GEMINI AI:</strong> ${fallbackResponse}`, false, 150);
-                        
-                        // Update stats with estimated tokens
-                        updateStats(150);
-                        
-                        // Show warning notification
-                        showNotification('Using Fallback Mode', `Gemini API connection issue. Using enhanced fallback responses.`, 'warning');
+                        // Fallback response jika API gagal
+                        const fallbackText = "Maaf, terjadi kesalahan koneksi ke Gemini API. Silakan coba lagi nanti.";
+                        addMessage(`<strong>GEMINI AI:</strong> ${fallbackText}`, false, 0);
+                        updateStats(0);
+                        showNotification('API Error', result.error, 'error');
                     }
                 } catch (error) {
                     typingIndicator.style.display = 'none';
-                    
-                    // Get fallback response
-                    const fallbackResponse = getFallbackResponse(message);
-                    addMessage(`<strong>GEMINI AI:</strong> ${fallbackResponse}`, false, 150);
-                    
-                    updateStats(150);
-                    showNotification('System Error', 'Using enhanced AI responses. Gemini API may be temporarily unavailable.', 'warning');
+                    addMessage(`<strong>GEMINI AI:</strong> Terjadi kesalahan sistem.`, false, 0);
+                    updateStats(0);
+                    showNotification('System Error', error.message, 'error');
                 }
             }
             
@@ -1675,8 +1594,6 @@
                     e.preventDefault();
                     sendMessage();
                 }
-                
-                // Ctrl+Space to clear input
                 if (e.key === ' ' && e.ctrlKey) {
                     e.preventDefault();
                     messageInput.value = '';
@@ -1685,12 +1602,12 @@
                 }
             });
             
-            // Attach button functionality
+            // Attach button (simulasi)
             document.getElementById('attachBtn').addEventListener('click', function() {
                 showNotification('File Attachment', 'Gemini supports image and document uploads! In a real implementation, you could upload files for analysis.', 'info');
             });
             
-            // Voice button functionality
+            // Voice button (simulasi)
             document.getElementById('voiceBtn').addEventListener('click', function() {
                 showNotification('Voice Input', 'Gemini has excellent speech recognition capabilities! In a real app, you could use voice input.', 'info');
             });
@@ -1705,27 +1622,10 @@
                 showNotification('Export Chat', 'You could export this conversation as PDF, text, or share it with others.', 'info');
             });
             
-            // Initial welcome message dengan API test
-            setTimeout(() => {
-                showNotification('Gemini API Connected', 'Successfully connected to Google Gemini API. Ready to process your requests.', 'success');
-                
-                // Update API status
-                apiStatus.innerHTML = '<i class="fas fa-check-circle"></i><span>GEMINI ACTIVE</span>';
-                apiStatus.style.background = 'rgba(52, 168, 83, 0.1)';
-                apiStatus.style.borderColor = 'var(--success)';
-                apiStatus.style.color = 'var(--success)';
-            }, 1000);
-            
-            // Add welcome message about Gemini capabilities
-            setTimeout(() => {
-                const welcomeMessage = `<strong>GEMINI AI:</strong> System initialized with Google Gemini API. I can process text, images, documents, and even video inputs! The input field below expands dynamically as you type. Try asking about science, coding, creative writing, or any topic you're curious about!`;
-                addMessage(welcomeMessage, false);
-            }, 2000);
-            
-            // Auto-test API on load
+            // Inisialisasi: test API saat load
             setTimeout(() => {
                 testApiBtn.click();
-            }, 3000);
+            }, 1000);
         });
     </script>
 </body>
