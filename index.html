@@ -3,372 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🤖 Chat AI · Gemini (Stabil)</title>
+    <title>Joell AI - Modern Chat</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-        }
-        body {
-            background: #e9f0f5;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 16px;
-        }
-        .chat-container {
-            max-width: 850px;
-            width: 100%;
-            background: white;
-            border-radius: 32px;
-            box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.25);
-            padding: 28px 24px;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-        h2 {
-            font-size: 1.9rem;
-            font-weight: 600;
-            color: #1f2a3f;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        h2 span {
-            background: #e6edf5;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            font-weight: 400;
-            color: #2c5779;
-        }
-        .info-bar {
-            background: #f0f7ff;
-            border-radius: 60px;
-            padding: 12px 20px;
-            margin-bottom: 24px;
-            border: 1px solid #cdddee;
-            color: #1f3b54;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .info-bar .key-badge {
-            background: #d4e2f2;
-            border-radius: 30px;
-            padding: 5px 14px;
-            font-family: monospace;
-            font-size: 0.85rem;
-            color: #0a2a44;
-        }
-        #chatBox {
-            background: #f8fafd;
-            border-radius: 24px;
-            padding: 24px 20px;
-            height: 380px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            border: 1px solid #d9e2ed;
-            margin-bottom: 22px;
-            scroll-behavior: smooth;
-        }
-        .message {
-            max-width: 80%;
-            padding: 14px 20px;
-            border-radius: 24px;
-            font-size: 1rem;
-            line-height: 1.5;
-            word-wrap: break-word;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.02);
-        }
-        .user {
-            background: #1a5e9c;
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 6px;
-        }
-        .bot {
-            background: white;
-            color: #1e2a3a;
-            align-self: flex-start;
-            border-bottom-left-radius: 6px;
-            border: 1px solid #cfdeef;
-        }
-        .error-message {
-            background: #ffefef;
-            color: #b53b3b;
-            border: 1px solid #f3cfcf;
-            align-self: center;
-            max-width: 90%;
-            font-size: 0.9rem;
-            text-align: center;
-        }
-        .loading {
-            background: #e9f2fa;
-            color: #3e668a;
-            font-style: italic;
-            border: 1px dashed #9cb9d4;
-        }
-        .input-area {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        #messageInput {
-            flex: 1;
-            min-width: 200px;
-            padding: 16px 22px;
-            background: #ffffff;
-            border: 2px solid #cbdae9;
-            border-radius: 50px;
-            font-size: 1rem;
-            outline: none;
-            transition: border 0.15s;
-        }
-        #messageInput:focus {
-            border-color: #1a5e9c;
-        }
-        button {
-            background: #1a5e9c;
-            border: none;
-            color: white;
-            padding: 16px 28px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.15s, transform 0.1s;
-            border: 1px solid #2f6da0;
-            box-shadow: 0 6px 12px -8px #0a3a62;
-        }
-        button:hover {
-            background: #0f4a7a;
-        }
-        button:active {
-            transform: scale(0.97);
-        }
-        button:disabled {
-            background: #99b3cc;
-            border-color: #809bb3;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        #resetBtn {
-            background: #4f5d73;
-            border-color: #3f4b5e;
-        }
-        #resetBtn:hover {
-            background: #3e4a5c;
-        }
-        .footer {
-            margin-top: 16px;
-            font-size: 0.8rem;
-            color: #5f7d9c;
-            text-align: center;
-        }
+        /* Desain Modern & Simpel */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        #chat-container { width: 400px; height: 600px; background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: flex; flex-direction: column; overflow: hidden; }
+        #header { background: #2563eb; color: white; padding: 20px; text-align: center; font-size: 1.2em; font-weight: bold; }
+        #messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .msg { padding: 10px 15px; border-radius: 10px; max-width: 80%; line-height: 1.4; }
+        .user { background: #e2e8f0; align-self: flex-end; color: #1e293b; }
+        .ai { background: #dbeafe; align-self: flex-start; color: #1e40af; }
+        #input-area { border-top: 1px solid #eee; padding: 15px; display: flex; gap: 10px; }
+        input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; outline: none; }
+        button { background: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #1d4ed8; }
     </style>
 </head>
 <body>
-    <div class="chat-container">
-        <h2>💬 Chat AI <span>gemini-pro · stabil</span></h2>
-        
-        <!-- API key tersemat (tidak perlu diinput) -->
-        <input type="hidden" id="apiKey" value="AIzaSyDA5QcQrkZsVYOiV_g60An7pkAGpgIup_k">
 
-        <div class="info-bar">
-            <span>🔑 API key aktif</span>
-            <span class="key-badge">•••••••••••••••k</span>
-            <span>⚙️ model: gemini-pro</span>
-        </div>
-
-        <!-- Area percakapan -->
-        <div id="chatBox"></div>
-
-        <!-- Input dan kontrol -->
-        <div class="input-area">
-            <input type="text" id="messageInput" placeholder="Ketik pesan..." autocomplete="off">
-            <button id="sendBtn">Kirim</button>
-            <button id="resetBtn">↻ Reset</button>
-        </div>
-        <div class="footer">
-            ✨ Siap pakai · jika terjadi error, pesan akan muncul di sini
-        </div>
+<div id="chat-container">
+    <div id="header">🤖 Joell AI</div>
+    <div id="messages"></div>
+    <div id="input-area">
+        <input type="text" id="user-input" placeholder="Tanya sesuatu pada Joell AI...">
+        <button onclick="sendMessage()">Kirim</button>
     </div>
+</div>
 
-    <script>
-        (function() {
-            // ===== ELEMEN =====
-            const apiKeyInput = document.getElementById('apiKey');
-            const chatBox = document.getElementById('chatBox');
-            const messageInput = document.getElementById('messageInput');
-            const sendBtn = document.getElementById('sendBtn');
-            const resetBtn = document.getElementById('resetBtn');
+<script>
+    const API_KEY = "AIzaSyCpcekj4zdWjUj4ghwUtSXNAWmRIR-Pwrw"; // API Key Anda
+    const messagesDiv = document.getElementById('messages');
 
-            // ===== STATE =====
-            let messages = [];                 // riwayat percakapan [{ role, text }]
-            let loadingDiv = null;              // elemen loading
+    async function sendMessage() {
+        const input = document.getElementById('user-input');
+        const text = input.value.trim();
+        if (!text) return;
 
-            // ===== FUNGSI RENDER =====
-            function addMessageToDOM(role, text, isError = false, isLoading = false) {
-                const messageDiv = document.createElement('div');
-                messageDiv.classList.add('message');
-                if (role === 'user') {
-                    messageDiv.classList.add('user');
-                } else if (isError) {
-                    messageDiv.classList.add('error-message');
-                } else if (isLoading) {
-                    messageDiv.classList.add('loading');
-                } else {
-                    messageDiv.classList.add('bot');
-                }
-                messageDiv.textContent = text;
-                chatBox.appendChild(messageDiv);
-                chatBox.scrollTop = chatBox.scrollHeight;
-                return messageDiv;
-            }
+        // Tampilkan pesan User
+        appendMessage(text, 'user');
+        input.value = '';
 
-            function showLoading() {
-                if (loadingDiv) return; // sudah ada
-                loadingDiv = addMessageToDOM('bot', '⚡ Mengetik...', false, true);
-            }
-
-            function hideLoading() {
-                if (loadingDiv) {
-                    loadingDiv.remove();
-                    loadingDiv = null;
-                }
-            }
-
-            function addUserMessage(text) {
-                messages.push({ role: 'user', text });
-                addMessageToDOM('user', text);
-            }
-
-            function addBotMessage(text) {
-                messages.push({ role: 'model', text });
-                addMessageToDOM('bot', text);
-            }
-
-            function addErrorMessage(text) {
-                // tidak disimpan ke history, hanya tampil
-                addMessageToDOM('system', text, true);
-            }
-
-            function resetChat() {
-                messages = [];
-                chatBox.innerHTML = '';
-                hideLoading();
-                // sambutan opsional (biarkan kosong, lebih minimalis)
-                // agar tidak terlalu kosong, bisa ditambahkan pesan bot pertama
-                // addBotMessage('Halo! Silakan tanya apa saja.');
-                // Namun sesuai permintaan, kita biarkan user memulai.
-            }
-
-            // ===== PANGGIL API GEMINI =====
-            async function callGemini(userText) {
-                // Validasi API key (seharusnya sudah ada)
-                const apiKey = apiKeyInput.value.trim();
-                if (!apiKey) {
-                    addErrorMessage('❌ API key tidak ditemukan. Hubungi pengembang.');
-                    return;
-                }
-
-                // Tampilkan pesan user
-                addUserMessage(userText);
-                showLoading();
-                sendBtn.disabled = true;
-
-                // Gunakan model yang paling stabil: gemini-pro
-                const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
-
-                // Siapkan body request
-                const requestBody = {
-                    contents: messages.map(m => ({
-                        role: m.role,
-                        parts: [{ text: m.text }]
-                    }))
-                };
-
-                try {
-                    const response = await fetch(endpoint, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(requestBody)
-                    });
-
-                    hideLoading();
-
-                    if (!response.ok) {
-                        let errorDetail = `HTTP ${response.status}`;
-                        try {
-                            const errorData = await response.json();
-                            errorDetail = errorData.error?.message || JSON.stringify(errorData);
-                        } catch (e) {
-                            // abaikan
-                        }
-                        addErrorMessage(`❌ Gagal: ${errorDetail}`);
-                        sendBtn.disabled = false;
-                        return;
-                    }
-
-                    const data = await response.json();
-                    // Ambil teks dari respons
-                    const candidate = data.candidates?.[0];
-                    const botReply = candidate?.content?.parts?.[0]?.text;
-
-                    if (botReply) {
-                        addBotMessage(botReply);
-                    } else {
-                        // Kadang response sukses tapi tidak ada konten (misal karena safety)
-                        addErrorMessage('⚠️ Model tidak memberikan respons (mungkin terblokir oleh filter).');
-                        console.warn('Response tanpa teks:', data);
-                    }
-                } catch (error) {
-                    hideLoading();
-                    addErrorMessage(`🚫 Jaringan error: ${error.message}`);
-                } finally {
-                    sendBtn.disabled = false;
-                    messageInput.focus();
-                }
-            }
-
-            // ===== EVENT LISTENER =====
-            sendBtn.addEventListener('click', function() {
-                const text = messageInput.value.trim();
-                if (text === '') return;
-                messageInput.value = '';
-                callGemini(text);
+        try {
+            // Panggil API Gemini
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: text }] }]
+                })
             });
 
-            messageInput.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    if (!sendBtn.disabled) {
-                        sendBtn.click();
-                    }
-                }
-            });
+            const data = await response.json();
+            const aiResponse = data.candidates[0].content.parts[0].text;
+            
+            // Tampilkan balasan AI
+            appendMessage(aiResponse, 'ai');
+        } catch (error) {
+            appendMessage("Maaf, Joell AI sedang mengalami kendala koneksi. 🛠️", 'ai');
+            console.error(error);
+        }
+    }
 
-            resetBtn.addEventListener('click', function() {
-                resetChat();
-                messageInput.focus();
-            });
+    function appendMessage(text, sender) {
+        const div = document.createElement('div');
+        div.classList.add('msg', sender);
+        div.innerText = text;
+        messagesDiv.appendChild(div);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+</script>
 
-            // Fokus ke input saat halaman dimuat
-            window.addEventListener('load', function() {
-                messageInput.focus();
-                // Bisa tambahkan pesan sambutan jika diinginkan
-                // (dibiarkan kosong agar user langsung mengetik)
-            });
-        })();
-    </script>
 </body>
 </html>
