@@ -6,6 +6,7 @@
     <title>JOJO AI - The Ultimate AI Experience</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ========== CSS (lengkap dari kode sebelumnya) ========== */
         * {
             margin: 0;
             padding: 0;
@@ -682,17 +683,6 @@
             font-size: 0.85rem;
         }
         
-        .developer-credit {
-            background: linear-gradient(135deg, var(--developer), #FF7F50);
-            padding: 8px 20px;
-            border-radius: 25px;
-            color: white;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
         /* Typing Indicator */
         .typing-indicator {
             display: none;
@@ -1114,12 +1104,10 @@
     <script>
         // ================ API CONFIGURATION ================
         // API KEY YANG ANDA MINTA
-        const API_KEY = "AIzaSyBrYui8RFhNPYOZzRAH46cWQLMYNIdSQbI";
+        const API_KEY = "AIzaSyDl0SSiNrqxZzPwa993DanKmlL7KDQhYYY";
         
-        // Gunakan model yang lebih stabil
+        // Gunakan model yang stabil
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
-        
-        // Backup URL jika utama error
         const BACKUP_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
         
         // ================ DOM ELEMENTS ================
@@ -1150,23 +1138,17 @@
         
         // ================ UTILITY FUNCTIONS ================
         function showNotification(message, type = 'info') {
-            // Remove existing notification if any
-            const existingNotification = document.querySelector('.notification');
-            if (existingNotification) {
-                existingNotification.remove();
-            }
+            const existing = document.querySelector('.notification');
+            if (existing) existing.remove();
             
-            // Create notification element
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
             notification.innerHTML = `
                 <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
                 <span>${message}</span>
             `;
-            
             document.body.appendChild(notification);
             
-            // Remove notification after 3 seconds
             setTimeout(() => {
                 if (notification.parentNode) {
                     notification.style.animation = 'slideIn 0.3s ease-out reverse';
@@ -1195,21 +1177,12 @@
             showNotification('Testing API connection...', 'info');
             
             try {
-                // Try primary API
                 const response = await fetch(currentApiUrl, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        contents: [{
-                            role: "user",
-                            parts: [{ text: "Say hello" }]
-                        }],
-                        generationConfig: {
-                            temperature: 0.7,
-                            maxOutputTokens: 10,
-                        }
+                        contents: [{ role: "user", parts: [{ text: "Hello" }] }],
+                        generationConfig: { temperature: 0.7, maxOutputTokens: 10 }
                     })
                 });
                 
@@ -1217,25 +1190,15 @@
                     showNotification('✅ API connection successful!', 'success');
                     return true;
                 } else {
-                    // Try backup API
-                    const backupResponse = await fetch(BACKUP_API_URL, {
+                    const backup = await fetch(BACKUP_API_URL, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
-                            contents: [{
-                                role: "user",
-                                parts: [{ text: "Say hello" }]
-                            }],
-                            generationConfig: {
-                                temperature: 0.7,
-                                maxOutputTokens: 10,
-                            }
+                            contents: [{ role: "user", parts: [{ text: "Hello" }] }],
+                            generationConfig: { temperature: 0.7, maxOutputTokens: 10 }
                         })
                     });
-                    
-                    if (backupResponse.ok) {
+                    if (backup.ok) {
                         currentApiUrl = BACKUP_API_URL;
                         showNotification('✅ Using backup API (working!)', 'success');
                         return true;
@@ -1255,42 +1218,28 @@
         
         function handleFileUpload(e) {
             const files = Array.from(e.target.files);
-            
             files.forEach(file => {
-                // Validate file size (max 5MB)
                 if (file.size > 5 * 1024 * 1024) {
-                    alert(`File ${file.name} is too large. Maximum size is 5MB.`);
+                    alert(`File ${file.name} is too large. Max 5MB.`);
                     return;
                 }
-                
-                // Validate file type
-                const allowedTypes = [
-                    'image/jpeg', 'image/jpg', 'image/png', 'image/gif',
-                    'application/pdf', 'text/plain'
-                ];
-                
-                if (!allowedTypes.includes(file.type)) {
-                    alert(`File type not supported: ${file.name}. Please upload JPG, PNG, PDF, or TXT files.`);
+                const allowed = ['image/jpeg','image/jpg','image/png','image/gif','application/pdf','text/plain'];
+                if (!allowed.includes(file.type)) {
+                    alert(`File type not supported: ${file.name}.`);
                     return;
                 }
-                
-                // Add to selected files
                 if (selectedFiles.length >= 5) {
-                    alert('Maximum 5 files allowed at once.');
+                    alert('Maximum 5 files allowed.');
                     return;
                 }
-                
                 selectedFiles.push(file);
                 fileCount++;
                 fileCountEl.textContent = fileCount;
                 
-                // Create file preview
                 const fileDiv = document.createElement('div');
                 fileDiv.className = 'selected-file';
                 fileDiv.dataset.filename = file.name;
-                
                 const fileIcon = getFileIcon(file.type);
-                
                 fileDiv.innerHTML = `
                     <i class="fas ${fileIcon} file-icon"></i>
                     <div class="file-info">
@@ -1301,23 +1250,17 @@
                         <i class="fas fa-times"></i>
                     </button>
                 `;
-                
                 selectedFilesContainer.appendChild(fileDiv);
             });
-            
-            // Reset file input
             fileUpload.value = '';
         }
         
         window.removeSelectedFile = function(filename) {
-            selectedFiles = selectedFiles.filter(file => file.name !== filename);
+            selectedFiles = selectedFiles.filter(f => f.name !== filename);
             fileCount--;
             fileCountEl.textContent = fileCount;
-            
             const fileDiv = document.querySelector(`.selected-file[data-filename="${filename}"]`);
-            if (fileDiv) {
-                fileDiv.remove();
-            }
+            if (fileDiv) fileDiv.remove();
         };
         
         // ================ MESSAGE HANDLING ================
@@ -1327,30 +1270,18 @@
             
             const header = document.createElement('div');
             header.className = 'message-header';
-            
-            const icon = document.createElement('i');
-            icon.className = isUser ? 'fas fa-user' : 'fas fa-robot';
-            
-            const sender = document.createElement('span');
-            sender.textContent = isUser ? 'You' : 'JOJO AI';
-            
-            header.appendChild(icon);
-            header.appendChild(sender);
+            header.innerHTML = `<i class="fas ${isUser ? 'fa-user' : 'fa-robot'}"></i><span>${isUser ? 'You' : 'JOJO AI'}</span>`;
             
             const contentDiv = document.createElement('div');
             contentDiv.className = 'message-content';
             
-            // Add files if present
             if (files.length > 0 && isUser) {
                 const filesContainer = document.createElement('div');
                 filesContainer.className = 'uploaded-files';
-                
                 files.forEach(file => {
                     const fileDiv = document.createElement('div');
                     fileDiv.className = 'file-item';
-                    
                     const fileIcon = getFileIcon(file.type);
-                    
                     fileDiv.innerHTML = `
                         <i class="fas ${fileIcon} file-icon"></i>
                         <div class="file-info">
@@ -1358,10 +1289,8 @@
                             <div class="file-size">${formatFileSize(file.size)}</div>
                         </div>
                     `;
-                    
                     filesContainer.appendChild(fileDiv);
                     
-                    // If it's an image, create preview
                     if (file.type.startsWith('image/')) {
                         const reader = new FileReader();
                         reader.onload = function(e) {
@@ -1373,167 +1302,94 @@
                         reader.readAsDataURL(file);
                     }
                 });
-                
                 contentDiv.appendChild(filesContainer);
             }
             
-            // Add text content
             contentDiv.innerHTML += formatMessage(content);
-            
             messageDiv.appendChild(header);
             messageDiv.appendChild(contentDiv);
-            
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
-            
             return messageDiv;
         }
         
         function formatMessage(text) {
             if (!text) return '';
-            
-            // Format code blocks
             text = text.replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code class="language-$1">$2</code></pre>');
-            
-            // Format inline code
             text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
-            
-            // Format bold and italic
             text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
-            
-            // Format line breaks and paragraphs
             text = text.replace(/\n\n/g, '</p><p>');
             text = text.replace(/\n/g, '<br>');
-            text = '<p>' + text + '</p>';
-            
-            return text;
+            return '<p>' + text + '</p>';
         }
         
         // ================ IMAGE MODAL ================
-        window.openImageModal = function(imageSrc) {
-            modalImage.src = imageSrc;
+        window.openImageModal = function(src) {
+            modalImage.src = src;
             imageModal.classList.add('active');
         };
-        
-        closeModal.addEventListener('click', () => {
-            imageModal.classList.remove('active');
-        });
-        
-        imageModal.addEventListener('click', (e) => {
-            if (e.target === imageModal) {
-                imageModal.classList.remove('active');
-            }
-        });
+        closeModal.addEventListener('click', () => imageModal.classList.remove('active'));
+        imageModal.addEventListener('click', (e) => { if (e.target === imageModal) imageModal.classList.remove('active'); });
         
         // ================ API COMMUNICATION ================
         async function sendToGemini(message, files = []) {
-            const startTime = performance.now();
+            const start = performance.now();
             isProcessing = true;
-            
             typingIndicator.style.display = 'flex';
             chatMessages.scrollTop = chatMessages.scrollHeight;
             
             try {
-                // Build content parts
-                const contentParts = [{ text: message }];
-                
-                // Add files as inline data (images only)
+                const parts = [{ text: message }];
                 for (const file of files) {
                     if (file.type.startsWith('image/')) {
-                        const base64Data = await fileToBase64(file);
-                        contentParts.push({
-                            inline_data: {
-                                mime_type: file.type,
-                                data: base64Data
-                            }
-                        });
+                        const base64 = await fileToBase64(file);
+                        parts.push({ inline_data: { mime_type: file.type, data: base64 } });
                     }
                 }
                 
                 const payload = {
-                    contents: [{
-                        role: "user",
-                        parts: contentParts
-                    }],
-                    generationConfig: {
-                        temperature: 0.7,
-                        maxOutputTokens: 2048,
-                    }
+                    contents: [{ role: "user", parts }],
+                    generationConfig: { temperature: 0.7, maxOutputTokens: 2048 }
                 };
                 
-                // Try primary API first
                 let response = await fetch(currentApiUrl, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
                 
-                // If primary fails, try backup
                 if (!response.ok && currentApiUrl === API_URL) {
-                    console.log('Primary API failed, trying backup...');
                     currentApiUrl = BACKUP_API_URL;
                     response = await fetch(currentApiUrl, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
                 }
                 
                 if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error?.message || `API Error ${response.status}`);
+                    const err = await response.json();
+                    throw new Error(err.error?.message || `API Error ${response.status}`);
                 }
                 
                 const data = await response.json();
+                const end = performance.now();
+                responseTimeEl.textContent = `${((end - start) / 1000).toFixed(1)}s`;
                 
-                // Calculate response time
-                const endTime = performance.now();
-                const responseTime = (endTime - startTime) / 1000;
-                responseTimeEl.textContent = `${responseTime.toFixed(1)}s`;
-                
-                let aiResponse = '';
-                
-                if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
-                    aiResponse = data.candidates[0].content.parts[0].text;
-                    
-                    // Store in history
-                    chatHistory.push({
-                        role: "user",
-                        parts: [{ text: message }]
-                    });
-                    chatHistory.push({
-                        role: "model", 
-                        parts: [{ text: aiResponse }]
-                    });
-                    
-                    // Limit history
-                    if (chatHistory.length > 10) {
-                        chatHistory = chatHistory.slice(-10);
-                    }
-                } else {
-                    aiResponse = "I received an unexpected response. Please try again.";
-                }
-                
-                return aiResponse;
+                let aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response.";
+                chatHistory.push({ role: "user", parts: [{ text: message }] });
+                chatHistory.push({ role: "model", parts: [{ text: aiText }] });
+                if (chatHistory.length > 10) chatHistory = chatHistory.slice(-10);
+                return aiText;
                 
             } catch (error) {
-                console.error('API Error:', error);
-                
-                const endTime = performance.now();
-                const responseTime = (endTime - startTime) / 1000;
-                responseTimeEl.textContent = `${responseTime.toFixed(1)}s`;
-                
+                console.error(error);
+                responseTimeEl.textContent = `${((performance.now() - start) / 1000).toFixed(1)}s`;
                 if (error.message.includes('API key') || error.message.includes('quota') || error.message.includes('billing')) {
                     return `**API Error**: The API key needs to be activated.\n\n**Solution:**\n1. Visit https://aistudio.google.com/app/apikey\n2. Create a new API key\n3. Enable billing (free $300 credit)\n4. Replace the API key in the code`;
                 }
-                
                 return `**Error**: ${error.message}. Please try again.`;
-                
             } finally {
                 typingIndicator.style.display = 'none';
                 isProcessing = false;
@@ -1544,52 +1400,35 @@
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
-                reader.onload = () => {
-                    const base64 = reader.result.split(',')[1];
-                    resolve(base64);
-                };
+                reader.onload = () => resolve(reader.result.split(',')[1]);
                 reader.onerror = reject;
             });
         }
         
         // ================ INPUT HANDLING ================
         async function handleUserInput() {
-            const message = userInput.value.trim();
+            const msg = userInput.value.trim();
             const files = [...selectedFiles];
+            if ((!msg && !files.length) || isProcessing) return;
             
-            if ((!message && files.length === 0) || isProcessing) return;
-            
-            // Add user message
-            addMessage(message, true, files);
-            
-            // Clear input
+            addMessage(msg, true, files);
             userInput.value = '';
             userInput.style.height = 'auto';
             selectedFiles = [];
             selectedFilesContainer.innerHTML = '';
             fileCount = 0;
             fileCountEl.textContent = '0';
-            
-            // Disable send button
             sendButton.disabled = true;
             sendButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
             
             try {
-                // Send to Gemini
-                const aiResponse = await sendToGemini(message, files);
-                
-                // Add AI response
-                addMessage(aiResponse, false);
-                
-                // Update message count
+                const reply = await sendToGemini(msg, files);
+                addMessage(reply, false);
                 messageCount++;
                 messageCountEl.textContent = messageCount;
-                
-            } catch (error) {
-                console.error('Error:', error);
-                addMessage("Sorry, there was an error processing your request. Please try again.", false);
+            } catch (e) {
+                addMessage("Sorry, there was an error processing your request.", false);
             } finally {
-                // Re-enable send button
                 sendButton.disabled = false;
                 sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
                 userInput.focus();
@@ -1598,36 +1437,33 @@
         
         // ================ EVENT LISTENERS ================
         sendButton.addEventListener('click', handleUserInput);
-        
         userInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && !e.shiftKey && !isProcessing) {
                 e.preventDefault();
                 handleUserInput();
             }
         });
-        
         userInput.addEventListener('input', function() {
             this.style.height = 'auto';
-            this.style.height = (this.scrollHeight) + 'px';
+            this.style.height = this.scrollHeight + 'px';
         });
         
         quickActions.forEach(btn => {
             btn.addEventListener('click', () => {
-                userInput.value = btn.getAttribute('data-prompt');
+                userInput.value = btn.dataset.prompt;
                 userInput.focus();
                 userInput.style.height = 'auto';
-                userInput.style.height = (userInput.scrollHeight) + 'px';
+                userInput.style.height = userInput.scrollHeight + 'px';
             });
         });
         
         promptItems.forEach(btn => {
             btn.addEventListener('click', () => {
-                userInput.value = btn.getAttribute('data-prompt');
+                userInput.value = btn.dataset.prompt;
                 userInput.focus();
             });
         });
         
-        // Clear chat button
         clearChatBtn.addEventListener('click', () => {
             if (confirm('Clear entire conversation?')) {
                 chatMessages.innerHTML = '';
@@ -1639,34 +1475,19 @@
                 fileCount = 0;
                 fileCountEl.textContent = '0';
                 responseTimeEl.textContent = '0.0s';
-                
-                // Add welcome message
-                addMessage(`<strong>✨ Welcome to JOJO AI</strong><br><br>
-                    <p>I'm your AI assistant powered by Google's Gemini.</p>
-                    <p>You can upload images (JPG, PNG) and files (PDF, TXT) for analysis.</p><br>
-                    <p><strong>🎯 Developed by: ADNAN S.</strong></p>
-                    <p>Ask me anything or upload files to get started!</p>`, false);
+                addMessage(`<strong>✨ Welcome to JOJO AI</strong><br><br><p>I'm your AI assistant powered by Google's Gemini.</p><p>You can upload images (JPG, PNG) and files (PDF, TXT) for analysis.</p><br><p><strong>🎯 Developed by: ADNAN S.</strong></p><p>Ask me anything or upload files to get started!</p>`, false);
             }
         });
         
-        // Test API button
         testApiBtn.addEventListener('click', testApiKey);
         
-        // ================ INITIALIZATION ================
+        // ================ INIT ================
         document.addEventListener('DOMContentLoaded', () => {
             userInput.focus();
             console.log('JOJO AI initialized');
-            console.log('Using API Key: AIzaSyBrYui8RFhNPYOZzRAH46cWQLMYNIdSQbI');
-            
-            // Auto-test API on load
-            setTimeout(() => {
-                testApiKey();
-            }, 1000);
-            
-            // Show welcome notification
-            setTimeout(() => {
-                showNotification('JOJO AI is ready! Start chatting.', 'success');
-            }, 1500);
+            console.log('Using API Key:', API_KEY);
+            setTimeout(() => testApiKey(), 1000);
+            setTimeout(() => showNotification('JOJO AI is ready! Start chatting.', 'success'), 1500);
         });
     </script>
 </body>
