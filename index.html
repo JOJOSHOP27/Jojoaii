@@ -3,334 +3,353 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JOELL AI · modern assistant</title>
+    <title>JOELL AI · pro assistant</title>
     <style>
+        /* === MODERN & LENGKAP === */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
-            background: radial-gradient(circle at 10% 30%, #e6f0fa, #d4e2f0);
+            background: linear-gradient(145deg, #f0f5fa 0%, #e2eaf2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
+            padding: 16px;
         }
 
-        .chat-container {
-            max-width: 1100px;
+        .joell-container {
+            max-width: 1200px;
             width: 100%;
-            height: 85vh;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
-            border-radius: 40px;
-            box-shadow: 0 30px 60px -20px rgba(0, 20, 40, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+            height: 90vh;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 48px;
+            box-shadow: 0 30px 70px -20px rgba(0, 20, 40, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.7) inset;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255,255,255,0.5);
         }
 
-        /* header modern */
-        .header {
-            padding: 1.2rem 2rem;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+        /* header premium */
+        .header-premium {
+            padding: 1.5rem 2.2rem;
+            background: rgba(255,255,255,0.4);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.8);
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 20px;
         }
 
-        .header-avatar {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(145deg, #0f172a, #1e293b);
-            border-radius: 24px;
+        .avatar-glow {
+            width: 58px;
+            height: 58px;
+            background: linear-gradient(135deg, #0e1c36, #1c2e4a);
+            border-radius: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: 600;
-            font-size: 1.8rem;
-            box-shadow: 0 12px 18px -8px #0f172a80;
+            font-weight: 700;
+            font-size: 2rem;
+            box-shadow: 0 15px 25px -8px #0e1c36, 0 0 0 2px rgba(255,255,255,0.5);
         }
 
-        .header-info {
+        .title-section {
             flex: 1;
         }
 
-        .header-info h1 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #0f172a, #2d3b52);
+        .title-section h1 {
+            font-size: 2rem;
+            font-weight: 650;
+            background: linear-gradient(145deg, #0e1c36, #1f3a5f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.2;
+            letter-spacing: -0.02em;
         }
 
-        .header-info p {
-            font-size: 0.85rem;
-            color: #2f4057;
+        .title-section .sub {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .live-badge {
             display: flex;
             align-items: center;
             gap: 6px;
-        }
-
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            background: #2b9a5e;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 0 2px #ffffff80;
-        }
-
-        .badge {
-            background: #ffffffcc;
-            padding: 0.4rem 1rem;
+            background: #e6f0f9;
+            padding: 0.3rem 1rem;
             border-radius: 40px;
             font-size: 0.75rem;
             font-weight: 500;
-            color: #1f2a3f;
-            border: 1px solid white;
-            backdrop-filter: blur(2px);
+            color: #0f2a44;
         }
 
-        /* area chat */
-        .chat-messages {
+        .dot-live {
+            width: 10px;
+            height: 10px;
+            background: #16a34a;
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px white;
+        }
+
+        .model-tag {
+            background: #ffffffc0;
+            backdrop-filter: blur(4px);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #172554;
+            border: 1px solid white;
+        }
+
+        /* main chat */
+        .chat-area {
             flex: 1;
             overflow-y: auto;
-            padding: 2rem;
+            padding: 2rem 2.2rem;
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
-            background: rgba(245, 248, 253, 0.3);
+            gap: 1.5rem;
+            background: rgba(240, 248, 255, 0.2);
         }
 
-        .message {
+        /* message styling */
+        .msg {
             display: flex;
             max-width: 80%;
-            animation: fadeUp 0.3s ease-out;
+            animation: appear 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
         }
 
-        .message.user {
+        .msg.user {
             align-self: flex-end;
         }
 
-        .message.bot {
+        .msg.bot {
             align-self: flex-start;
         }
 
-        .bubble {
-            padding: 1rem 1.5rem;
-            border-radius: 28px;
+        .msg.bubble {
+            padding: 1rem 1.6rem;
+            border-radius: 32px;
             font-size: 1rem;
             line-height: 1.5;
             word-break: break-word;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.03);
         }
 
         .user .bubble {
             background: #0f172a;
             color: white;
-            border-bottom-right-radius: 8px;
-            box-shadow: 0 10px 20px -10px #0f172a;
+            border-bottom-right-radius: 10px;
+            box-shadow: 0 12px 22px -12px #0f172a;
         }
 
         .bot .bubble {
             background: rgba(255, 255, 255, 0.9);
-            color: #0b1a2b;
-            border-bottom-left-radius: 8px;
+            color: #1f2a44;
+            border-bottom-left-radius: 10px;
             backdrop-filter: blur(4px);
-            border: 1px solid rgba(255,255,255,0.6);
+            border: 1px solid rgba(255,255,255,0.8);
         }
 
-        .bot.loading .bubble {
-            background: #ffffffde;
+        /* loading indicator */
+        .msg.bot.loading .bubble {
+            background: #ffffffec;
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 1rem 1.8rem;
+            gap: 12px;
+            padding: 1rem 2rem;
         }
 
-        .typing-indicator {
+        .typing-dots {
             display: flex;
-            gap: 5px;
+            gap: 6px;
         }
-
-        .typing-indicator span {
-            width: 9px;
-            height: 9px;
-            background: #2e405b;
+        .typing-dots span {
+            width: 10px;
+            height: 10px;
+            background: #1f3a5f;
             border-radius: 50%;
-            opacity: 0.6;
-            animation: bounce 1.5s infinite ease-in-out;
+            animation: wave 1.4s infinite;
         }
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
 
-        .typing-indicator span:nth-child(1) { animation-delay: 0s; }
-        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes bounce {
+        @keyframes wave {
             0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
-            30% { transform: translateY(-6px); opacity: 1; }
+            30% { transform: translateY(-8px); opacity: 1; }
         }
 
-        .bot.error .bubble {
-            background: #fff1f0;
-            color: #b02b2b;
-            border-left: 4px solid #e34f4f;
+        /* error */
+        .msg.bot.error .bubble {
+            background: #fff3f0;
+            color: #bc1c1c;
+            border-left: 6px solid #e04f4f;
         }
 
-        /* input area modern */
-        .input-area {
-            padding: 1.5rem 2rem;
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(12px);
-            border-top: 1px solid rgba(255,255,255,0.8);
+        /* input area mewah */
+        .input-premium {
+            padding: 1.8rem 2.2rem;
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255,255,255,0.9);
+        }
+
+        .input-group {
             display: flex;
             gap: 16px;
-        }
-
-        .input-wrapper {
-            flex: 1;
             background: white;
-            border-radius: 44px;
-            display: flex;
-            align-items: center;
-            padding: 0.2rem 0.2rem 0.2rem 1.5rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 60px;
+            padding: 0.2rem 0.2rem 0.2rem 1.8rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.03);
         }
 
-        .input-wrapper input {
-            width: 100%;
-            padding: 0.9rem 0.2rem 0.9rem 0;
+        .input-group input {
+            flex: 1;
+            padding: 1.1rem 0.2rem;
             border: none;
             background: transparent;
-            font-size: 1rem;
+            font-size: 1.05rem;
             outline: none;
         }
 
-        .input-wrapper input:disabled {
-            opacity: 0.6;
+        .input-group input:disabled {
+            background: #f4f8fd;
+            color: #7e8b9e;
         }
 
-        .send-btn {
+        .send-action {
             background: #0f172a;
             border: none;
-            width: 52px;
-            height: 52px;
+            width: 58px;
+            height: 58px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: 0.2s;
-            box-shadow: 0 8px 14px -6px #0f172a;
-            margin-left: 4px;
+            box-shadow: 0 12px 18px -8px #0f172a;
         }
 
-        .send-btn:hover:not(:disabled) {
-            background: #1f2d44;
+        .send-action:hover:not(:disabled) {
+            background: #1d334f;
             transform: scale(1.03);
         }
 
-        .send-btn:disabled {
-            background: #b0c0d0;
+        .send-action:disabled {
+            background: #b7c9dd;
             box-shadow: none;
             cursor: not-allowed;
         }
 
-        .send-btn svg {
-            width: 22px;
-            height: 22px;
+        .send-action svg {
+            width: 24px;
+            height: 24px;
             fill: white;
         }
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(12px); }
+        @keyframes appear {
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* scrollbar kustom */
-        .chat-messages::-webkit-scrollbar {
-            width: 5px;
+        /* scrollbar cantik */
+        .chat-area::-webkit-scrollbar {
+            width: 6px;
         }
-        .chat-messages::-webkit-scrollbar-track {
+        .chat-area::-webkit-scrollbar-track {
             background: transparent;
         }
-        .chat-messages::-webkit-scrollbar-thumb {
-            background: #b3c2d1;
+        .chat-area::-webkit-scrollbar-thumb {
+            background: #a3b8d0;
             border-radius: 20px;
         }
 
-        /* responsif mobile */
-        @media (max-width: 500px) {
-            .chat-container { height: 92vh; border-radius: 28px; }
-            .header { padding: 1rem 1.2rem; }
-            .header-info h1 { font-size: 1.5rem; }
-            .chat-messages { padding: 1.5rem; }
-            .message { max-width: 90%; }
-            .input-area { padding: 1.2rem; }
+        @media (max-width: 600px) {
+            .joell-container { height: 95vh; border-radius: 28px; }
+            .header-premium { padding: 1rem 1.5rem; }
+            .avatar-glow { width: 46px; height: 46px; font-size: 1.6rem; }
+            .title-section h1 { font-size: 1.6rem; }
+            .chat-area { padding: 1.5rem; }
+            .msg { max-width: 90%; }
+            .input-premium { padding: 1.2rem 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <div class="chat-container">
-        <div class="header">
-            <div class="header-avatar">J</div>
-            <div class="header-info">
+    <div class="joell-container">
+        <!-- HEADER MEWAH -->
+        <div class="header-premium">
+            <div class="avatar-glow">J</div>
+            <div class="title-section">
                 <h1>JOELL AI</h1>
-                <p><span class="status-dot"></span> online · model Gemini 1.5 Flash</p>
+                <div class="sub">
+                    <span class="live-badge"><span class="dot-live"></span> live · siap membantu</span>
+                    <span class="model-tag">Gemini 1.5 Pro</span>
+                </div>
             </div>
-            <div class="badge">✨ modern</div>
         </div>
 
-        <div class="chat-messages" id="chatMessages"></div>
+        <!-- AREA PESAN -->
+        <div class="chat-area" id="chatMessages"></div>
 
-        <div class="input-area">
-            <div class="input-wrapper">
-                <input type="text" id="userInput" placeholder="Tanyakan sesuatu ..." autofocus>
-                <button class="send-btn" id="sendButton">
+        <!-- INPUT AREA -->
+        <div class="input-premium">
+            <div class="input-group">
+                <input type="text" id="userInput" placeholder="Tanyakan apa saja ..." autofocus>
+                <button class="send-action" id="sendButton">
                     <svg viewBox="0 0 24 24">
                         <path d="M2 21L22 12L2 3V10L16 12L2 14V21Z" />
                     </svg>
                 </button>
             </div>
+            <p style="font-size:0.7rem; margin-top:8px; color:#3b4e66; opacity:0.7; text-align:center;">⚡ model pro · konteks penuh · jawaban detail</p>
         </div>
     </div>
 
     <script>
         (function() {
-            // API key baru dari Anda
-            const API_KEY = 'AIzaSyBrYui8RFhNPYOZzRAH46cWQLMYNIdSQbI';
-            const MODEL = 'gemini-1.5-flash';  // cepat dan modern
+            // ===== KONFIGURASI =====
+            const API_KEY = 'AIzaSyBrYui8RFhNPYOZzRAH46cWQLMYNIdSQbI';   // API key baru
+            // Ganti model di sini: 'gemini-1.5-pro' (lebih lengkap) atau 'gemini-1.5-flash' (lebih cepat)
+            const MODEL = 'gemini-1.5-pro';        // Menggunakan model pro untuk kelengkapan
             const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`;
 
+            // ===== DOM ELEMENTS =====
             const chatMessages = document.getElementById('chatMessages');
             const userInput = document.getElementById('userInput');
             const sendButton = document.getElementById('sendButton');
 
-            let history = []; // menyimpan { role, text }
-            let loadingIndicator = null;
-            let isWaiting = false;
+            // ===== STATE =====
+            let conversationHistory = [];       // menyimpan { role, text }
+            let loadingEl = null;                // elemen loading
+            let isProcessing = false;
 
+            // ===== UTILITIES =====
             function scrollToBottom() {
-                chatMessages.scrollTo({ top: chatMessages.scrollHeight, behavior: 'smooth' });
+                chatMessages.scrollTo({
+                    top: chatMessages.scrollHeight,
+                    behavior: 'smooth'
+                });
             }
 
-            function addMessage(role, text, saveToHistory = false, isError = false) {
+            // tambah pesan ke chat
+            function appendMessage(role, text, saveToHistory = false, isError = false) {
                 const msgDiv = document.createElement('div');
-                msgDiv.classList.add('message', role);
+                msgDiv.classList.add('msg', role);
                 if (isError) msgDiv.classList.add('error');
 
                 const bubble = document.createElement('div');
@@ -340,129 +359,162 @@
                 chatMessages.appendChild(msgDiv);
 
                 if (saveToHistory) {
-                    history.push({ role, text });
+                    conversationHistory.push({ role: role, text: text });
                 }
+
                 scrollToBottom();
                 return msgDiv;
             }
 
-            function showTyping() {
-                if (loadingIndicator) return;
+            // tampilkan indikator mengetik (bot)
+            function showTypingIndicator() {
+                if (loadingEl) return; // sudah ada
                 const loader = document.createElement('div');
-                loader.classList.add('message', 'bot', 'loading');
+                loader.classList.add('msg', 'bot', 'loading');
                 loader.innerHTML = `
                     <div class="bubble">
-                        <span>JOELL AI mengetik</span>
-                        <div class="typing-indicator">
+                        <span>JOELL AI sedang menulis</span>
+                        <div class="typing-dots">
                             <span></span><span></span><span></span>
                         </div>
                     </div>
                 `;
                 chatMessages.appendChild(loader);
-                loadingIndicator = loader;
+                loadingEl = loader;
                 scrollToBottom();
             }
 
-            function removeTyping() {
-                if (loadingIndicator && loadingIndicator.parentNode) {
-                    loadingIndicator.remove();
-                    loadingIndicator = null;
+            function removeTypingIndicator() {
+                if (loadingEl && loadingEl.parentNode) {
+                    loadingEl.remove();
+                    loadingEl = null;
                 }
             }
 
-            function setLoadingState(loading) {
-                isWaiting = loading;
-                userInput.disabled = loading;
-                sendButton.disabled = loading;
+            function setBusyState(busy) {
+                isProcessing = busy;
+                userInput.disabled = busy;
+                sendButton.disabled = busy;
             }
 
-            async function callGeminiAPI(contents) {
-                const request = {
-                    contents,
-                    generationConfig: { temperature: 0.8, maxOutputTokens: 1024 },
+            // ===== PANGGIL API GEMINI =====
+            async function callGemini(contents) {
+                const requestBody = {
+                    contents: contents,
+                    generationConfig: {
+                        temperature: 0.85,          // sedikit kreatif
+                        maxOutputTokens: 2048,      // respons lebih panjang untuk pro
+                        topP: 0.95,
+                        topK: 40
+                    },
                     safetySettings: [
-                        { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
-                        { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' },
-                        { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE' },
-                        { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_NONE' }
+                        { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
+                        { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
+                        { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
+                        { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" }
                     ]
                 };
 
-                const res = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(request)
-                });
+                try {
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(requestBody)
+                    });
 
-                if (!res.ok) {
-                    let errMsg = `HTTP ${res.status}`;
-                    try {
-                        const errData = await res.json();
-                        errMsg = errData.error?.message || JSON.stringify(errData);
-                    } catch (e) {}
-                    throw new Error(`Gemini error: ${errMsg}`);
-                }
-
-                const data = await res.json();
-                const candidate = data.candidates?.[0];
-                if (!candidate) throw new Error('Tidak ada respons dari AI.');
-
-                if (candidate.finishReason && candidate.finishReason !== 'STOP') {
-                    if (candidate.finishReason === 'SAFETY') {
-                        throw new Error('Respons diblokir karena pedoman keamanan. Coba tanyakan dengan cara lain.');
+                    if (!response.ok) {
+                        let errorDetail = `HTTP ${response.status}`;
+                        try {
+                            const errJson = await response.json();
+                            errorDetail = errJson.error?.message || JSON.stringify(errJson);
+                        } catch (e) {}
+                        throw new Error(`Gagal: ${errorDetail}`);
                     }
-                }
 
-                const text = candidate.content?.parts?.[0]?.text;
-                if (!text) throw new Error('Respons kosong.');
-                return text;
+                    const data = await response.json();
+                    const candidate = data.candidates?.[0];
+                    if (!candidate) throw new Error('Tidak ada kandidat respons.');
+
+                    // Cek jika dihentikan karena safety
+                    if (candidate.finishReason && candidate.finishReason !== 'STOP') {
+                        console.warn('Finish reason:', candidate.finishReason);
+                        if (candidate.finishReason === 'SAFETY') {
+                            throw new Error('Respons diblokir sistem keamanan. Coba tanyakan dengan kata lain.');
+                        } else {
+                            throw new Error(`Respons terhenti (${candidate.finishReason})`);
+                        }
+                    }
+
+                    const textPart = candidate.content?.parts?.[0]?.text;
+                    if (!textPart) throw new Error('Respons kosong.');
+                    return textPart;
+                } catch (error) {
+                    console.error('API Error:', error);
+                    throw error;
+                }
             }
 
-            async function sendMessage() {
-                const userText = userInput.value.trim();
-                if (!userText || isWaiting) return;
+            // ===== KIRIM PESAN =====
+            async function sendUserMessage() {
+                const userMessage = userInput.value.trim();
+                if (userMessage === '' || isProcessing) return;
 
+                // clear input
                 userInput.value = '';
-                setLoadingState(true);
+                setBusyState(true);
 
-                // tampilkan pesan user
-                addMessage('user', userText, true);
-                showTyping();
+                // tampilkan pesan user & simpan history
+                appendMessage('user', userMessage, true);
 
-                // siapkan contents dari history
-                const contents = history.map(msg => ({
-                    role: msg.role,
-                    parts: [{ text: msg.text }]
+                // tampilkan loading
+                showTypingIndicator();
+
+                // siapkan content dari history (role user dan model)
+                const contentsForAPI = conversationHistory.map(entry => ({
+                    role: entry.role,
+                    parts: [{ text: entry.text }]
                 }));
 
                 try {
-                    const reply = await callGeminiAPI(contents);
-                    removeTyping();
-                    addMessage('bot', reply, true);
+                    // panggil API dengan model pro
+                    const reply = await callGemini(contentsForAPI);
+
+                    // hapus loading
+                    removeTypingIndicator();
+
+                    // tampilkan respons bot dan simpan ke history
+                    appendMessage('bot', reply, true);
                 } catch (error) {
-                    removeTyping();
-                    addMessage('bot', `⚠️ ${error.message}`, false, true);
+                    removeTypingIndicator();
+                    // tampilkan error sebagai bot tanpa menyimpan ke history
+                    appendMessage('bot', `⚠️ ${error.message}`, false, true);
                 } finally {
-                    setLoadingState(false);
+                    setBusyState(false);
                     userInput.focus();
                 }
             }
 
-            // inisialisasi sambutan
+            // ===== INIT =====
             function initChat() {
-                const welcome = 'Halo! Saya JOELL AI, asisten modern siap membantu. Silakan tanya apa saja.';
-                addMessage('bot', welcome, true);
+                // Pesan sambutan dari JOELL AI
+                const welcomeMsg = 'Halo! Saya **JOELL AI** dengan model **Gemini 1.5 Pro**. Saya siap membantu Anda dengan pertanyaan apa pun secara detail dan akurat. Ada yang bisa saya jelaskan?';
+                // Untuk menghindari markdown, kita tampilkan plain dulu
+                appendMessage('bot', 'Halo! Saya JOELL AI dengan model Gemini 1.5 Pro. Saya siap membantu Anda dengan pertanyaan apa pun secara detail dan akurat. Ada yang bisa saya jelaskan?', true);
             }
 
-            sendButton.addEventListener('click', sendMessage);
-            userInput.addEventListener('keypress', (e) => {
+            // event listeners
+            sendButton.addEventListener('click', sendUserMessage);
+            userInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
-                    sendMessage();
+                    sendUserMessage();
                 }
             });
 
             initChat();
+
+            // OPSIONAL: jika model pro tidak tersedia (misal region), kita bisa kasih saran fallback di console
+            // Tapi tidak perlu ditampilkan ke user, karena error akan muncul di chat.
         })();
     </script>
 </body>
