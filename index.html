@@ -2,1493 +2,427 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JOJO AI - The Ultimate AI Experience</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Turnamen FM - Tabel Dinamis & Edit Data</title>
     <style>
-        /* ========== CSS (lengkap dari kode sebelumnya) ========== */
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
         }
-        
-        :root {
-            --primary: #FF6B6B;
-            --primary-dark: #FF4757;
-            --secondary: #1E90FF;
-            --accent: #FFA502;
-            --dark-bg: #0A0F1C;
-            --darker-bg: #070B16;
-            --card-bg: #1A1F35;
-            --text: #FFFFFF;
-            --text-secondary: #A0A8C3;
-            --user-bubble: #1E90FF;
-            --ai-bubble: #2D3748;
-            --success: #2ED573;
-            --warning: #FFA502;
-            --developer: #FFA502;
-            --input-bg: rgba(26, 31, 53, 0.8);
-            --border: rgba(255, 255, 255, 0.1);
-        }
-        
         body {
-            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
-            color: var(--text);
+            background: #1a2a32;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
         }
-        
         .container {
             max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
+            width: 100%;
+            background: #0f1a1f;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.4);
+            overflow-x: auto;
         }
-        
-        /* Header */
-        header {
-            background: linear-gradient(90deg, rgba(10, 15, 28, 0.95), rgba(26, 31, 53, 0.95));
-            backdrop-filter: blur(10px);
-            padding: 20px 0;
-            border-bottom: 2px solid var(--primary);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .logo-icon {
-            font-size: 2.8rem;
-            color: var(--primary);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-        
-        .logo-text h1 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        h1 {
+            margin: 0 0 10px 0;
+            font-size: 1.7rem;
+            color: #f5c542;
+            text-align: center;
             letter-spacing: 1px;
         }
-        
-        .logo-text .tagline {
+        .sub {
+            text-align: center;
+            color: #b9d8c1;
+            margin-bottom: 20px;
             font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-top: 5px;
+            border-bottom: 1px dashed #2e4a3a;
+            padding-bottom: 8px;
         }
-        
-        /* Developer Badge */
-        .developer-badge {
-            background: linear-gradient(135deg, var(--developer), #FF7F50);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        /* Status Area */
-        .status-area {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .status-badge {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 20px;
-            background: rgba(46, 213, 115, 0.1);
-            border: 1px solid var(--success);
-            border-radius: 20px;
-            font-weight: 600;
-        }
-        
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--success);
-            border-radius: 50%;
-            animation: blink 1.5s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        /* Main Content */
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 30px;
-            padding: 30px 0;
-            min-height: calc(100vh - 180px);
-        }
-        
-        @media (max-width: 1024px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Chat Container */
-        .chat-container {
-            background: var(--card-bg);
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .chat-header {
-            padding: 20px;
-            background: rgba(10, 15, 28, 0.9);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .chat-header h2 {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.4rem;
-            color: var(--primary);
-        }
-        
-        .chat-controls {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .chat-controls button {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--border);
-            color: var(--text);
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .chat-controls button:hover {
-            background: var(--primary);
-            transform: translateY(-2px);
-        }
-        
-        /* Chat Messages */
-        .chat-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            min-height: 500px;
-            background: rgba(10, 15, 28, 0.3);
-        }
-        
-        /* Message Bubbles */
-        .message {
-            max-width: 85%;
-            padding: 15px 20px;
-            border-radius: 18px;
-            line-height: 1.6;
-            animation: messageAppear 0.3s ease-out;
-        }
-        
-        @keyframes messageAppear {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .user-message {
-            align-self: flex-end;
-            background: linear-gradient(135deg, var(--user-bubble), #4169E1);
-            color: white;
-            border-bottom-right-radius: 5px;
-        }
-        
-        .ai-message {
-            align-self: flex-start;
-            background: linear-gradient(135deg, var(--ai-bubble), #363D4D);
-            color: var(--text);
-            border-bottom-left-radius: 5px;
-            border-left: 4px solid var(--primary);
-        }
-        
-        .message-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        
-        .user-message .message-header {
-            color: rgba(255, 255, 255, 0.95);
-        }
-        
-        .ai-message .message-header {
-            color: var(--primary);
-        }
-        
-        .message-content {
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-        
-        .message-content code {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-        }
-        
-        .message-content pre {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 10px 0;
-            border: 1px solid var(--border);
-        }
-        
-        .message-content pre code {
-            background: none;
-            padding: 0;
-        }
-        
-        /* Uploaded Files Preview */
-        .uploaded-files {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 15px 0;
-        }
-        
-        .file-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            max-width: 200px;
-        }
-        
-        .file-icon {
-            color: var(--primary);
-            font-size: 1rem;
-        }
-        
-        .file-info {
-            flex: 1;
-            min-width: 0;
-        }
-        
-        .file-name {
-            font-size: 0.85rem;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .file-size {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-        
-        /* Image Preview */
-        .image-preview {
-            margin: 10px 0;
-            max-width: 300px;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 2px solid var(--border);
-            cursor: pointer;
-        }
-        
-        .image-preview img {
+        table {
             width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.3s;
+            border-collapse: collapse;
+            background: #1e2f2a;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+            font-size: 14px;
         }
-        
-        .image-preview:hover img {
+        th {
+            background: #2d5a4c;
+            color: white;
+            padding: 12px 6px;
+            font-weight: 600;
+            border: 1px solid #3f7866;
+            text-align: center;
+            vertical-align: middle;
+        }
+        td {
+            border: 1px solid #3a6a58;
+            padding: 8px 5px;
+            text-align: center;
+            background-color: #fef9e6;
+            color: #1e2f2a;
+            vertical-align: middle;
+        }
+        /* Kolom yang bisa diedit */
+        td[contenteditable="true"] {
+            background-color: #fff7e0;
+            transition: 0.1s;
+            cursor: text;
+            font-weight: 500;
+        }
+        td[contenteditable="true"]:hover {
+            background-color: #fffaec;
+            box-shadow: inset 0 0 0 1px #f5b642;
+        }
+        td[contenteditable="true"]:focus {
+            background-color: #fff1cc;
+            outline: 2px solid #f5b642;
+        }
+        /* Kolom total & rank tidak bisa diedit, style khusus */
+        td.total-cell, td.rank-cell {
+            background-color: #d9e6d4;
+            font-weight: bold;
+            color: #1b4d3e;
+        }
+        .match-group {
+            background-color: #1f493d;
+        }
+        button {
+            background: #f5b642;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            margin-right: 12px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #1e2f2a;
+            box-shadow: 0 2px 5px black;
+        }
+        button:hover {
+            background: #ffca6f;
             transform: scale(1.02);
         }
-        
-        /* Input Area */
-        .input-container {
-            padding: 20px;
-            background: rgba(10, 15, 28, 0.9);
-            border-top: 1px solid var(--border);
-        }
-        
-        .input-area {
+        .juara-box {
+            margin-top: 30px;
+            background: #10231e;
+            border-radius: 28px;
+            padding: 15px 20px;
             display: flex;
-            gap: 12px;
-            align-items: flex-end;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            border: 1px solid #f5c542;
         }
-        
-        .input-wrapper {
+        .juara-card {
+            background: #2b4a3e;
+            border-radius: 30px;
+            text-align: center;
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            min-width: 140px;
+            padding: 12px 5px;
+            color: #f9e0a0;
+            box-shadow: 0 6px 0 #0f2a22;
         }
-        
-        #user-input {
-            width: 100%;
-            padding: 15px 20px;
-            border: 2px solid var(--border);
-            background: var(--input-bg);
-            color: var(--text);
-            font-size: 1rem;
-            border-radius: 15px;
-            resize: none;
-            min-height: 60px;
-            max-height: 150px;
-            transition: all 0.3s;
-            line-height: 1.5;
+        .juara-card h3 {
+            margin: 0;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
         }
-        
-        #user-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
-        }
-        
-        /* Selected Files */
-        .selected-files {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            min-height: 50px;
-        }
-        
-        .selected-file {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 10px;
-            background: rgba(30, 144, 255, 0.2);
-            border-radius: 8px;
-            border: 1px solid rgba(30, 144, 255, 0.3);
-            max-width: 180px;
-        }
-        
-        .remove-file {
-            background: none;
-            border: none;
-            color: var(--text);
-            cursor: pointer;
-            padding: 2px 4px;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
-        
-        .remove-file:hover {
-            opacity: 1;
-        }
-        
-        /* Input Controls */
-        .input-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .input-buttons {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .input-button {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--border);
-            color: var(--text);
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-        }
-        
-        .input-button:hover {
-            background: var(--primary);
-            transform: translateY(-2px);
-        }
-        
-        /* File Upload */
-        #file-upload {
-            display: none;
-        }
-        
-        .file-upload-label {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            width: 100%;
-            height: 100%;
-        }
-        
-        /* Send Button */
-        .send-button {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            border: none;
-            border-radius: 15px;
-            width: 55px;
-            height: 55px;
-            cursor: pointer;
+        .juara-card .name {
             font-size: 1.2rem;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+            font-weight: bold;
+            color: white;
+            margin: 8px 0 4px;
         }
-        
-        .send-button:hover:not(:disabled) {
-            background: linear-gradient(135deg, var(--primary-dark), #FF3B30);
-            transform: translateY(-3px);
-        }
-        
-        .send-button:disabled {
-            background: var(--text-secondary);
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        /* Quick Actions */
-        .quick-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .quick-action {
-            padding: 8px 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .quick-action:hover {
-            background: rgba(255, 107, 107, 0.2);
-            color: var(--primary);
-            border-color: var(--primary);
-        }
-        
-        /* Sidebar */
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        /* Cards */
-        .card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 20px;
-            border: 1px solid var(--border);
-        }
-        
-        .card h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
+        .juara-card .pts {
             font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-weight: bold;
+            background: #00000055;
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 25px;
         }
-        
-        /* Capabilities */
-        .capabilities-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-        
-        .capability-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            transition: all 0.3s;
-        }
-        
-        .capability-item:hover {
-            background: rgba(255, 107, 107, 0.1);
-            transform: translateX(3px);
-        }
-        
-        .capability-icon {
-            color: var(--primary);
-            font-size: 1rem;
-            width: 20px;
-        }
-        
-        /* Supported Files */
-        .files-support {
+        .footer-actions {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        
-        .file-type-badge {
-            padding: 4px 10px;
-            background: rgba(30, 144, 255, 0.2);
-            border-radius: 6px;
-            font-size: 0.75rem;
-            color: var(--secondary);
-            border: 1px solid rgba(30, 144, 255, 0.3);
-        }
-        
-        /* Quick Prompts */
-        .prompts-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-        
-        .prompt-item {
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-        
-        .prompt-item:hover {
-            background: rgba(30, 144, 255, 0.1);
-            border-color: var(--secondary);
-        }
-        
-        /* Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-        
-        .stat-item {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary);
-        }
-        
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-        
-        /* Footer */
-        footer {
-            margin-top: 40px;
-            padding: 25px 0;
-            border-top: 1px solid var(--border);
-            background: rgba(10, 15, 28, 0.9);
-        }
-        
-        .footer-content {
-            display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
         }
-        
-        .copyright {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
+        .info-note {
+            font-size: 12px;
+            color: #b3cfc0;
+            margin-top: 15px;
+            text-align: right;
         }
-        
-        .model-info {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-        
-        /* Typing Indicator */
-        .typing-indicator {
-            display: none;
-            align-items: center;
-            gap: 10px;
-            padding: 15px 20px;
-            background: linear-gradient(135deg, var(--ai-bubble), #363D4D);
-            border-radius: 18px;
-            border-bottom-left-radius: 5px;
-            align-self: flex-start;
-            width: fit-content;
-        }
-        
-        .typing-dots {
-            display: flex;
-            gap: 5px;
-        }
-        
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: typingBounce 1.4s infinite ease-in-out;
-        }
-        
-        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
-        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-        
-        @keyframes typingBounce {
-            0%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-8px); }
-        }
-        
-        /* Image Modal */
-        .image-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .image-modal.active {
-            display: flex;
-            animation: fadeIn 0.3s;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .modal-content {
-            max-width: 90%;
-            max-height: 90%;
-            position: relative;
-        }
-        
-        .modal-content img {
-            width: 100%;
-            height: auto;
-            max-height: 80vh;
-            border-radius: 10px;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            background: var(--primary);
-            color: white;
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(26, 31, 53, 0.5);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 4px;
-        }
-        
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 99999;
-            animation: slideIn 0.3s ease-out;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .notification.success {
-            background: rgba(46, 213, 115, 0.9);
-            color: white;
-        }
-        
-        .notification.error {
-            background: rgba(255, 71, 87, 0.9);
-            color: white;
-        }
-        
-        .notification.info {
-            background: rgba(30, 144, 255, 0.9);
-            color: white;
-        }
-        
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .logo-text h1 {
-                font-size: 2rem;
-            }
-            
-            .message {
-                max-width: 95%;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .input-buttons {
-                display: none;
-            }
-            
-            .selected-file {
-                max-width: 140px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .chat-controls {
-                display: none;
-            }
+        @media (max-width: 700px) {
+            th, td { font-size: 11px; padding: 4px 2px; }
+            button { padding: 6px 12px; font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Main App -->
-    <div id="main-app">
-        <header>
-            <div class="container">
-                <div class="header-content">
-                    <div class="logo">
-                        <div class="logo-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div class="logo-text">
-                            <h1>JOJO AI</h1>
-                            <div class="tagline">The Ultimate AI Experience</div>
-                        </div>
-                    </div>
-                    
-                    <div class="status-area">
-                        <div class="status-badge">
-                            <div class="status-dot"></div>
-                            <span>API Active</span>
-                        </div>
-                        
-                        <div class="developer-badge">
-                            <i class="fas fa-code"></i>
-                            <span>Dev: jooo.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        
-        <div class="container">
-            <div class="main-content">
-                <!-- Main Chat Container -->
-                <div class="chat-container">
-                    <div class="chat-header">
-                        <h2><i class="fas fa-comment-dots"></i> AI Chat</h2>
-                        <div class="chat-controls">
-                            <button id="clear-chat" title="Clear Chat">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            <button id="test-api-btn" title="Test API">
-                                <i class="fas fa-vial"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Chat Messages -->
-                    <div class="chat-messages" id="chat-messages">
-                        <!-- Welcome Message -->
-                        <div class="message ai-message">
-                            <div class="message-header">
-                                <i class="fas fa-robot"></i>
-                                <span>JOJO AI</span>
-                            </div>
-                            <div class="message-content">
-                                <strong>✨ Welcome to JOJO AI</strong><br><br>
-                                <p>I'm your AI assistant powered by Google's Gemini.</p>
-                                <p>You can upload images (JPG, PNG) and files (PDF, TXT) for analysis.</p><br>
-                                <p><strong>🎯 Developed by: ADNAN S.</strong></p>
-                                <p>Ask me anything or upload files to get started!</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Typing Indicator -->
-                    <div class="typing-indicator" id="typing-indicator">
-                        <div class="typing-dots">
-                            <div class="typing-dot"></div>
-                            <div class="typing-dot"></div>
-                            <div class="typing-dot"></div>
-                        </div>
-                        <span>JOJO AI is thinking...</span>
-                    </div>
-                    
-                    <!-- Input Area -->
-                    <div class="input-container">
-                        <div class="input-area">
-                            <div class="input-wrapper">
-                                <!-- Selected Files -->
-                                <div class="selected-files" id="selected-files">
-                                    <!-- Selected files will appear here -->
-                                </div>
-                                
-                                <textarea 
-                                    id="user-input" 
-                                    placeholder="Ask anything or upload images/files... (Press Enter to send, Shift+Enter for new line)" 
-                                    rows="3"
-                                    autocomplete="off"
-                                    autocorrect="off"
-                                    autocapitalize="off"
-                                    spellcheck="true"
-                                ></textarea>
-                                
-                                <!-- Input Controls -->
-                                <div class="input-controls">
-                                    <div class="input-buttons">
-                                        <!-- File Upload -->
-                                        <div class="input-button" title="Upload File">
-                                            <label for="file-upload" class="file-upload-label">
-                                                <i class="fas fa-paperclip"></i>
-                                            </label>
-                                            <input type="file" id="file-upload" multiple accept=".jpg,.jpeg,.png,.gif,.pdf,.txt">
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Quick Actions -->
-                                    <div class="quick-actions">
-                                        <div class="quick-action" data-prompt="Hello, how are you?">
-                                            <i class="fas fa-comment"></i> Say Hello
-                                        </div>
-                                        <div class="quick-action" data-prompt="Explain quantum computing">
-                                            <i class="fas fa-atom"></i> Quantum
-                                        </div>
-                                        <div class="quick-action" data-prompt="Write Python code">
-                                            <i class="fas fa-code"></i> Code
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <button id="send-button" class="send-button" title="Send Message">
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Sidebar -->
-                <div class="sidebar">
-                    <!-- API Status -->
-                    <div class="card">
-                        <h3><i class="fas fa-key"></i> API Status</h3>
-                        <div class="capabilities-grid">
-                            <div class="capability-item" style="background: rgba(46, 213, 115, 0.1);">
-                                <i class="fas fa-check-circle capability-icon" style="color: var(--success);"></i>
-                                <span>API Key: Active</span>
-                            </div>
-                            <div class="capability-item">
-                                <i class="fas fa-bolt capability-icon"></i>
-                                <span>Gemini Pro Model</span>
-                            </div>
-                            <div class="capability-item">
-                                <i class="fas fa-image capability-icon"></i>
-                                <span>Vision Enabled</span>
-                            </div>
-                            <div class="capability-item">
-                                <i class="fas fa-shield-alt capability-icon"></i>
-                                <span>Secure Connection</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Supported Files -->
-                    <div class="card">
-                        <h3><i class="fas fa-folder-open"></i> Supported Files</h3>
-                        <div class="files-support">
-                            <span class="file-type-badge">JPG</span>
-                            <span class="file-type-badge">PNG</span>
-                            <span class="file-type-badge">PDF</span>
-                            <span class="file-type-badge">TXT</span>
-                            <span class="file-type-badge">GIF</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Quick Prompts -->
-                    <div class="card">
-                        <h3><i class="fas fa-lightbulb"></i> Quick Prompts</h3>
-                        <div class="prompts-grid">
-                            <div class="prompt-item" data-prompt="Write a Python function to sort a list">
-                                Write a Python function to sort a list
-                            </div>
-                            <div class="prompt-item" data-prompt="Explain the theory of relativity in simple terms">
-                                Explain theory of relativity
-                            </div>
-                            <div class="prompt-item" data-prompt="Create a business plan outline for a startup">
-                                Business plan outline
-                            </div>
-                            <div class="prompt-item" data-prompt="Translate this to Indonesian: Hello, how are you?">
-                                Translate to Indonesian
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Performance Stats -->
-                    <div class="card">
-                        <h3><i class="fas fa-chart-line"></i> Stats</h3>
-                        <div class="stats-grid">
-                            <div class="stat-item">
-                                <div class="stat-value" id="response-time">0.0s</div>
-                                <div class="stat-label">Response Time</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value" id="message-count">1</div>
-                                <div class="stat-label">Messages</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value" id="file-count">0</div>
-                                <div class="stat-label">Files</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">100%</div>
-                                <div class="stat-label">Uptime</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <h1>🏆 FT RAMOT SESI 19.00 WIB 🏆</h1>
+    <div class="sub">✏️ Klik ganda / tap pada sel NICKNAME, PLACE atau KILL untuk mengedit data → tekan tombol <strong style="background:#2d5a4c; padding:2px 6px; border-radius:20px;">⟳ UPDATE DATA</strong> untuk menghitung ulang poin, total & peringkat</div>
+
+    <div id="tabel-wrapper" style="overflow-x: auto;"></div>
+
+    <div class="footer-actions">
+        <div>
+            <button id="refreshBtn">⟳ UPDATE DATA & RANKING</button>
+            <button id="addRowBtn">➕ Tambah Tim Baru</button>
         </div>
-        
-        <!-- Image Modal -->
-        <div class="image-modal" id="image-modal">
-            <div class="modal-content">
-                <img id="modal-image" src="" alt="Full size image">
-                <button class="close-modal" id="close-modal">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
+        <div class="info-note">
+            ⚡ Poin per match = PLACE + KILL (otomatis)<br>
+            🥇 Ranking berdasarkan TOTAL POIN tertinggi, jika sama berdasarkan TOTAL KILL tertinggi
         </div>
-        
-        <footer>
-            <div class="container">
-                <div class="footer-content">
-                    <div class="copyright">
-                        © 2025 JOJO AI • Powered by jooo.
-                    </div>
-                    
-                    <div class="model-info">
-                        <i class="fas fa-microchip"></i>
-                        <span>Gemini Pro • Vision Enabled</span>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </div>
-    
-    <script>
-        // ================ API CONFIGURATION ================
-        // API KEY YANG ANDA MINTA
-        const API_KEY = "AIzaSyDl0SSiNrqxZzPwa993DanKmlL7KDQhYYY";
-        
-        // Gunakan model yang stabil
-        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
-        const BACKUP_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-        
-        // ================ DOM ELEMENTS ================
-        const chatMessages = document.getElementById('chat-messages');
-        const userInput = document.getElementById('user-input');
-        const sendButton = document.getElementById('send-button');
-        const typingIndicator = document.getElementById('typing-indicator');
-        const clearChatBtn = document.getElementById('clear-chat');
-        const testApiBtn = document.getElementById('test-api-btn');
-        const fileUpload = document.getElementById('file-upload');
-        const selectedFilesContainer = document.getElementById('selected-files');
-        const imageModal = document.getElementById('image-modal');
-        const modalImage = document.getElementById('modal-image');
-        const closeModal = document.getElementById('close-modal');
-        const quickActions = document.querySelectorAll('.quick-action');
-        const promptItems = document.querySelectorAll('.prompt-item');
-        const responseTimeEl = document.getElementById('response-time');
-        const messageCountEl = document.getElementById('message-count');
-        const fileCountEl = document.getElementById('file-count');
-        
-        // ================ STATE VARIABLES ================
-        let chatHistory = [];
-        let isProcessing = false;
-        let messageCount = 1;
-        let fileCount = 0;
-        let selectedFiles = [];
-        let currentApiUrl = API_URL;
-        
-        // ================ UTILITY FUNCTIONS ================
-        function showNotification(message, type = 'info') {
-            const existing = document.querySelector('.notification');
-            if (existing) existing.remove();
-            
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-                <span>${message}</span>
-            `;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.style.animation = 'slideIn 0.3s ease-out reverse';
-                    setTimeout(() => notification.remove(), 300);
-                }
-            }, 3000);
+
+    <div id="juaraContainer" class="juara-box"></div>
+</div>
+
+<script>
+    // ---------- DATA AWAL (persis dari gambar) ----------
+    let teamsData = [
+        { nickname: "BARUDAK BAPAK", matches: [[9,13], [8,6], [6,17]] },   // [place, kill]
+        { nickname: "frezzwashere", matches: [[4,4], [9,11], [12,14]] },
+        { nickname: "LUPI JUSTICE", matches: [[12,14], [4,2], [8,8]] },
+        { nickname: "JPN2", matches: [[6,1], [12,12], [9,7]] },
+        { nickname: "Spontan", matches: [[8,19], [1,7], [2,10]] },
+        { nickname: "SAUYUNAN ID", matches: [[5,10], [6,8], [5,8]] },
+        { nickname: "VOLDAREZ", matches: [[7,2], [3,7], [4,3]] },
+        { nickname: "Jumidi RSCL", matches: [[2,1], [7,10], [0,3]] },
+        { nickname: "STARHIGH NEW", matches: [[0,3], [2,3], [3,7]] },
+        { nickname: "SMAGAPRO", matches: [[3,6], [0,1], [1,6]] },
+        { nickname: "esukibri", matches: [[0,0], [5,4], [0,4]] },
+        { nickname: "LAST SALDO", matches: [[1,7], [0,1], [0,0]] }
+    ];
+
+    // Fungsi untuk menghitung ulang poin per match, total kill, total poin dari data matches
+    function recalcTeamStats(team) {
+        let totalKill = 0;
+        let totalPoint = 0;
+        let matchPoints = [];
+        for (let m of team.matches) {
+            let place = m[0];
+            let kill = m[1];
+            let pointMatch = place + kill;
+            matchPoints.push(pointMatch);
+            totalKill += kill;
+            totalPoint += pointMatch;
         }
-        
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+        return { matchPoints, totalKill, totalPoint };
+    }
+
+    // Hitung ranking berdasarkan data tim (urutkan totalPoint desc, totalKill desc)
+    function computeRankings(data) {
+        // buat salinan dengan indeks asli
+        let indexed = data.map((team, idx) => {
+            let stats = recalcTeamStats(team);
+            return {
+                originalIndex: idx,
+                nickname: team.nickname,
+                totalPoint: stats.totalPoint,
+                totalKill: stats.totalKill,
+                matchPoints: stats.matchPoints,
+                matches: team.matches
+            };
+        });
+        // urutkan
+        indexed.sort((a,b) => {
+            if (a.totalPoint !== b.totalPoint) return b.totalPoint - a.totalPoint;
+            return b.totalKill - a.totalKill;
+        });
+        // beri ranking (1-index)
+        let rankMap = new Array(data.length);
+        for (let i = 0; i < indexed.length; i++) {
+            rankMap[indexed[i].originalIndex] = i+1;
         }
+        // juga kembalikan data terurut untuk juara? kita butuh juara dari rankMap, ambil 3 pertama dari indexed
+        let top3 = indexed.slice(0,3).map(t => ({ nickname: t.nickname, points: t.totalPoint }));
+        return { rankMap, top3, sortedTeams: indexed };
+    }
+
+    // Render seluruh tabel HTML berdasarkan data terkini
+    function renderTable() {
+        const wrapper = document.getElementById("tabel-wrapper");
+        if (!wrapper) return;
         
-        function getFileIcon(fileType) {
-            if (fileType.startsWith('image/')) return 'fa-image';
-            if (fileType.includes('pdf')) return 'fa-file-pdf';
-            if (fileType.includes('text')) return 'fa-file-alt';
-            return 'fa-file';
+        // Hitung rankings dulu
+        const { rankMap, top3 } = computeRankings(teamsData);
+        
+        // Buat tabel
+        let html = '<table id="mainTable">';
+        // Header kompleks
+        html += '<thead>';
+        html += '<tr>';
+        html += '<th rowspan="2">NICKNAME</th>';
+        html += '<th colspan="3">MATCH 1</th>';
+        html += '<th colspan="3">MATCH 2</th>';
+        html += '<th colspan="3">MATCH 3</th>';
+        html += '<th rowspan="2">TOTAL<br>KILL</th>';
+        html += '<th rowspan="2">TOTAL<br>POINT</th>';
+        html += '<th rowspan="2">RANK</th>';
+        html += '</tr>';
+        html += '<tr>';
+        for (let i=1;i<=3;i++) {
+            html += `<th>PLACE</th><th>KILL</th><th>POINT</th>`;
         }
+        html += '</tr>';
+        html += '</thead><tbody>';
         
-        // ================ TEST API KEY ================
-        async function testApiKey() {
-            showNotification('Testing API connection...', 'info');
+        // Looping setiap tim
+        for (let i=0; i<teamsData.length; i++) {
+            const team = teamsData[i];
+            const stats = recalcTeamStats(team);
+            const matchPoints = stats.matchPoints;
+            const totalKill = stats.totalKill;
+            const totalPoint = stats.totalPoint;
+            const rank = rankMap[i];
             
-            try {
-                const response = await fetch(currentApiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ role: "user", parts: [{ text: "Hello" }] }],
-                        generationConfig: { temperature: 0.7, maxOutputTokens: 10 }
-                    })
-                });
-                
-                if (response.ok) {
-                    showNotification('✅ API connection successful!', 'success');
-                    return true;
-                } else {
-                    const backup = await fetch(BACKUP_API_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            contents: [{ role: "user", parts: [{ text: "Hello" }] }],
-                            generationConfig: { temperature: 0.7, maxOutputTokens: 10 }
-                        })
-                    });
-                    if (backup.ok) {
-                        currentApiUrl = BACKUP_API_URL;
-                        showNotification('✅ Using backup API (working!)', 'success');
-                        return true;
-                    } else {
-                        showNotification('❌ API connection failed', 'error');
-                        return false;
-                    }
-                }
-            } catch (error) {
-                showNotification('❌ Network error: ' + error.message, 'error');
-                return false;
+            html += '<tr>';
+            // NICKNAME (editable)
+            html += `<td contenteditable="true" class="editable-nick" data-row="${i}" data-field="nick">${escapeHtml(team.nickname)}</td>`;
+            
+            // 3 match : place, kill, point (point tidak editable)
+            for (let m = 0; m < 3; m++) {
+                const place = team.matches[m][0];
+                const kill = team.matches[m][1];
+                const pointMatch = matchPoints[m];
+                html += `<td contenteditable="true" class="editable-place" data-row="${i}" data-match="${m}" data-type="place">${place}</td>`;
+                html += `<td contenteditable="true" class="editable-kill" data-row="${i}" data-match="${m}" data-type="kill">${kill}</td>`;
+                html += `<td class="point-match">${pointMatch}</td>`;
             }
+            // total kill & total point & rank
+            html += `<td class="total-cell">${totalKill}</td>`;
+            html += `<td class="total-cell">${totalPoint}</td>`;
+            html += `<td class="rank-cell">${rank}</td>`;
+            html += '</tr>';
         }
+        html += '</tbody></table>';
+        wrapper.innerHTML = html;
         
-        // ================ FILE UPLOAD HANDLING ================
-        fileUpload.addEventListener('change', handleFileUpload);
-        
-        function handleFileUpload(e) {
-            const files = Array.from(e.target.files);
-            files.forEach(file => {
-                if (file.size > 5 * 1024 * 1024) {
-                    alert(`File ${file.name} is too large. Max 5MB.`);
-                    return;
-                }
-                const allowed = ['image/jpeg','image/jpg','image/png','image/gif','application/pdf','text/plain'];
-                if (!allowed.includes(file.type)) {
-                    alert(`File type not supported: ${file.name}.`);
-                    return;
-                }
-                if (selectedFiles.length >= 5) {
-                    alert('Maximum 5 files allowed.');
-                    return;
-                }
-                selectedFiles.push(file);
-                fileCount++;
-                fileCountEl.textContent = fileCount;
-                
-                const fileDiv = document.createElement('div');
-                fileDiv.className = 'selected-file';
-                fileDiv.dataset.filename = file.name;
-                const fileIcon = getFileIcon(file.type);
-                fileDiv.innerHTML = `
-                    <i class="fas ${fileIcon} file-icon"></i>
-                    <div class="file-info">
-                        <div class="file-name">${file.name}</div>
-                        <div class="file-size">${formatFileSize(file.size)}</div>
+        // Update juara container
+        const juaraDiv = document.getElementById("juaraContainer");
+        if (juaraDiv && top3.length) {
+            let juaraHtml = '';
+            const medal = ['🥇 Juara 1', '🥈 Juara 2', '🥉 Juara 3'];
+            top3.forEach((j, idx) => {
+                juaraHtml += `
+                    <div class="juara-card">
+                        <h3>${medal[idx]}</h3>
+                        <div class="name">${escapeHtml(j.nickname)}</div>
+                        <div class="pts">${j.points} POINT</div>
                     </div>
-                    <button class="remove-file" onclick="removeSelectedFile('${file.name}')">
-                        <i class="fas fa-times"></i>
-                    </button>
                 `;
-                selectedFilesContainer.appendChild(fileDiv);
             });
-            fileUpload.value = '';
+            juaraDiv.innerHTML = juaraHtml;
         }
         
-        window.removeSelectedFile = function(filename) {
-            selectedFiles = selectedFiles.filter(f => f.name !== filename);
-            fileCount--;
-            fileCountEl.textContent = fileCount;
-            const fileDiv = document.querySelector(`.selected-file[data-filename="${filename}"]`);
-            if (fileDiv) fileDiv.remove();
-        };
-        
-        // ================ MESSAGE HANDLING ================
-        function addMessage(content, isUser = false, files = []) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isUser ? 'user-message' : 'ai-message'}`;
-            
-            const header = document.createElement('div');
-            header.className = 'message-header';
-            header.innerHTML = `<i class="fas ${isUser ? 'fa-user' : 'fa-robot'}"></i><span>${isUser ? 'You' : 'JOJO AI'}</span>`;
-            
-            const contentDiv = document.createElement('div');
-            contentDiv.className = 'message-content';
-            
-            if (files.length > 0 && isUser) {
-                const filesContainer = document.createElement('div');
-                filesContainer.className = 'uploaded-files';
-                files.forEach(file => {
-                    const fileDiv = document.createElement('div');
-                    fileDiv.className = 'file-item';
-                    const fileIcon = getFileIcon(file.type);
-                    fileDiv.innerHTML = `
-                        <i class="fas ${fileIcon} file-icon"></i>
-                        <div class="file-info">
-                            <div class="file-name">${file.name}</div>
-                            <div class="file-size">${formatFileSize(file.size)}</div>
-                        </div>
-                    `;
-                    filesContainer.appendChild(fileDiv);
-                    
-                    if (file.type.startsWith('image/')) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            const imgContainer = document.createElement('div');
-                            imgContainer.className = 'image-preview';
-                            imgContainer.innerHTML = `<img src="${e.target.result}" alt="${file.name}" onclick="openImageModal('${e.target.result}')">`;
-                            contentDiv.appendChild(imgContainer);
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-                contentDiv.appendChild(filesContainer);
-            }
-            
-            contentDiv.innerHTML += formatMessage(content);
-            messageDiv.appendChild(header);
-            messageDiv.appendChild(contentDiv);
-            chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-            return messageDiv;
+        // Pasang event listener untuk menyimpan perubahan dari contenteditable (agar ke memory teamsData)
+        attachEditableEvents();
+    }
+    
+    // Menangani perubahan dari contenteditable (update teamsData)
+    function attachEditableEvents() {
+        // Nickname
+        document.querySelectorAll('.editable-nick').forEach(cell => {
+            cell.removeEventListener('blur', handleNickBlur);
+            cell.addEventListener('blur', handleNickBlur);
+        });
+        // Place
+        document.querySelectorAll('.editable-place').forEach(cell => {
+            cell.removeEventListener('blur', handlePlaceKillBlur);
+            cell.addEventListener('blur', handlePlaceKillBlur);
+        });
+        // Kill
+        document.querySelectorAll('.editable-kill').forEach(cell => {
+            cell.removeEventListener('blur', handlePlaceKillBlur);
+            cell.addEventListener('blur', handlePlaceKillBlur);
+        });
+    }
+    
+    function handleNickBlur(e) {
+        const row = parseInt(e.target.getAttribute('data-row'));
+        const newVal = e.target.innerText.trim();
+        if (!isNaN(row) && teamsData[row]) {
+            teamsData[row].nickname = newVal || "Unknown";
         }
+    }
+    
+    function handlePlaceKillBlur(e) {
+        const row = parseInt(e.target.getAttribute('data-row'));
+        const matchIdx = parseInt(e.target.getAttribute('data-match'));
+        const type = e.target.getAttribute('data-type'); // 'place' atau 'kill'
+        let rawValue = e.target.innerText.trim();
+        let numValue = parseInt(rawValue);
+        if (isNaN(numValue)) numValue = 0;
+        if (numValue < 0) numValue = 0;
         
-        function formatMessage(text) {
-            if (!text) return '';
-            text = text.replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code class="language-$1">$2</code></pre>');
-            text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
-            text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
-            text = text.replace(/\n\n/g, '</p><p>');
-            text = text.replace(/\n/g, '<br>');
-            return '<p>' + text + '</p>';
-        }
-        
-        // ================ IMAGE MODAL ================
-        window.openImageModal = function(src) {
-            modalImage.src = src;
-            imageModal.classList.add('active');
-        };
-        closeModal.addEventListener('click', () => imageModal.classList.remove('active'));
-        imageModal.addEventListener('click', (e) => { if (e.target === imageModal) imageModal.classList.remove('active'); });
-        
-        // ================ API COMMUNICATION ================
-        async function sendToGemini(message, files = []) {
-            const start = performance.now();
-            isProcessing = true;
-            typingIndicator.style.display = 'flex';
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-            
-            try {
-                const parts = [{ text: message }];
-                for (const file of files) {
-                    if (file.type.startsWith('image/')) {
-                        const base64 = await fileToBase64(file);
-                        parts.push({ inline_data: { mime_type: file.type, data: base64 } });
-                    }
-                }
-                
-                const payload = {
-                    contents: [{ role: "user", parts }],
-                    generationConfig: { temperature: 0.7, maxOutputTokens: 2048 }
-                };
-                
-                let response = await fetch(currentApiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                
-                if (!response.ok && currentApiUrl === API_URL) {
-                    currentApiUrl = BACKUP_API_URL;
-                    response = await fetch(currentApiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                }
-                
-                if (!response.ok) {
-                    const err = await response.json();
-                    throw new Error(err.error?.message || `API Error ${response.status}`);
-                }
-                
-                const data = await response.json();
-                const end = performance.now();
-                responseTimeEl.textContent = `${((end - start) / 1000).toFixed(1)}s`;
-                
-                let aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response.";
-                chatHistory.push({ role: "user", parts: [{ text: message }] });
-                chatHistory.push({ role: "model", parts: [{ text: aiText }] });
-                if (chatHistory.length > 10) chatHistory = chatHistory.slice(-10);
-                return aiText;
-                
-            } catch (error) {
-                console.error(error);
-                responseTimeEl.textContent = `${((performance.now() - start) / 1000).toFixed(1)}s`;
-                if (error.message.includes('API key') || error.message.includes('quota') || error.message.includes('billing')) {
-                    return `**API Error**: The API key needs to be activated.\n\n**Solution:**\n1. Visit https://aistudio.google.com/app/apikey\n2. Create a new API key\n3. Enable billing (free $300 credit)\n4. Replace the API key in the code`;
-                }
-                return `**Error**: ${error.message}. Please try again.`;
-            } finally {
-                typingIndicator.style.display = 'none';
-                isProcessing = false;
+        if (!isNaN(row) && !isNaN(matchIdx) && teamsData[row] && teamsData[row].matches[matchIdx]) {
+            if (type === 'place') {
+                teamsData[row].matches[matchIdx][0] = numValue;
+            } else if (type === 'kill') {
+                teamsData[row].matches[matchIdx][1] = numValue;
             }
         }
-        
-        async function fileToBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result.split(',')[1]);
-                reader.onerror = reject;
-            });
-        }
-        
-        // ================ INPUT HANDLING ================
-        async function handleUserInput() {
-            const msg = userInput.value.trim();
-            const files = [...selectedFiles];
-            if ((!msg && !files.length) || isProcessing) return;
-            
-            addMessage(msg, true, files);
-            userInput.value = '';
-            userInput.style.height = 'auto';
-            selectedFiles = [];
-            selectedFilesContainer.innerHTML = '';
-            fileCount = 0;
-            fileCountEl.textContent = '0';
-            sendButton.disabled = true;
-            sendButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-            
-            try {
-                const reply = await sendToGemini(msg, files);
-                addMessage(reply, false);
-                messageCount++;
-                messageCountEl.textContent = messageCount;
-            } catch (e) {
-                addMessage("Sorry, there was an error processing your request.", false);
-            } finally {
-                sendButton.disabled = false;
-                sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
-                userInput.focus();
+    }
+    
+    // Fungsi untuk menyegarkan tampilan berdasarkan data terbaru di teamsData
+    function refreshDisplay() {
+        renderTable();  // render ulang dengan data teamsData yang sudah diupdate
+    }
+    
+    // Menambah tim baru dengan default place=0, kill=0
+    function addNewTeam() {
+        teamsData.push({
+            nickname: "Tim Baru",
+            matches: [[0,0], [0,0], [0,0]]
+        });
+        refreshDisplay();
+    }
+    
+    // Utility escape HTML
+    function escapeHtml(str) {
+        if (!str) return "";
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+    
+    // Inisialisasi event tombol
+    function initButtons() {
+        const refreshBtn = document.getElementById('refreshBtn');
+        const addBtn = document.getElementById('addRowBtn');
+        if (refreshBtn) refreshBtn.addEventListener('click', () => {
+            // Sebelum refresh, pastikan semua perubahan yang mungkin masih dalam fokus sudah tersimpan.
+            // trigger blur pada element aktif
+            if (document.activeElement && document.activeElement.contentEditable === 'true') {
+                document.activeElement.blur();
             }
-        }
-        
-        // ================ EVENT LISTENERS ================
-        sendButton.addEventListener('click', handleUserInput);
-        userInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey && !isProcessing) {
-                e.preventDefault();
-                handleUserInput();
-            }
+            refreshDisplay();
         });
-        userInput.addEventListener('input', function() {
-            this.style.height = 'auto';
-            this.style.height = this.scrollHeight + 'px';
+        if (addBtn) addBtn.addEventListener('click', () => {
+            addNewTeam();
         });
-        
-        quickActions.forEach(btn => {
-            btn.addEventListener('click', () => {
-                userInput.value = btn.dataset.prompt;
-                userInput.focus();
-                userInput.style.height = 'auto';
-                userInput.style.height = userInput.scrollHeight + 'px';
-            });
-        });
-        
-        promptItems.forEach(btn => {
-            btn.addEventListener('click', () => {
-                userInput.value = btn.dataset.prompt;
-                userInput.focus();
-            });
-        });
-        
-        clearChatBtn.addEventListener('click', () => {
-            if (confirm('Clear entire conversation?')) {
-                chatMessages.innerHTML = '';
-                chatHistory = [];
-                selectedFiles = [];
-                selectedFilesContainer.innerHTML = '';
-                messageCount = 1;
-                messageCountEl.textContent = '1';
-                fileCount = 0;
-                fileCountEl.textContent = '0';
-                responseTimeEl.textContent = '0.0s';
-                addMessage(`<strong>✨ Welcome to JOJO AI</strong><br><br><p>I'm your AI assistant powered by Google's Gemini.</p><p>You can upload images (JPG, PNG) and files (PDF, TXT) for analysis.</p><br><p><strong>🎯 Developed by: ADNAN S.</strong></p><p>Ask me anything or upload files to get started!</p>`, false);
-            }
-        });
-        
-        testApiBtn.addEventListener('click', testApiKey);
-        
-        // ================ INIT ================
-        document.addEventListener('DOMContentLoaded', () => {
-            userInput.focus();
-            console.log('JOJO AI initialized');
-            console.log('Using API Key:', API_KEY);
-            setTimeout(() => testApiKey(), 1000);
-            setTimeout(() => showNotification('JOJO AI is ready! Start chatting.', 'success'), 1500);
-        });
-    </script>
+    }
+    
+    // Jalankan render awal
+    renderTable();
+    initButtons();
+</script>
 </body>
 </html>
