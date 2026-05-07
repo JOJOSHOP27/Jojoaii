@@ -2,11 +2,11 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>FT RAMOT SESI 19.00 WIB - Tabel Turnamen</title>
-    <!-- html2canvas library untuk download PNG -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FT RAMOT SESI 19.00 WIB</title>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <style>
+        /* ===== TAMPILAN PERSIS SEPERTI GAMBAR, TIDAK DIUBAH ===== */
         * {
             margin: 0;
             padding: 0;
@@ -23,7 +23,7 @@
             font-family: 'Segoe UI', 'Arial', sans-serif;
         }
 
-        /* Container utama yang akan di-download (capture area) */
+        /* Container utama */
         #capture-area {
             background: white;
             width: fit-content;
@@ -60,41 +60,35 @@
             vertical-align: middle;
         }
 
-        /* Header utama */
         .tournament-table th {
             background-color: #d9e1e8;
             font-weight: 700;
             text-align: center;
-            font-size: 14px;
         }
 
-        /* Sub-header (Place, Kill, Point) */
         .tournament-table .sub-header {
             background-color: #eef2f5;
             font-weight: 600;
         }
 
-        /* Sel data biasa */
         .tournament-table td {
             text-align: center;
         }
 
-        /* Kolom NICKNAME rata kiri */
         .tournament-table td:first-child {
             text-align: left;
             font-weight: 500;
             background-color: #fefefe;
         }
 
-        /* Warna total & rank sedikit berbeda (opsional, sesuai gambar) */
-        .tournament-table td.total-kill-cell,
-        .tournament-table td.total-point-cell,
-        .tournament-table td.rank-cell {
+        .total-kill-cell,
+        .total-point-cell,
+        .rank-cell {
             background-color: #f8f5e6;
             font-weight: 600;
         }
 
-        /* Tabel JUARA (persis seperti gambar) */
+        /* Tabel JUARA */
         .juara-wrapper {
             margin-top: 20px;
             border: 1px solid #000;
@@ -140,7 +134,7 @@
             font-weight: bold;
         }
 
-        /* Tombol download */
+        /* Tombol download - tidak mengubah tampilan tabel */
         .btn-download {
             display: block;
             margin: 25px auto 0 auto;
@@ -163,23 +157,24 @@
             transform: scale(1.02);
         }
 
-        /* Responsif: scroll horizontal jika layar kecil */
+        /* Responsif */
         .table-responsive {
             overflow-x: auto;
+        }
+
+        /* Tidak ada gaya tambahan untuk edit - tampilan tetap identik */
+        [data-editable] {
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-
 <div style="display: flex; flex-direction: column; align-items: center;">
-    <!-- Area yang akan di-capture ke PNG -->
     <div id="capture-area">
-        <!-- Tabel utama tournament -->
         <div class="table-responsive">
-            <table class="tournament-table">
+            <table class="tournament-table" id="mainTable">
                 <caption>FT RAMOT SESI 19.00 WIB</caption>
                 <thead>
-                    <!-- Baris pertama header (colspan) -->
                     <tr>
                         <th rowspan="2">NICKNAME</th>
                         <th colspan="3">MATCH 1</th>
@@ -187,7 +182,6 @@
                         <th colspan="3">MATCH 3</th>
                         <th colspan="3">TOTAL</th>
                     </tr>
-                    <!-- Baris kedua header (sub) -->
                     <tr class="sub-header">
                         <th>PLACE</th><th>KILL</th><th>POINT</th>
                         <th>PLACE</th><th>KILL</th><th>POINT</th>
@@ -195,159 +189,214 @@
                         <th>KILL</th><th>POINT</th><th>RANK</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Data persis dari gambar (12 baris) -->
-                    <tr>
-                        <td>BARUDAK BAPAK</td>
-                        <td>9</td><td>13</td><td>22</td>
-                        <td>8</td><td>6</td><td>14</td>
-                        <td>6</td><td>17</td><td>23</td>
-                        <td class="total-kill-cell">36</td><td class="total-point-cell">59</td><td class="rank-cell">1</td>
-                    </tr>
-                    <tr>
-                        <td>frezzwashere</td>
-                        <td>4</td><td>4</td><td>8</td>
-                        <td>9</td><td>11</td><td>20</td>
-                        <td>12</td><td>14</td><td>26</td>
-                        <td class="total-kill-cell">29</td><td class="total-point-cell">54</td><td class="rank-cell">2</td>
-                    </tr>
-                    <tr>
-                        <td>LUPI JUSTICE</td>
-                        <td>12</td><td>14</td><td>26</td>
-                        <td>4</td><td>2</td><td>6</td>
-                        <td>8</td><td>8</td><td>16</td>
-                        <td class="total-kill-cell">24</td><td class="total-point-cell">48</td><td class="rank-cell">3</td>
-                    </tr>
-                    <tr>
-                        <td>JPN2</td>
-                        <td>6</td><td>1</td><td>7</td>
-                        <td>12</td><td>12</td><td>24</td>
-                        <td>9</td><td>7</td><td>16</td>
-                        <td class="total-kill-cell">20</td><td class="total-point-cell">47</td><td class="rank-cell">4</td>
-                    </tr>
-                    <tr>
-                        <td>Spontan</td>
-                        <td>8</td><td>19</td><td>27</td>
-                        <td>1</td><td>7</td><td>8</td>
-                        <td>2</td><td>10</td><td>12</td>
-                        <td class="total-kill-cell">36</td><td class="total-point-cell">47</td><td class="rank-cell">5</td>
-                    </tr>
-                    <tr>
-                        <td>SAUYUNAN ID</td>
-                        <td>5</td><td>10</td><td>15</td>
-                        <td>6</td><td>8</td><td>14</td>
-                        <td>5</td><td>8</td><td>13</td>
-                        <td class="total-kill-cell">26</td><td class="total-point-cell">42</td><td class="rank-cell">6</td>
-                    </tr>
-                    <tr>
-                        <td>VOLDAREZ</td>
-                        <td>7</td><td>2</td><td>9</td>
-                        <td>3</td><td>7</td><td>10</td>
-                        <td>4</td><td>3</td><td>7</td>
-                        <td class="total-kill-cell">12</td><td class="total-point-cell">26</td><td class="rank-cell">7</td>
-                    </tr>
-                    <tr>
-                        <td>Jumidi RSCL</td>
-                        <td>2</td><td>1</td><td>3</td>
-                        <td>7</td><td>10</td><td>17</td>
-                        <td>0</td><td>3</td><td>3</td>
-                        <td class="total-kill-cell">14</td><td class="total-point-cell">23</td><td class="rank-cell">8</td>
-                    </tr>
-                    <tr>
-                        <td>STARHIGH NEW</td>
-                        <td>0</td><td>3</td><td>3</td>
-                        <td>2</td><td>3</td><td>5</td>
-                        <td>3</td><td>7</td><td>10</td>
-                        <td class="total-kill-cell">13</td><td class="total-point-cell">18</td><td class="rank-cell">9</td>
-                    </tr>
-                    <tr>
-                        <td>SMAGAPRO</td>
-                        <td>3</td><td>6</td><td>9</td>
-                        <td>0</td><td>1</td><td>1</td>
-                        <td>1</td><td>6</td><td>7</td>
-                        <td class="total-kill-cell">13</td><td class="total-point-cell">17</td><td class="rank-cell">10</td>
-                    </tr>
-                    <tr>
-                        <td>esukibri</td>
-                        <td>0</td><td>0</td><td>0</td>
-                        <td>5</td><td>4</td><td>9</td>
-                        <td>0</td><td>4</td><td>4</td>
-                        <td class="total-kill-cell">8</td><td class="total-point-cell">13</td><td class="rank-cell">11</td>
-                    </tr>
-                    <tr>
-                        <td>LAST SALDO</td>
-                        <td>1</td><td>7</td><td>8</td>
-                        <td>0</td><td>1</td><td>1</td>
-                        <td>0</td><td>0</td><td>0</td>
-                        <td class="total-kill-cell">8</td><td class="total-point-cell">9</td><td class="rank-cell">12</td>
-                    </tr>
+                <tbody id="tableBody">
+                    <!-- Data akan diisi JavaScript -->
                 </tbody>
             </table>
         </div>
-
-        <!-- Tabel JUARA (persis format seperti gambar: JUARA, NICKNAME, POINT) -->
         <div class="juara-wrapper">
-            <table class="juara-table">
+            <table class="juara-table" id="juaraTable">
                 <caption>JUARA</caption>
                 <thead>
-                    <tr>
-                        <th>JUARA</th>
-                        <th>NICKNAME</th>
-                        <th>POINT</th>
-                    </tr>
+                    <tr><th>JUARA</th><th>NICKNAME</th><th>POINT</th></tr>
                 </thead>
-                <tbody>
-                    <tr><td>Juara 1</td><td>BARUDAK BAPAK</td><td>59</td></tr>
-                    <tr><td>Juara 2</td><td>frezzwashere</td><td>54</td></tr>
-                    <tr><td>Juara 3</td><td>LUPI JUSTICE</td><td>48</td></tr>
+                <tbody id="juaraBody">
+                    <tr><td>Juara 1</td><td>-</td><td>-</td></tr>
+                    <tr><td>Juara 2</td><td>-</td><td>-</td></tr>
+                    <tr><td>Juara 3</td><td>-</td><td>-</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
-
-    <!-- Tombol download PNG -->
     <button class="btn-download" id="downloadPNGButton">📸 Download sebagai PNG</button>
 </div>
 
 <script>
-    (function() {
-        const downloadBtn = document.getElementById('downloadPNGButton');
-        const captureElement = document.getElementById('capture-area');
+    // ========= DATA AWAL PERSIS GAMBAR =========
+    let teams = [
+        { nickname: "BARUDAK BAPAK", matches: [[9,13], [8,6], [6,17]] },
+        { nickname: "frezzwashere", matches: [[4,4], [9,11], [12,14]] },
+        { nickname: "LUPI JUSTICE", matches: [[12,14], [4,2], [8,8]] },
+        { nickname: "JPN2", matches: [[6,1], [12,12], [9,7]] },
+        { nickname: "Spontan", matches: [[8,19], [1,7], [2,10]] },
+        { nickname: "SAUYUNAN ID", matches: [[5,10], [6,8], [5,8]] },
+        { nickname: "VOLDAREZ", matches: [[7,2], [3,7], [4,3]] },
+        { nickname: "Jumidi RSCL", matches: [[2,1], [7,10], [0,3]] },
+        { nickname: "STARHIGH NEW", matches: [[0,3], [2,3], [3,7]] },
+        { nickname: "SMAGAPRO", matches: [[3,6], [0,1], [1,6]] },
+        { nickname: "esukibri", matches: [[0,0], [5,4], [0,4]] },
+        { nickname: "LAST SALDO", matches: [[1,7], [0,1], [0,0]] }
+    ];
 
-        async function downloadAsPNG() {
-            if (!captureElement) return;
-            try {
-                // Tampilkan loading cursor
-                downloadBtn.textContent = '⏳ Memproses...';
-                downloadBtn.disabled = true;
-
-                // Gunakan html2canvas dengan skala tinggi agar hasil tajam
-                const canvas = await html2canvas(captureElement, {
-                    scale: 2.5,            // resolusi tinggi
-                    backgroundColor: '#ffffff',
-                    logging: false,
-                    useCORS: false,
-                    allowTaint: false
-                });
-                
-                // Buat link download
-                const link = document.createElement('a');
-                link.download = 'FT_RAMOT_Turnamen.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-
-            } catch (error) {
-                console.error('Gagal generate PNG:', error);
-                alert('Terjadi kesalahan saat membuat PNG. Coba refresh halaman.');
-            } finally {
-                downloadBtn.textContent = '📸 Download sebagai PNG';
-                downloadBtn.disabled = false;
-            }
+    // Fungsi hitung statistik per tim
+    function calcTeamStats(team) {
+        let totalKill = 0;
+        let totalPoint = 0;
+        let matchPoints = [];
+        for (let i = 0; i < team.matches.length; i++) {
+            let place = team.matches[i][0];
+            let kill = team.matches[i][1];
+            let point = place + kill;
+            matchPoints.push(point);
+            totalKill += kill;
+            totalPoint += point;
         }
+        return { matchPoints, totalKill, totalPoint };
+    }
 
-        downloadBtn.addEventListener('click', downloadAsPNG);
-    })();
+    // Hitung peringkat & juara
+    function computeRankings() {
+        let stats = teams.map((team, idx) => {
+            let s = calcTeamStats(team);
+            return { idx, nickname: team.nickname, totalPoint: s.totalPoint, totalKill: s.totalKill };
+        });
+        stats.sort((a,b) => {
+            if (a.totalPoint !== b.totalPoint) return b.totalPoint - a.totalPoint;
+            return b.totalKill - a.totalKill;
+        });
+        let rankMap = new Array(teams.length);
+        for (let i = 0; i < stats.length; i++) {
+            rankMap[stats[i].idx] = i+1;
+        }
+        let top3 = stats.slice(0,3).map(s => ({ nickname: s.nickname, point: s.totalPoint }));
+        return { rankMap, top3 };
+    }
+
+    // Render seluruh tabel (termasuk peringkat & juara)
+    function renderTables() {
+        const tbody = document.getElementById('tableBody');
+        if (!tbody) return;
+        const { rankMap, top3 } = computeRankings();
+        let html = '';
+        for (let i = 0; i < teams.length; i++) {
+            const team = teams[i];
+            const stats = calcTeamStats(team);
+            const matchPoints = stats.matchPoints;
+            html += '<tr>';
+            // NICKNAME (editable via double click)
+            html += `<td data-editable="nick" data-row="${i}" style="cursor: pointer;">${escapeHtml(team.nickname)}</td>`;
+            // Match 1,2,3
+            for (let m = 0; m < 3; m++) {
+                const place = team.matches[m][0];
+                const kill = team.matches[m][1];
+                html += `<td data-editable="place" data-row="${i}" data-match="${m}" style="cursor: pointer;">${place}</td>`;
+                html += `<td data-editable="kill" data-row="${i}" data-match="${m}" style="cursor: pointer;">${kill}</td>`;
+                html += `<td>${matchPoints[m]}</td>`;
+            }
+            html += `<td class="total-kill-cell">${stats.totalKill}</td>`;
+            html += `<td class="total-point-cell">${stats.totalPoint}</td>`;
+            html += `<td class="rank-cell">${rankMap[i]}</td>`;
+            html += '</tr>';
+        }
+        tbody.innerHTML = html;
+        
+        // Update tabel JUARA
+        const juaraBody = document.getElementById('juaraBody');
+        if (juaraBody) {
+            let juaraHtml = '';
+            const titles = ['Juara 1', 'Juara 2', 'Juara 3'];
+            for (let i = 0; i < 3; i++) {
+                let nickname = (top3[i] ? top3[i].nickname : '-');
+                let point = (top3[i] ? top3[i].point : '-');
+                juaraHtml += `<tr><td>${titles[i]}</td><td>${escapeHtml(nickname)}</td><td>${point}</td></tr>`;
+            }
+            juaraBody.innerHTML = juaraHtml;
+        }
+        
+        // Re-attach event listener untuk double click
+        attachDoubleClickEvents();
+    }
+    
+    // Double click edit menggunakan prompt (tidak mengubah tampilan)
+    function attachDoubleClickEvents() {
+        // Edit NICKNAME
+        document.querySelectorAll('[data-editable="nick"]').forEach(cell => {
+            cell.removeEventListener('dblclick', nickEditHandler);
+            cell.addEventListener('dblclick', nickEditHandler);
+        });
+        // Edit PLACE
+        document.querySelectorAll('[data-editable="place"]').forEach(cell => {
+            cell.removeEventListener('dblclick', placeKillEditHandler);
+            cell.addEventListener('dblclick', placeKillEditHandler);
+        });
+        // Edit KILL
+        document.querySelectorAll('[data-editable="kill"]').forEach(cell => {
+            cell.removeEventListener('dblclick', placeKillEditHandler);
+            cell.addEventListener('dblclick', placeKillEditHandler);
+        });
+    }
+    
+    function nickEditHandler(e) {
+        const cell = e.currentTarget;
+        const row = parseInt(cell.getAttribute('data-row'));
+        const oldValue = teams[row].nickname;
+        let newValue = prompt("Edit Nama Tim:", oldValue);
+        if (newValue !== null && newValue.trim() !== "") {
+            teams[row].nickname = newValue.trim();
+            renderTables(); // refresh tampilan
+        }
+    }
+    
+    function placeKillEditHandler(e) {
+        const cell = e.currentTarget;
+        const row = parseInt(cell.getAttribute('data-row'));
+        const matchIdx = parseInt(cell.getAttribute('data-match'));
+        const type = cell.getAttribute('data-editable'); // 'place' atau 'kill'
+        let oldValue = type === 'place' ? teams[row].matches[matchIdx][0] : teams[row].matches[matchIdx][1];
+        let newValue = prompt(`Edit ${type.toUpperCase()} untuk Match ${matchIdx+1}:`, oldValue);
+        if (newValue !== null) {
+            let num = parseInt(newValue);
+            if (isNaN(num)) num = 0;
+            if (num < 0) num = 0;
+            if (type === 'place') {
+                teams[row].matches[matchIdx][0] = num;
+            } else {
+                teams[row].matches[matchIdx][1] = num;
+            }
+            renderTables(); // refresh semua perhitungan
+        }
+    }
+    
+    function escapeHtml(str) {
+        if (!str) return "";
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    // Download PNG
+    async function downloadPNG() {
+        const btn = document.getElementById('downloadPNGButton');
+        const area = document.getElementById('capture-area');
+        btn.textContent = '⏳ Memproses...';
+        btn.disabled = true;
+        try {
+            const canvas = await html2canvas(area, {
+                scale: 2.5,
+                backgroundColor: '#ffffff',
+                logging: false,
+                windowWidth: area.scrollWidth,
+                windowHeight: area.scrollHeight
+            });
+            const link = document.createElement('a');
+            link.download = 'FT_RAMOT_Turnamen.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        } catch (err) {
+            console.error(err);
+            alert('Gagal membuat PNG.');
+        } finally {
+            btn.textContent = '📸 Download sebagai PNG';
+            btn.disabled = false;
+        }
+    }
+    
+    // Inisialisasi
+    renderTables();
+    document.getElementById('downloadPNGButton').addEventListener('click', downloadPNG);
 </script>
-
 </body>
 </html>
