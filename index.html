@@ -23,7 +23,6 @@
             font-family: 'Segoe UI', 'Arial', sans-serif;
         }
 
-        /* Container utama */
         #capture-area {
             background: white;
             width: fit-content;
@@ -34,7 +33,6 @@
             border-radius: 4px;
         }
 
-        /* Tabel utama */
         .tournament-table {
             border-collapse: collapse;
             width: 100%;
@@ -88,7 +86,6 @@
             font-weight: 600;
         }
 
-        /* Tabel JUARA */
         .juara-wrapper {
             margin-top: 20px;
             border: 1px solid #000;
@@ -134,7 +131,6 @@
             font-weight: bold;
         }
 
-        /* Tombol download - tidak mengubah tampilan tabel */
         .btn-download {
             display: block;
             margin: 25px auto 0 auto;
@@ -157,12 +153,11 @@
             transform: scale(1.02);
         }
 
-        /* Responsif */
         .table-responsive {
             overflow-x: auto;
         }
 
-        /* Tidak ada gaya tambahan untuk edit - tampilan tetap identik */
+        /* Indikator bahwa sel bisa diedit (hanya perubahan cursor, tidak mengubah tampilan) */
         [data-editable] {
             cursor: pointer;
         }
@@ -189,9 +184,7 @@
                         <th>KILL</th><th>POINT</th><th>RANK</th>
                     </tr>
                 </thead>
-                <tbody id="tableBody">
-                    <!-- Data akan diisi JavaScript -->
-                </tbody>
+                <tbody id="tableBody"></tbody>
             </table>
         </div>
         <div class="juara-wrapper">
@@ -212,7 +205,7 @@
 </div>
 
 <script>
-    // ========= DATA AWAL PERSIS GAMBAR =========
+    // Data awal persis gambar
     let teams = [
         { nickname: "BARUDAK BAPAK", matches: [[9,13], [8,6], [6,17]] },
         { nickname: "frezzwashere", matches: [[4,4], [9,11], [12,14]] },
@@ -228,10 +221,9 @@
         { nickname: "LAST SALDO", matches: [[1,7], [0,1], [0,0]] }
     ];
 
-    // Fungsi hitung statistik per tim
-    function calcTeamStats(team) {
-        let totalKill = 0;
-        let totalPoint = 0;
+    // Hitung statistik per tim
+    function calcStats(team) {
+        let totalKill = 0, totalPoint = 0;
         let matchPoints = [];
         for (let i = 0; i < team.matches.length; i++) {
             let place = team.matches[i][0];
@@ -244,44 +236,41 @@
         return { matchPoints, totalKill, totalPoint };
     }
 
-    // Hitung peringkat & juara
-    function computeRankings() {
-        let stats = teams.map((team, idx) => {
-            let s = calcTeamStats(team);
+    // Hitung peringkat dan podium
+    function getRankingsAndPodium() {
+        let withStats = teams.map((team, idx) => {
+            let s = calcStats(team);
             return { idx, nickname: team.nickname, totalPoint: s.totalPoint, totalKill: s.totalKill };
         });
-        stats.sort((a,b) => {
+        withStats.sort((a,b) => {
             if (a.totalPoint !== b.totalPoint) return b.totalPoint - a.totalPoint;
             return b.totalKill - a.totalKill;
         });
         let rankMap = new Array(teams.length);
-        for (let i = 0; i < stats.length; i++) {
-            rankMap[stats[i].idx] = i+1;
-        }
-        let top3 = stats.slice(0,3).map(s => ({ nickname: s.nickname, point: s.totalPoint }));
-        return { rankMap, top3 };
+        for (let i = 0; i < withStats.length; i++) rankMap[withStats[i].idx] = i+1;
+        let podium = withStats.slice(0,3).map(p => ({ nickname: p.nickname, point: p.totalPoint }));
+        return { rankMap, podium };
     }
 
-    // Render seluruh tabel (termasuk peringkat & juara)
-    function renderTables() {
+    // Render seluruh tabel (termasuk juara)
+    function renderAll() {
         const tbody = document.getElementById('tableBody');
         if (!tbody) return;
-        const { rankMap, top3 } = computeRankings();
+        const { rankMap, podium } = getRankingsAndPodium();
         let html = '';
         for (let i = 0; i < teams.length; i++) {
             const team = teams[i];
-            const stats = calcTeamStats(team);
-            const matchPoints = stats.matchPoints;
+            const stats = calcStats(team);
             html += '<tr>';
-            // NICKNAME (editable via double click)
-            html += `<td data-editable="nick" data-row="${i}" style="cursor: pointer;">${escapeHtml(team.nickname)}</td>`;
-            // Match 1,2,3
+            // NICKNAME editable
+            html += `<td data-editable="nick" data-row="${i}">${escapeHtml(team.nickname)}</td>`;
+            // 3 matches
             for (let m = 0; m < 3; m++) {
-                const place = team.matches[m][0];
-                const kill = team.matches[m][1];
-                html += `<td data-editable="place" data-row="${i}" data-match="${m}" style="cursor: pointer;">${place}</td>`;
-                html += `<td data-editable="kill" data-row="${i}" data-match="${m}" style="cursor: pointer;">${kill}</td>`;
-                html += `<td>${matchPoints[m]}</td>`;
+                let place = team.matches[m][0];
+                let kill = team.matches[m][1];
+                html += `<td data-editable="place" data-row="${i}" data-match="${m}">${place}</td>`;
+                html += `<td data-editable="kill" data-row="${i}" data-match="${m}">${kill}</td>`;
+                html += `<td>${stats.matchPoints[m]}</td>`;
             }
             html += `<td class="total-kill-cell">${stats.totalKill}</td>`;
             html += `<td class="total-point-cell">${stats.totalPoint}</td>`;
@@ -289,74 +278,65 @@
             html += '</tr>';
         }
         tbody.innerHTML = html;
-        
-        // Update tabel JUARA
+
+        // Update podium juara
         const juaraBody = document.getElementById('juaraBody');
         if (juaraBody) {
             let juaraHtml = '';
             const titles = ['Juara 1', 'Juara 2', 'Juara 3'];
             for (let i = 0; i < 3; i++) {
-                let nickname = (top3[i] ? top3[i].nickname : '-');
-                let point = (top3[i] ? top3[i].point : '-');
-                juaraHtml += `<tr><td>${titles[i]}</td><td>${escapeHtml(nickname)}</td><td>${point}</td></tr>`;
+                let nick = podium[i] ? podium[i].nickname : '-';
+                let pts = podium[i] ? podium[i].point : '-';
+                juaraHtml += `<tr><td>${titles[i]}</td><td>${escapeHtml(nick)}</td><td>${pts}</td></tr>`;
             }
             juaraBody.innerHTML = juaraHtml;
         }
-        
-        // Re-attach event listener untuk double click
-        attachDoubleClickEvents();
+
+        // Pasang event listener double click
+        attachEditEvents();
     }
-    
-    // Double click edit menggunakan prompt (tidak mengubah tampilan)
-    function attachDoubleClickEvents() {
-        // Edit NICKNAME
-        document.querySelectorAll('[data-editable="nick"]').forEach(cell => {
-            cell.removeEventListener('dblclick', nickEditHandler);
-            cell.addEventListener('dblclick', nickEditHandler);
+
+    // Event handler untuk edit
+    function attachEditEvents() {
+        // Edit nickname
+        document.querySelectorAll('[data-editable="nick"]').forEach(el => {
+            el.removeEventListener('dblclick', nickEdit);
+            el.addEventListener('dblclick', nickEdit);
         });
-        // Edit PLACE
-        document.querySelectorAll('[data-editable="place"]').forEach(cell => {
-            cell.removeEventListener('dblclick', placeKillEditHandler);
-            cell.addEventListener('dblclick', placeKillEditHandler);
-        });
-        // Edit KILL
-        document.querySelectorAll('[data-editable="kill"]').forEach(cell => {
-            cell.removeEventListener('dblclick', placeKillEditHandler);
-            cell.addEventListener('dblclick', placeKillEditHandler);
+        // Edit place & kill
+        document.querySelectorAll('[data-editable="place"], [data-editable="kill"]').forEach(el => {
+            el.removeEventListener('dblclick', placeKillEdit);
+            el.addEventListener('dblclick', placeKillEdit);
         });
     }
-    
-    function nickEditHandler(e) {
+
+    function nickEdit(e) {
         const cell = e.currentTarget;
         const row = parseInt(cell.getAttribute('data-row'));
-        const oldValue = teams[row].nickname;
-        let newValue = prompt("Edit Nama Tim:", oldValue);
-        if (newValue !== null && newValue.trim() !== "") {
-            teams[row].nickname = newValue.trim();
-            renderTables(); // refresh tampilan
+        const old = teams[row].nickname;
+        let newVal = prompt("Edit Nama Tim:", old);
+        if (newVal && newVal.trim() !== "") {
+            teams[row].nickname = newVal.trim();
+            renderAll();  // refresh semua (termasuk podium)
         }
     }
-    
-    function placeKillEditHandler(e) {
+
+    function placeKillEdit(e) {
         const cell = e.currentTarget;
         const row = parseInt(cell.getAttribute('data-row'));
-        const matchIdx = parseInt(cell.getAttribute('data-match'));
-        const type = cell.getAttribute('data-editable'); // 'place' atau 'kill'
-        let oldValue = type === 'place' ? teams[row].matches[matchIdx][0] : teams[row].matches[matchIdx][1];
-        let newValue = prompt(`Edit ${type.toUpperCase()} untuk Match ${matchIdx+1}:`, oldValue);
-        if (newValue !== null) {
-            let num = parseInt(newValue);
+        const match = parseInt(cell.getAttribute('data-match'));
+        const type = cell.getAttribute('data-editable'); // "place" atau "kill"
+        const oldVal = teams[row].matches[match][type === 'place' ? 0 : 1];
+        let newVal = prompt(`Edit ${type.toUpperCase()} Match ${match+1}:`, oldVal);
+        if (newVal !== null) {
+            let num = parseInt(newVal);
             if (isNaN(num)) num = 0;
             if (num < 0) num = 0;
-            if (type === 'place') {
-                teams[row].matches[matchIdx][0] = num;
-            } else {
-                teams[row].matches[matchIdx][1] = num;
-            }
-            renderTables(); // refresh semua perhitungan
+            teams[row].matches[match][type === 'place' ? 0 : 1] = num;
+            renderAll();
         }
     }
-    
+
     function escapeHtml(str) {
         if (!str) return "";
         return str.replace(/[&<>]/g, function(m) {
@@ -366,7 +346,7 @@
             return m;
         });
     }
-    
+
     // Download PNG
     async function downloadPNG() {
         const btn = document.getElementById('downloadPNGButton');
@@ -393,9 +373,9 @@
             btn.disabled = false;
         }
     }
-    
+
     // Inisialisasi
-    renderTables();
+    renderAll();
     document.getElementById('downloadPNGButton').addEventListener('click', downloadPNG);
 </script>
 </body>
