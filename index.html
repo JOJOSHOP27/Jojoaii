@@ -6,13 +6,8 @@
     <title>FT RAMOT SESI 19.00 WIB</title>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <style>
-        /* ===== TAMPILAN PERSIS SEPERTI GAMBAR, TIDAK DIUBAH ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* TAMPILAN PERSIS SEPERTI GAMBAR, TIDAK DIUBAH */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: #e6e9ef;
             display: flex;
@@ -22,7 +17,6 @@
             padding: 30px 20px;
             font-family: 'Segoe UI', 'Arial', sans-serif;
         }
-
         #capture-area {
             background: white;
             width: fit-content;
@@ -32,73 +26,43 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             border-radius: 4px;
         }
-
         .tournament-table {
             border-collapse: collapse;
             width: 100%;
             font-size: 14px;
-            font-family: 'Segoe UI', 'Arial', sans-serif;
             margin-bottom: 28px;
         }
-
         .tournament-table caption {
             font-size: 22px;
             font-weight: bold;
             margin-bottom: 16px;
             text-align: center;
-            letter-spacing: 1px;
             color: #1e2f2a;
-            caption-side: top;
         }
-
-        .tournament-table th, 
-        .tournament-table td {
+        .tournament-table th, .tournament-table td {
             border: 1.2px solid #000000;
             padding: 8px 10px;
             vertical-align: middle;
         }
-
         .tournament-table th {
             background-color: #d9e1e8;
             font-weight: 700;
             text-align: center;
         }
-
-        .tournament-table .sub-header {
-            background-color: #eef2f5;
-            font-weight: 600;
-        }
-
-        .tournament-table td {
-            text-align: center;
-        }
-
-        .tournament-table td:first-child {
-            text-align: left;
-            font-weight: 500;
-            background-color: #fefefe;
-        }
-
-        .total-kill-cell,
-        .total-point-cell,
-        .rank-cell {
-            background-color: #f8f5e6;
-            font-weight: 600;
-        }
-
+        .tournament-table .sub-header { background-color: #eef2f5; font-weight: 600; }
+        .tournament-table td { text-align: center; }
+        .tournament-table td:first-child { text-align: left; background-color: #fefefe; }
+        .total-kill-cell, .total-point-cell, .rank-cell { background-color: #f8f5e6; font-weight: 600; }
         .juara-wrapper {
             margin-top: 20px;
             border: 1px solid #000;
-            width: 100%;
             background: white;
         }
-
         .juara-table {
             border-collapse: collapse;
             width: 100%;
             font-size: 14px;
         }
-
         .juara-table caption {
             font-size: 18px;
             font-weight: bold;
@@ -107,30 +71,14 @@
             padding: 8px 12px;
             border: 1px solid #000;
             border-bottom: none;
-            caption-side: top;
         }
-
-        .juara-table th, 
-        .juara-table td {
+        .juara-table th, .juara-table td {
             border: 1px solid #000000;
             padding: 8px 12px;
             text-align: left;
         }
-
-        .juara-table th {
-            background-color: #eef2f5;
-            font-weight: 700;
-        }
-
-        .juara-table td:first-child {
-            font-weight: 600;
-        }
-
-        .juara-table td:last-child {
-            text-align: center;
-            font-weight: bold;
-        }
-
+        .juara-table th { background-color: #eef2f5; }
+        .juara-table td:last-child { text-align: center; font-weight: bold; }
         .btn-download {
             display: block;
             margin: 25px auto 0 auto;
@@ -142,24 +90,11 @@
             padding: 12px 28px;
             border-radius: 40px;
             cursor: pointer;
-            transition: 0.2s;
             box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-            font-family: inherit;
-            text-align: center;
         }
-
-        .btn-download:hover {
-            background-color: #1f5e3a;
-            transform: scale(1.02);
-        }
-
-        .table-responsive {
-            overflow-x: auto;
-        }
-
-        [data-editable], [data-podium] {
-            cursor: pointer;
-        }
+        .btn-download:hover { background-color: #1f5e3a; }
+        .table-responsive { overflow-x: auto; }
+        [data-editable], [data-podium] { cursor: pointer; }
     </style>
 </head>
 <body>
@@ -169,34 +104,17 @@
             <table class="tournament-table" id="mainTable">
                 <caption>FT RAMOT SESI 19.00 WIB</caption>
                 <thead>
-                    <tr>
-                        <th rowspan="2">NICKNAME</th>
-                        <th colspan="3">MATCH 1</th>
-                        <th colspan="3">MATCH 2</th>
-                        <th colspan="3">MATCH 3</th>
-                        <th colspan="3">TOTAL</th>
-                    </tr>
-                    <tr class="sub-header">
-                        <th>PLACE</th><th>KILL</th><th>POINT</th>
-                        <th>PLACE</th><th>KILL</th><th>POINT</th>
-                        <th>PLACE</th><th>KILL</th><th>POINT</th>
-                        <th>KILL</th><th>POINT</th><th>RANK</th>
-                    </tr>
+                    <tr><th rowspan="2">NICKNAME</th><th colspan="3">MATCH 1</th><th colspan="3">MATCH 2</th><th colspan="3">MATCH 3</th><th colspan="3">TOTAL</th></tr>
+                    <tr class="sub-header"><th>PLACE</th><th>KILL</th><th>POINT</th><th>PLACE</th><th>KILL</th><th>POINT</th><th>PLACE</th><th>KILL</th><th>POINT</th><th>KILL</th><th>POINT</th><th>RANK</th></tr>
                 </thead>
                 <tbody id="tableBody"></tbody>
             </table>
         </div>
         <div class="juara-wrapper">
-            <table class="juara-table" id="juaraTable">
+            <table class="juara-table">
                 <caption>JUARA</caption>
-                <thead>
-                    <tr><th>JUARA</th><th>NICKNAME</th><th>POINT</th></tr>
-                </thead>
-                <tbody id="juaraBody">
-                    <tr><td>Juara 1</td><td data-podium="nick" data-rank="0">-</td><td>-</td><tr>
-                    <tr><td>Juara 2</td><td data-podium="nick" data-rank="1">-</td><td>-</td></tr>
-                    <tr><td>Juara 3</td><td data-podium="nick" data-rank="2">-</td><td>-</td></tr>
-                </tbody>
+                <thead><tr><th>JUARA</th><th>NICKNAME</th><th>POINT</th></tr></thead>
+                <tbody id="juaraBody"></tbody>
             </table>
         </div>
     </div>
@@ -220,6 +138,7 @@
         { nickname: "LAST SALDO", matches: [[1,7], [0,1], [0,0]] }
     ];
 
+    // Helper: hitung statistik tim
     function calcStats(team) {
         let totalKill = 0, totalPoint = 0;
         let matchPoints = [];
@@ -234,6 +153,7 @@
         return { matchPoints, totalKill, totalPoint };
     }
 
+    // Hitung peringkat dan data podium (original index)
     function getRankingsAndPodium() {
         let withStats = teams.map((team, idx) => {
             let s = calcStats(team);
@@ -249,22 +169,26 @@
         return { rankMap, podium };
     }
 
+    // Render seluruh tabel (tanpa attach event, karena pakai event delegation)
     function renderAll() {
         const tbody = document.getElementById('tableBody');
         if (!tbody) return;
         const { rankMap, podium } = getRankingsAndPodium();
+
+        // Render tabel utama
         let html = '';
         for (let i = 0; i < teams.length; i++) {
             const team = teams[i];
             const stats = calcStats(team);
             html += '<tr>';
+            // NICKNAME (data-editable="nick")
             html += `<td data-editable="nick" data-row="${i}">${escapeHtml(team.nickname)}</td>`;
             for (let m = 0; m < 3; m++) {
                 let place = team.matches[m][0];
                 let kill = team.matches[m][1];
                 html += `<td data-editable="place" data-row="${i}" data-match="${m}">${place}</td>`;
                 html += `<td data-editable="kill" data-row="${i}" data-match="${m}">${kill}</td>`;
-                html += `<td>${stats.matchPoints[m]}</td>`;
+                html += `<td class="point-match">${stats.matchPoints[m]}</td>`;
             }
             html += `<td class="total-kill-cell">${stats.totalKill}</td>`;
             html += `<td class="total-point-cell">${stats.totalPoint}</td>`;
@@ -273,6 +197,7 @@
         }
         tbody.innerHTML = html;
 
+        // Render tabel JUARA (podium)
         const juaraBody = document.getElementById('juaraBody');
         if (juaraBody) {
             let juaraHtml = '';
@@ -289,74 +214,61 @@
             }
             juaraBody.innerHTML = juaraHtml;
         }
-
-        attachEditEvents();
-        attachPodiumEditEvents();
     }
 
-    // Event click (satu klik) untuk edit di tabel utama
-    function attachEditEvents() {
-        document.querySelectorAll('[data-editable="nick"]').forEach(el => {
-            el.removeEventListener('click', nickEdit);
-            el.addEventListener('click', nickEdit);
+    // Event delegation: satu event listener untuk semua klik pada elemen dengan data-editable atau data-podium
+    function setupGlobalClick() {
+        const container = document.getElementById('capture-area');
+        container.addEventListener('click', function(e) {
+            // Cari target terdekat yang memiliki atribut data-editable atau data-podium
+            let target = e.target.closest('[data-editable], [data-podium]');
+            if (!target) return;
+
+            if (target.hasAttribute('data-editable')) {
+                const type = target.getAttribute('data-editable'); // 'nick', 'place', 'kill'
+                if (type === 'nick') {
+                    const row = parseInt(target.getAttribute('data-row'));
+                    if (isNaN(row)) return;
+                    const oldVal = teams[row].nickname;
+                    let newVal = prompt("Edit Nama Tim:", oldVal);
+                    if (newVal && newVal.trim() !== "") {
+                        teams[row].nickname = newVal.trim();
+                        renderAll();
+                    }
+                } 
+                else if (type === 'place' || type === 'kill') {
+                    const row = parseInt(target.getAttribute('data-row'));
+                    const match = parseInt(target.getAttribute('data-match'));
+                    if (isNaN(row) || isNaN(match)) return;
+                    const oldVal = teams[row].matches[match][type === 'place' ? 0 : 1];
+                    let newVal = prompt(`Edit ${type.toUpperCase()} Match ${match+1}:`, oldVal);
+                    if (newVal !== null) {
+                        let num = parseInt(newVal);
+                        if (isNaN(num)) num = 0;
+                        if (num < 0) num = 0;
+                        teams[row].matches[match][type === 'place' ? 0 : 1] = num;
+                        renderAll();
+                    }
+                }
+            } 
+            else if (target.hasAttribute('data-podium')) {
+                // Edit nickname pada podium
+                const rankPos = parseInt(target.getAttribute('data-rank'));
+                let originalIdx = parseInt(target.getAttribute('data-original-idx'));
+                if (isNaN(originalIdx) || originalIdx < 0) {
+                    // fallback cari ulang dari peringkat saat ini
+                    const { podium } = getRankingsAndPodium();
+                    if (podium[rankPos]) originalIdx = podium[rankPos].originalIdx;
+                    else return;
+                }
+                const oldNick = teams[originalIdx].nickname;
+                let newVal = prompt("Edit Nama Tim di Podium:", oldNick);
+                if (newVal && newVal.trim() !== "") {
+                    teams[originalIdx].nickname = newVal.trim();
+                    renderAll();
+                }
+            }
         });
-        document.querySelectorAll('[data-editable="place"], [data-editable="kill"]').forEach(el => {
-            el.removeEventListener('click', placeKillEdit);
-            el.addEventListener('click', placeKillEdit);
-        });
-    }
-
-    function attachPodiumEditEvents() {
-        document.querySelectorAll('[data-podium="nick"]').forEach(el => {
-            el.removeEventListener('click', podiumNickEdit);
-            el.addEventListener('click', podiumNickEdit);
-        });
-    }
-
-    function nickEdit(e) {
-        e.stopPropagation();
-        const row = parseInt(e.currentTarget.getAttribute('data-row'));
-        const old = teams[row].nickname;
-        let newVal = prompt("Edit Nama Tim:", old);
-        if (newVal && newVal.trim() !== "") {
-            teams[row].nickname = newVal.trim();
-            renderAll();
-        }
-    }
-
-    function placeKillEdit(e) {
-        e.stopPropagation();
-        const cell = e.currentTarget;
-        const row = parseInt(cell.getAttribute('data-row'));
-        const match = parseInt(cell.getAttribute('data-match'));
-        const type = cell.getAttribute('data-editable');
-        const oldVal = teams[row].matches[match][type === 'place' ? 0 : 1];
-        let newVal = prompt(`Edit ${type.toUpperCase()} Match ${match+1}:`, oldVal);
-        if (newVal !== null) {
-            let num = parseInt(newVal);
-            if (isNaN(num)) num = 0;
-            if (num < 0) num = 0;
-            teams[row].matches[match][type === 'place' ? 0 : 1] = num;
-            renderAll();
-        }
-    }
-
-    function podiumNickEdit(e) {
-        e.stopPropagation();
-        const cell = e.currentTarget;
-        const rankPos = parseInt(cell.getAttribute('data-rank'));
-        let originalIdx = parseInt(cell.getAttribute('data-original-idx'));
-        if (isNaN(originalIdx) || originalIdx < 0) {
-            const { podium } = getRankingsAndPodium();
-            if (podium[rankPos]) originalIdx = podium[rankPos].originalIdx;
-            else return;
-        }
-        const oldNick = teams[originalIdx].nickname;
-        let newVal = prompt("Edit Nama Tim di Podium:", oldNick);
-        if (newVal && newVal.trim() !== "") {
-            teams[originalIdx].nickname = newVal.trim();
-            renderAll();
-        }
     }
 
     function escapeHtml(str) {
@@ -369,6 +281,7 @@
         });
     }
 
+    // Download PNG
     async function downloadPNG() {
         const btn = document.getElementById('downloadPNGButton');
         const area = document.getElementById('capture-area');
@@ -395,7 +308,9 @@
         }
     }
 
+    // Inisialisasi
     renderAll();
+    setupGlobalClick();
     document.getElementById('downloadPNGButton').addEventListener('click', downloadPNG);
 </script>
 </body>
