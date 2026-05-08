@@ -157,8 +157,7 @@
             overflow-x: auto;
         }
 
-        /* Indikator bahwa sel bisa diedit (hanya perubahan cursor, tidak mengubah tampilan) */
-        [data-editable] {
+        [data-editable], [data-podium] {
             cursor: pointer;
         }
     </style>
@@ -194,9 +193,9 @@
                     <tr><th>JUARA</th><th>NICKNAME</th><th>POINT</th></tr>
                 </thead>
                 <tbody id="juaraBody">
-                    <tr><td>Juara 1</td><td>-</td><td>-</td></tr>
-                    <tr><td>Juara 2</td><td>-</td><td>-</td></tr>
-                    <tr><td>Juara 3</td><td>-</td><td>-</td></tr>
+                    <tr><td>Juara 1</td><td data-podium="nick" data-rank="0">-</td><td>-</td><tr>
+                    <tr><td>Juara 2</td><td data-podium="nick" data-rank="1">-</td><td>-</td></tr>
+                    <tr><td>Juara 3</td><td data-podium="nick" data-rank="2">-</td><td>-</td></tr>
                 </tbody>
             </table>
         </div>
@@ -221,7 +220,6 @@
         { nickname: "LAST SALDO", matches: [[1,7], [0,1], [0,0]] }
     ];
 
-    // Hitung statistik per tim
     function calcStats(team) {
         let totalKill = 0, totalPoint = 0;
         let matchPoints = [];
@@ -236,7 +234,6 @@
         return { matchPoints, totalKill, totalPoint };
     }
 
-    // Hitung peringkat dan podium
     function getRankingsAndPodium() {
         let withStats = teams.map((team, idx) => {
             let s = calcStats(team);
@@ -248,11 +245,10 @@
         });
         let rankMap = new Array(teams.length);
         for (let i = 0; i < withStats.length; i++) rankMap[withStats[i].idx] = i+1;
-        let podium = withStats.slice(0,3).map(p => ({ nickname: p.nickname, point: p.totalPoint }));
+        let podium = withStats.slice(0,3).map(p => ({ originalIdx: p.idx, nickname: p.nickname, point: p.totalPoint }));
         return { rankMap, podium };
     }
 
-    // Render seluruh tabel (termasuk juara)
     function renderAll() {
         const tbody = document.getElementById('tableBody');
         if (!tbody) return;
@@ -262,9 +258,7 @@
             const team = teams[i];
             const stats = calcStats(team);
             html += '<tr>';
-            // NICKNAME editable
             html += `<td data-editable="nick" data-row="${i}">${escapeHtml(team.nickname)}</td>`;
-            // 3 matches
             for (let m = 0; m < 3; m++) {
                 let place = team.matches[m][0];
                 let kill = team.matches[m][1];
@@ -279,7 +273,6 @@
         }
         tbody.innerHTML = html;
 
-        // Update podium juara
         const juaraBody = document.getElementById('juaraBody');
         if (juaraBody) {
             let juaraHtml = '';
@@ -287,45 +280,56 @@
             for (let i = 0; i < 3; i++) {
                 let nick = podium[i] ? podium[i].nickname : '-';
                 let pts = podium[i] ? podium[i].point : '-';
-                juaraHtml += `<tr><td>${titles[i]}</td><td>${escapeHtml(nick)}</td><td>${pts}</td></tr>`;
+                let originalIdx = podium[i] ? podium[i].originalIdx : -1;
+                juaraHtml += `<tr>
+                    <td>${titles[i]}</td>
+                    <td data-podium="nick" data-rank="${i}" data-original-idx="${originalIdx}">${escapeHtml(nick)}</td>
+                    <td>${pts}</td>
+                </tr>`;
             }
             juaraBody.innerHTML = juaraHtml;
         }
 
-        // Pasang event listener double click
         attachEditEvents();
+        attachPodiumEditEvents();
     }
 
-    // Event handler untuk edit
+    // Event click (satu klik) untuk edit di tabel utama
     function attachEditEvents() {
-        // Edit nickname
         document.querySelectorAll('[data-editable="nick"]').forEach(el => {
-            el.removeEventListener('dblclick', nickEdit);
-            el.addEventListener('dblclick', nickEdit);
+            el.removeEventListener('click', nickEdit);
+            el.addEventListener('click', nickEdit);
         });
-        // Edit place & kill
         document.querySelectorAll('[data-editable="place"], [data-editable="kill"]').forEach(el => {
-            el.removeEventListener('dblclick', placeKillEdit);
-            el.addEventListener('dblclick', placeKillEdit);
+            el.removeEventListener('click', placeKillEdit);
+            el.addEventListener('click', placeKillEdit);
+        });
+    }
+
+    function attachPodiumEditEvents() {
+        document.querySelectorAll('[data-podium="nick"]').forEach(el => {
+            el.removeEventListener('click', podiumNickEdit);
+            el.addEventListener('click', podiumNickEdit);
         });
     }
 
     function nickEdit(e) {
-        const cell = e.currentTarget;
-        const row = parseInt(cell.getAttribute('data-row'));
+        e.stopPropagation();
+        const row = parseInt(e.currentTarget.getAttribute('data-row'));
         const old = teams[row].nickname;
         let newVal = prompt("Edit Nama Tim:", old);
         if (newVal && newVal.trim() !== "") {
             teams[row].nickname = newVal.trim();
-            renderAll();  // refresh semua (termasuk podium)
+            renderAll();
         }
     }
 
     function placeKillEdit(e) {
+        e.stopPropagation();
         const cell = e.currentTarget;
         const row = parseInt(cell.getAttribute('data-row'));
         const match = parseInt(cell.getAttribute('data-match'));
-        const type = cell.getAttribute('data-editable'); // "place" atau "kill"
+        const type = cell.getAttribute('data-editable');
         const oldVal = teams[row].matches[match][type === 'place' ? 0 : 1];
         let newVal = prompt(`Edit ${type.toUpperCase()} Match ${match+1}:`, oldVal);
         if (newVal !== null) {
@@ -333,6 +337,24 @@
             if (isNaN(num)) num = 0;
             if (num < 0) num = 0;
             teams[row].matches[match][type === 'place' ? 0 : 1] = num;
+            renderAll();
+        }
+    }
+
+    function podiumNickEdit(e) {
+        e.stopPropagation();
+        const cell = e.currentTarget;
+        const rankPos = parseInt(cell.getAttribute('data-rank'));
+        let originalIdx = parseInt(cell.getAttribute('data-original-idx'));
+        if (isNaN(originalIdx) || originalIdx < 0) {
+            const { podium } = getRankingsAndPodium();
+            if (podium[rankPos]) originalIdx = podium[rankPos].originalIdx;
+            else return;
+        }
+        const oldNick = teams[originalIdx].nickname;
+        let newVal = prompt("Edit Nama Tim di Podium:", oldNick);
+        if (newVal && newVal.trim() !== "") {
+            teams[originalIdx].nickname = newVal.trim();
             renderAll();
         }
     }
@@ -347,7 +369,6 @@
         });
     }
 
-    // Download PNG
     async function downloadPNG() {
         const btn = document.getElementById('downloadPNGButton');
         const area = document.getElementById('capture-area');
@@ -374,7 +395,6 @@
         }
     }
 
-    // Inisialisasi
     renderAll();
     document.getElementById('downloadPNGButton').addEventListener('click', downloadPNG);
 </script>
