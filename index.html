@@ -2,319 +2,272 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>FT RAMOT - Turnamen Manager</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Voice Assistant (Gemini) - Bisa menjawab apapun</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: radial-gradient(ellipse at 20% 30%, #0a0f2a, #03050b);
-            font-family: 'Inter', 'Segoe UI', sans-serif;
-            padding: 20px;
-            color: #edf2ff;
-        }
-        .container { max-width: 1400px; margin: 0 auto; }
-        .hero-section {
-            background: rgba(15, 25, 45, 0.6);
-            backdrop-filter: blur(10px);
-            border-radius: 1.5rem;
-            padding: 1.2rem 1.5rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(0,255,255,0.3);
+            font-family: 'Segoe UI', system-ui;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white;
             text-align: center;
+            padding: 2rem;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .logo-area { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-        .logo-preview { background: transparent; border-radius: 1rem; padding: 10px; display: inline-block; }
-        .logo-preview img { max-height: 120px; width: auto; max-width: 100%; height: auto; border-radius: 8px; display: block; margin: 0 auto; }
-        .upload-btn {
-            background: rgba(30, 40, 60, 0.9); border: 1px solid #2dd4bf; padding: 3px 14px;
-            border-radius: 2rem; font-size: 0.75rem; font-weight: 600; color: white; cursor: pointer;
-            display: inline-flex; align-items: center; gap: 6px; transition: 0.2s;
+        .card {
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            padding: 2rem;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.3);
         }
-        .upload-btn:hover { background: #1e2a4a; transform: translateY(-1px); }
-        .sub { font-size: 0.8rem; color: #a0b3d9; margin-top: 8px; }
-        .toolbar {
-            display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;
-            margin: 1rem 0 1.2rem;
+        h1 { margin: 0 0 0.5rem; font-size: 2rem; }
+        .status {
+            background: #000000aa;
+            border-radius: 60px;
+            padding: 0.5rem 1.2rem;
+            display: inline-block;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        .conversation {
+            background: #1e2a32;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            text-align: left;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .user-msg, .ai-msg {
+            margin: 10px 0;
+            padding: 8px 12px;
+            border-radius: 20px;
+            max-width: 85%;
+        }
+        .user-msg {
+            background: #ff9800;
+            color: #1e2a32;
+            align-self: flex-end;
+            margin-left: auto;
+            text-align: right;
+        }
+        .ai-msg {
+            background: #2e4a62;
+            text-align: left;
         }
         button {
-            background: rgba(20,30,55,0.85); border: 1px solid #2dd4bf; padding: 8px 16px;
-            border-radius: 2rem; font-size: 0.85rem; font-weight: 600; color: white; cursor: pointer;
+            background: #ff9800;
+            border: none;
+            color: #1e2a32;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 12px 28px;
+            border-radius: 40px;
+            margin: 8px;
+            cursor: pointer;
             transition: 0.2s;
         }
-        button:hover { background: #1e2a4a; transform: translateY(-1px); }
-        button.danger { border-color: #f87171; }
-        button.warning { border-color: #f97316; }
-        .table-wrapper { overflow-x: auto; border-radius: 1rem; margin-bottom: 1rem; }
-        table {
-            width: 100%; border-collapse: collapse; font-size: 0.85rem;
-            background: rgba(0,0,0,0.35); border-radius: 1rem; overflow: hidden;
-            min-width: 1000px;
-        }
-        th, td { border: 1px solid rgba(45,212,191,0.3); padding: 10px 6px; text-align: center; vertical-align: middle; }
-        th { background: #0a0f1f; color: #cbd5ff; font-weight: 700; }
-        .match-group { background: #111827; }
+        button:hover { background: #f57c00; transform: scale(1.02);}
+        button:active { transform: scale(0.98);}
         input {
-            width: 100%; background: #0f172acc; border: 1px solid #334155; border-radius: 20px;
-            padding: 6px 2px; text-align: center; color: white; font-size: 0.8rem;
+            width: 70%;
+            padding: 12px;
+            border-radius: 40px;
+            border: none;
+            margin-top: 1rem;
+            font-size: 1rem;
         }
-        .team-input { text-align: left; padding-left: 8px; font-weight: 600; }
-        .total-cell { font-weight: bold; color: #facc15; }
-        .podium {
-            margin-top: 1.5rem; border: 1px solid #facc1540; border-radius: 1rem; overflow: hidden;
+        .api-key-input {
+            background: #ffffffdd;
+            color: #000;
+            width: 80%;
+            margin: 10px auto;
         }
-        .podium table { font-size: 0.9rem; }
-        .podium th, .podium td { padding: 10px 6px; }
-        .podium th { background: #1e1b2a; color: #facc15; }
-        .podium tr:first-child td { color: #FFD700; font-weight: bold; }
-        .podium tr:nth-child(2) td { color: #C0C0C0; }
-        .podium tr:nth-child(3) td { color: #CD7F32; }
-        .footer {
-            font-size: 0.7rem; text-align: center; margin-top: 1.5rem; padding-top: 0.8rem;
-            border-top: 1px solid #2dd4bf30; color: #6a7c9e; display: flex; justify-content: space-between;
-        }
-        @media (max-width: 800px) {
-            body { padding: 12px; }
-            table { font-size: 0.7rem; }
-            input { font-size: 0.7rem; padding: 4px 2px; }
+        .note {
+            font-size: 0.8rem;
+            background: #00000099;
+            border-radius: 1rem;
+            padding: 0.7rem;
+            margin-top: 1rem;
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
-<div class="container" id="posterArea">
-    <div class="hero-section">
-        <div class="logo-area">
-            <div class="logo-preview" id="logoPreview">
-                <img id="logoImg" src="" alt="Logo" style="display: none;">
-                <div id="defaultTitle" style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: #FFD966; text-shadow: 2px 2px 4px black;">FT RAMOT<br>SESI 19.00 WIB</div>
-            </div>
-            <label class="upload-btn"><i class="fas fa-upload"></i> Upload Logo <input type="file" id="logoUpload" accept="image/*" style="display: none;"></label>
-        </div>
+<div class="card">
+    <h1>🎙️ AI Voice Assistant</h1>
+    <p>Ucapkan <strong>APA SAJA</strong> — AI akan menjawab dengan suara</p>
+    <div class="status" id="statusText">⚪ Siap</div>
+    <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+        <button id="startBtn">🎤 Mulai dengar</button>
+        <button id="stopBtn" disabled>⏹️ Berhenti</button>
+        <button id="clearBtn">🗑️ Hapus percakapan</button>
     </div>
-    <div class="toolbar" id="toolbar">
-        <div><button id="addBtn">+ Tambah Tim</button><button id="resetBtn" class="warning">↺ Reset Contoh</button><button id="clearBtn" class="danger">🗑 Hapus Semua</button></div>
-        <div><button id="posterBtn">📸 Download Poster (PNG)</button><button id="csvBtn">📄 Export CSV</button><span style="font-size:0.75rem;">💾 Auto-save</span></div>
+    <div class="conversation" id="conversationBox">
+        <div class="ai-msg">Halo! Saya asisten AI. Klik Mulai dengar dan ucapkan apapun.</div>
     </div>
-    <div class="table-wrapper" id="tableWrapper">
-        <table id="mainTable">
-            <thead>
-                <tr><th rowspan="2">#</th><th rowspan="2">NICKNAME</th><th colspan="3">MATCH 1</th><th colspan="3">MATCH 2</th><th colspan="3">MATCH 3</th><th rowspan="2">TOTAL KILL</th><th rowspan="2">TOTAL POINT</th><th rowspan="2">RANK</th></tr>
-                <tr><th>PLACE</th><th>KILL</th><th>POINT</th><th>PLACE</th><th>KILL</th><th>POINT</th><th>PLACE</th><th>KILL</th><th>POINT</th></tr>
-            </thead>
-            <tbody id="tableBody"></tbody>
-        </table>
+    <div>
+        <input type="text" id="apiKeyInput" placeholder="Masukkan Gemini API Key (dapatkan di aistudio.google.com)" class="api-key-input">
+        <button id="saveKeyBtn">💾 Simpan Key</button>
     </div>
-    <div class="podium"><table style="width:100%"><thead><tr><th>JUARA</th><th>NICKNAME</th><th>POINT</th></tr></thead><tbody id="podiumBody"><tr><td>Juara 1</td><td>-</td><td>0</td></tr><tr><td>Juara 2</td><td>-</td><td>0</td></tr><tr><td>Juara 3</td><td>-</td><td>0</td></tr></tbody></table></div>
+    <div class="note">
+        📢 <strong>Cara pakai:</strong><br>
+        1. Dapatkan API Key gratis dari <a href="https://aistudio.google.com/apikey" target="_blank" style="color:#ff9800">Google AI Studio</a><br>
+        2. Tempel key di atas, klik Simpan Key<br>
+        3. Klik "Mulai dengar", izinkan mikrofon, lalu bicara APAPUN (Bahasa Indonesia/Inggris).<br>
+        ⚡ AI akan menjawab secara natural dan membacakan jawabannya.
+    </div>
 </div>
+
 <script>
-    const DEFAULT_TEAMS = [
-        { name: "BARUDAK BAPAK", m1p:9, m1k:13, m2p:8, m2k:6, m3p:6, m3k:17 },
-        { name: "frezzwashere", m1p:4, m1k:4, m2p:9, m2k:11, m3p:12, m3k:14 },
-        { name: "LUPI JUSTICE", m1p:12, m1k:14, m2p:4, m2k:2, m3p:8, m3k:8 },
-        { name: "JPN2", m1p:6, m1k:1, m2p:12, m2k:12, m3p:9, m3k:7 },
-        { name: "Spontan", m1p:8, m1k:19, m2p:1, m2k:7, m3p:2, m3k:10 },
-        { name: "SAUYUNAN ID", m1p:5, m1k:10, m2p:6, m2k:8, m3p:5, m3k:8 },
-        { name: "VOLDAREZ", m1p:7, m1k:2, m2p:3, m2k:7, m3p:4, m3k:3 },
-        { name: "Jumidi RSCL", m1p:2, m1k:1, m2p:7, m2k:10, m3p:0, m3k:3 },
-        { name: "STARHIGH NEW", m1p:0, m1k:3, m2p:2, m2k:3, m3p:3, m3k:7 },
-        { name: "SMAGAPRO", m1p:3, m1k:6, m2p:0, m2k:1, m3p:1, m3k:6 },
-        { name: "esukibri", m1p:0, m1k:0, m2p:5, m2k:4, m3p:0, m3k:4 },
-        { name: "LAST SALDO", m1p:1, m1k:7, m2p:0, m2k:1, m3p:0, m3k:0 }
-    ];
-    let teams = [];
+    // Elemen
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const statusText = document.getElementById('statusText');
+    const conversationBox = document.getElementById('conversationBox');
+    const apiKeyInput = document.getElementById('apiKeyInput');
+    const saveKeyBtn = document.getElementById('saveKeyBtn');
 
-    function saveTeams() { localStorage.setItem('ft_ramot_detail', JSON.stringify(teams)); }
-    function loadTeams() { let d = localStorage.getItem('ft_ramot_detail'); if(d){ try{ teams = JSON.parse(d); return true; } catch(e){} } return false; }
-    function resetDefault() { teams = DEFAULT_TEAMS.map(t => ({ ...t })); renderTable(); saveTeams(); }
+    let recognition = null;
+    let isListening = false;
+    let apiKey = localStorage.getItem('gemini_api_key') || '';
 
-    function computeKill(t) { return (t.m1k||0)+(t.m2k||0)+(t.m3k||0); }
-    function computePoint(t) { return (t.m1p+t.m1k)+(t.m2p+t.m2k)+(t.m3p+t.m3k); }
-    function recalcAll() { 
-        teams.forEach(t => { t.totalKill = computeKill(t); t.totalPoint = computePoint(t); });
-        let sorted = [...teams].sort((a,b)=>b.totalPoint - a.totalPoint);
-        sorted.forEach((t,idx)=> t.rank = idx+1);
-    }
-    function updatePodium() {
-        let sorted = [...teams].sort((a,b)=>b.totalPoint - a.totalPoint);
-        let podium = document.getElementById('podiumBody');
-        podium.innerHTML = '';
-        for(let i=0;i<3;i++){
-            let row = podium.insertRow();
-            row.insertCell(0).innerText = `Juara ${i+1}`;
-            if(sorted[i]) { row.insertCell(1).innerText = sorted[i].name; row.insertCell(2).innerText = sorted[i].totalPoint; }
-            else { row.insertCell(1).innerText = '-'; row.insertCell(2).innerText = '0'; }
+    // Load API Key dari localStorage
+    if (apiKey) apiKeyInput.value = apiKey;
+
+    saveKeyBtn.onclick = () => {
+        const newKey = apiKeyInput.value.trim();
+        if (newKey) {
+            apiKey = newKey;
+            localStorage.setItem('gemini_api_key', apiKey);
+            statusText.innerHTML = '✅ API Key tersimpan!';
+            setTimeout(() => { if(!isListening) statusText.innerHTML = '⚪ Siap'; }, 1500);
+        } else {
+            alert('Masukkan API Key yang valid');
         }
-    }
-    function renderTable() {
-        recalcAll();
-        let tbody = document.getElementById('tableBody'); tbody.innerHTML = '';
-        if(teams.length===0){ tbody.innerHTML='<tr><td colspan="14" style="text-align:center">Belum ada data</td></tr>'; updatePodium(); return; }
-        teams.forEach((team,idx)=>{
-            let row = tbody.insertRow();
-            row.insertCell(0).innerText = idx+1;
-            let nameCell = row.insertCell(1);
-            let nameInp = document.createElement('input'); nameInp.type='text'; nameInp.value=team.name; nameInp.classList.add('team-input');
-            nameCell.appendChild(nameInp);
-            // match1
-            let p1c = row.insertCell(2); let p1 = document.createElement('input'); p1.type='number'; p1.value=team.m1p; p1.style.width='70px'; p1c.appendChild(p1);
-            let k1c = row.insertCell(3); let k1 = document.createElement('input'); k1.type='number'; k1.value=team.m1k; k1.style.width='70px'; k1c.appendChild(k1);
-            let po1c = row.insertCell(4); let po1 = document.createElement('span'); po1.className='total-cell'; po1.innerText = (team.m1p+team.m1k); po1c.appendChild(po1);
-            // match2
-            let p2c = row.insertCell(5); let p2 = document.createElement('input'); p2.type='number'; p2.value=team.m2p; p2.style.width='70px'; p2c.appendChild(p2);
-            let k2c = row.insertCell(6); let k2 = document.createElement('input'); k2.type='number'; k2.value=team.m2k; k2.style.width='70px'; k2c.appendChild(k2);
-            let po2c = row.insertCell(7); let po2 = document.createElement('span'); po2.className='total-cell'; po2.innerText = (team.m2p+team.m2k); po2c.appendChild(po2);
-            // match3
-            let p3c = row.insertCell(8); let p3 = document.createElement('input'); p3.type='number'; p3.value=team.m3p; p3.style.width='70px'; p3c.appendChild(p3);
-            let k3c = row.insertCell(9); let k3 = document.createElement('input'); k3.type='number'; k3.value=team.m3k; k3.style.width='70px'; k3c.appendChild(k3);
-            let po3c = row.insertCell(10); let po3 = document.createElement('span'); po3.className='total-cell'; po3.innerText = (team.m3p+team.m3k); po3c.appendChild(po3);
-            // total kill & total point & rank
-            let tkCell = row.insertCell(11); let tkSpan = document.createElement('span'); tkSpan.innerText = computeKill(team); tkCell.appendChild(tkSpan);
-            let tpCell = row.insertCell(12); let tpSpan = document.createElement('span'); tpSpan.innerText = team.totalPoint; tpCell.appendChild(tpSpan);
-            let rCell = row.insertCell(13); let rSpan = document.createElement('span'); rSpan.innerText = team.rank; rCell.appendChild(rSpan);
+    };
 
-            function updateRow(){
-                team.m1p = parseInt(p1.value)||0; team.m1k = parseInt(k1.value)||0;
-                team.m2p = parseInt(p2.value)||0; team.m2k = parseInt(k2.value)||0;
-                team.m3p = parseInt(p3.value)||0; team.m3k = parseInt(k3.value)||0;
-                po1.innerText = team.m1p+team.m1k; po2.innerText = team.m2p+team.m2k; po3.innerText = team.m3p+team.m3k;
-                let totalK = computeKill(team); let totalP = computePoint(team);
-                tkSpan.innerText = totalK; tpSpan.innerText = totalP;
-                team.totalKill = totalK; team.totalPoint = totalP;
-                recalcAll();
-                // update rank semua baris tanpa re-render
-                teams.forEach((t,i)=>{ let rankSpan = document.querySelector(`#tableBody tr:nth-child(${i+1}) td:last-child span`); if(rankSpan) rankSpan.innerText = t.rank; });
-                saveTeams(); updatePodium();
+    // Speech Recognition setup
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        statusText.innerHTML = '❌ Browser tidak mendukung Web Speech. Gunakan Chrome/Edge.';
+        startBtn.disabled = true;
+    } else {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'id-ID';
+        recognition.maxAlternatives = 1;
+
+        recognition.onstart = () => {
+            isListening = true;
+            statusText.innerHTML = '🎙️ Mendengar... bicaralah sekarang';
+            startBtn.disabled = true;
+            stopBtn.disabled = false;
+        };
+
+        recognition.onresult = async (event) => {
+            const userText = event.results[0][0].transcript.trim();
+            addMessage(userText, 'user');
+            statusText.innerHTML = '🤖 AI sedang berpikir...';
+            // Panggil Gemini API
+            if (!apiKey) {
+                addMessage('API Key belum diatur. Masukkan key Gemini terlebih dahulu.', 'ai');
+                statusText.innerHTML = '⚠️ API Key missing';
+                stopListening();
+                return;
             }
-            p1.onchange = updateRow; k1.onchange = updateRow;
-            p2.onchange = updateRow; k2.onchange = updateRow;
-            p3.onchange = updateRow; k3.onchange = updateRow;
-            nameInp.onchange = () => { team.name = nameInp.value.trim()||'No Name'; saveTeams(); updatePodium(); };
-            [p1,k1,p2,k2,p3,k3].forEach(inp => inp.oninput = () => {
-                let v1p=parseInt(p1.value)||0, v1k=parseInt(k1.value)||0, v2p=parseInt(p2.value)||0, v2k=parseInt(k2.value)||0, v3p=parseInt(p3.value)||0, v3k=parseInt(k3.value)||0;
-                po1.innerText = v1p+v1k; po2.innerText = v2p+v2k; po3.innerText = v3p+v3k;
-                let sumK = v1k+v2k+v3k; let sumP = (v1p+v1k)+(v2p+v2k)+(v3p+v3k);
-                tkSpan.innerText = sumK; tpSpan.innerText = sumP;
-            });
-        });
-        recalcAll(); updatePodium();
+            try {
+                const aiReply = await callGemini(userText);
+                addMessage(aiReply, 'ai');
+                speak(aiReply);
+                statusText.innerHTML = '✅ Selesai. Klik Mulai dengar lagi.';
+            } catch (err) {
+                console.error(err);
+                addMessage(`Error AI: ${err.message}`, 'ai');
+                statusText.innerHTML = '❌ Gagal memanggil AI';
+            }
+            stopListening(); // berhenti setelah satu kali dengar (agar bisa klik mulai lagi)
+        };
+
+        recognition.onerror = (event) => {
+            console.error(event.error);
+            if (event.error === 'not-allowed') statusText.innerHTML = '❌ Izin mikrofon ditolak';
+            else statusText.innerHTML = `❌ Error: ${event.error}`;
+            stopListening();
+        };
+
+        recognition.onend = () => {
+            if(isListening) stopListening();
+        };
     }
 
-    function addTeam(){ teams.push({ name:"NEW TIM", m1p:0,m1k:0, m2p:0,m2k:0, m3p:0,m3k:0 }); renderTable(); saveTeams(); }
-    function clearAll(){ if(confirm('Hapus semua?')){ teams=[]; renderTable(); saveTeams(); } }
-
-    // LOGO UPLOAD
-    const logoInput = document.getElementById('logoUpload'), logoImg = document.getElementById('logoImg'), defaultTitleDiv = document.getElementById('defaultTitle');
-    function saveLogoToLocalStorage(dataUrl){ localStorage.setItem('ft_ramot_logo', dataUrl); }
-    function loadLogoFromLocalStorage(){
-        let saved = localStorage.getItem('ft_ramot_logo');
-        if(saved && saved.startsWith('data:image')){ logoImg.src = saved; logoImg.style.display = 'block'; defaultTitleDiv.style.display = 'none'; }
-        else{ logoImg.style.display = 'none'; defaultTitleDiv.style.display = 'block'; }
-    }
-    logoInput.addEventListener('change', function(e){
-        let file = e.target.files[0];
-        if(file && file.type.startsWith('image/')){
-            let reader = new FileReader();
-            reader.onload = ev => { let data = ev.target.result; logoImg.src = data; logoImg.style.display = 'block'; defaultTitleDiv.style.display = 'none'; saveLogoToLocalStorage(data); };
-            reader.readAsDataURL(file);
+    function stopListening() {
+        if (recognition && isListening) {
+            try { recognition.stop(); } catch(e) {}
         }
-    });
-    document.querySelector('.upload-btn').addEventListener('click', ()=>logoInput.click());
-
-    // DOWNLOAD POSTER - DIPERBAIKI AGAR TIDAK TERPOTONG
-    async function downloadPoster() {
-        // 1. Ubah semua input menjadi span agar nilainya terekam
-        const inputs = document.querySelectorAll('#mainTable input');
-        const replacements = [];
-        inputs.forEach(inp => {
-            const span = document.createElement('span');
-            span.innerText = inp.value;
-            span.style.display = 'inline-block';
-            span.style.width = '100%';
-            span.style.textAlign = inp.classList.contains('team-input') ? 'left' : 'center';
-            span.style.padding = '6px 4px';
-            span.style.color = '#f0f3ff';
-            span.style.fontSize = '0.8rem';
-            if (inp.classList.contains('team-input')) span.style.fontWeight = '600';
-            replacements.push({ parent: inp.parentNode, input: inp, span });
-            inp.parentNode.replaceChild(span, inp);
-        });
-
-        // 2. Sembunyikan toolbar dan tombol upload
-        const toolbar = document.getElementById('toolbar');
-        const uploadBtn = document.querySelector('.upload-btn');
-        const origToolbar = toolbar.style.display;
-        const origUpload = uploadBtn.style.display;
-        toolbar.style.display = 'none';
-        uploadBtn.style.display = 'none';
-
-        // 3. Tangani agar tabel tidak terpotong karena overflow-x:auto
-        const tableWrapper = document.getElementById('tableWrapper');
-        const wrapperOverflow = tableWrapper.style.overflowX;
-        tableWrapper.style.overflowX = 'visible';
-        // Juga pastikan container tidak membatasi lebar
-        const container = document.getElementById('posterArea');
-        const containerWidth = container.style.width;
-        container.style.width = 'max-content';
-        container.style.minWidth = '100%';
-
-        try {
-            const element = document.getElementById('posterArea');
-            const canvas = await html2canvas(element, {
-                scale: 2.5,
-                backgroundColor: '#03050b',
-                logging: false,
-                useCORS: true,
-                allowTaint: false,
-                windowWidth: element.scrollWidth,
-                windowHeight: element.scrollHeight
-            });
-            const link = document.createElement('a');
-            const timestamp = new Date().toISOString().slice(0,19).replace(/:/g, '-');
-            link.download = `FT_RAMOT_${timestamp}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-        } catch(e) {
-            alert('Gagal membuat poster: ' + e.message);
-        } finally {
-            // Kembalikan semua perubahan
-            replacements.forEach(r => r.parent.replaceChild(r.input, r.span));
-            toolbar.style.display = origToolbar;
-            uploadBtn.style.display = origUpload;
-            tableWrapper.style.overflowX = wrapperOverflow;
-            container.style.width = containerWidth;
-            container.style.minWidth = '';
-        }
+        isListening = false;
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+        if(statusText.innerHTML.includes('Mendengar')) statusText.innerHTML = '⚪ Siap';
     }
 
-    // EXPORT CSV (sesuai format detail)
-    function exportCSV(){
-        if(!teams.length){ alert('Tidak ada data'); return; }
-        let rows = [];
-        rows.push(['NICKNAME','MATCH 1 PLACE','MATCH 1 KILL','MATCH 1 POINT','MATCH 2 PLACE','MATCH 2 KILL','MATCH 2 POINT','MATCH 3 PLACE','MATCH 3 KILL','MATCH 3 POINT','TOTAL KILL','TOTAL POINT','RANK']);
-        teams.forEach(t => {
-            rows.push([t.name, t.m1p, t.m1k, t.m1p+t.m1k, t.m2p, t.m2k, t.m2p+t.m2k, t.m3p, t.m3k, t.m3p+t.m3k, computeKill(t), computePoint(t), t.rank]);
-        });
-        rows.push([]);
-        rows.push(['=== PODIUM ===','','','','','','','','','','','','']);
-        let sorted = [...teams].sort((a,b)=>b.totalPoint - a.totalPoint);
-        for(let i=0;i<3;i++){
-            if(sorted[i]) rows.push([`Juara ${i+1}`, sorted[i].name, '','','','','','','','','', sorted[i].totalPoint]);
-            else rows.push([`Juara ${i+1}`,'','','','','','','','','','','']);
+    function startListening() {
+        if (!recognition) return;
+        if (!apiKey) {
+            alert('Simpan API Key Gemini terlebih dahulu');
+            return;
         }
-        let csv = rows.map(row => row.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
-        let blob = new Blob(["\uFEFF"+csv], {type:'text/csv;charset=utf-8'});
-        let a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `FT_RAMOT_${new Date().toISOString().slice(0,19).replace(/:/g,'-')}.csv`; a.click(); URL.revokeObjectURL(a.href);
+        recognition.start();
     }
 
-    function init(){ loadLogoFromLocalStorage(); if(!loadTeams() || teams.length===0) resetDefault(); else renderTable(); }
-    init();
-    document.getElementById('addBtn').onclick = addTeam;
-    document.getElementById('resetBtn').onclick = resetDefault;
-    document.getElementById('clearBtn').onclick = clearAll;
-    document.getElementById('posterBtn').onclick = downloadPoster;
-    document.getElementById('csvBtn').onclick = exportCSV;
+    startBtn.onclick = startListening;
+    stopBtn.onclick = stopListening;
+    clearBtn.onclick = () => {
+        conversationBox.innerHTML = '<div class="ai-msg">Percakapan dihapus. Mulai bicara lagi.</div>';
+    };
+
+    function addMessage(text, sender) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = sender === 'user' ? 'user-msg' : 'ai-msg';
+        msgDiv.textContent = text;
+        conversationBox.appendChild(msgDiv);
+        conversationBox.scrollTop = conversationBox.scrollHeight;
+    }
+
+    async function callGemini(prompt) {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${apiKey}`;
+        const payload = {
+            contents: [{ parts: [{ text: prompt }] }]
+        };
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        if (!response.ok) {
+            const err = await response.text();
+            throw new Error(`HTTP ${response.status}: ${err}`);
+        }
+        const data = await response.json();
+        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Maaf, AI tidak memberikan jawaban.';
+        return reply;
+    }
+
+    function speak(text) {
+        if (!window.speechSynthesis) return;
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'id-ID';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+    }
 </script>
 </body>
 </html>
