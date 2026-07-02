@@ -6,11 +6,7 @@
     <title>JOELL SHOP · Bot & Hosting</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
-        /* ============================================================
-           RESET & VARIABEL — DARK BIRU
-           ============================================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-
         :root {
             --bg-primary: #0a0d14;
             --bg-card: rgba(26, 32, 44, 0.85);
@@ -31,7 +27,6 @@
             --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             --bottom-nav-height: 88px;
         }
-
         body {
             background: var(--bg-primary);
             color: var(--text-primary);
@@ -42,14 +37,11 @@
             justify-content: center;
             font-weight: 400;
         }
-
         .app-container {
             max-width: 640px;
             width: 100%;
             padding: 0 18px 24px;
         }
-
-        /* ===== HEADER ===== */
         .top-header {
             display: flex;
             align-items: center;
@@ -58,7 +50,6 @@
             border-bottom: 1px solid var(--border-subtle);
             margin-bottom: 16px;
         }
-
         .top-header .logo-area {
             display: flex;
             align-items: center;
@@ -68,7 +59,6 @@
             color: var(--text-primary);
             letter-spacing: -0.5px;
         }
-
         .top-header .logo-area img {
             height: 50px;
             width: auto;
@@ -77,15 +67,12 @@
             padding: 4px;
             border: 1px solid var(--border-subtle);
         }
-
         .top-header .logo-area span {
             background: linear-gradient(135deg, var(--accent), var(--accent-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
-        /* ===== HERO ===== */
         .hero {
             border-radius: var(--radius);
             overflow: hidden;
@@ -94,7 +81,6 @@
             border: 1px solid var(--border-subtle);
             position: relative;
         }
-
         .hero-video {
             width: 100%;
             height: auto;
@@ -104,26 +90,21 @@
             background: var(--bg-card);
             pointer-events: none;
         }
-
         .hero-logo {
             display: flex;
             justify-content: center;
             padding: 10px 0 4px;
         }
-
         .hero-logo img {
             height: 70px;
             width: auto;
             filter: drop-shadow(0 4px 20px var(--accent-glow));
         }
-
-        /* ===== SEARCH ===== */
         .search-wrap {
             display: flex;
             justify-content: center;
             margin: 6px 0 22px;
         }
-
         .search-box {
             display: flex;
             align-items: center;
@@ -136,12 +117,10 @@
             backdrop-filter: blur(6px);
             transition: var(--transition);
         }
-
         .search-box:focus-within {
             border-color: var(--accent);
             box-shadow: 0 0 0 4px var(--accent-glow), var(--shadow-card);
         }
-
         .search-box input {
             border: none;
             outline: none;
@@ -151,11 +130,9 @@
             background: transparent;
             color: var(--text-primary);
         }
-
         .search-box input::placeholder {
             color: var(--text-muted);
         }
-
         .search-box button {
             background: linear-gradient(135deg, var(--accent), var(--accent-light));
             border: none;
@@ -170,18 +147,14 @@
             align-items: center;
             gap: 8px;
         }
-
         .search-box button:hover {
             transform: scale(1.02);
             box-shadow: 0 0 24px var(--accent-glow);
         }
-
-        /* ===== STORE HEADER ===== */
         .store-header {
             text-align: center;
             margin: 8px 0 16px;
         }
-
         .store-name {
             font-size: 1.6rem;
             font-weight: 800;
@@ -193,7 +166,6 @@
             justify-content: center;
             gap: 6px 12px;
         }
-
         .store-name .rating {
             font-size: 0.9rem;
             font-weight: 500;
@@ -202,13 +174,11 @@
             align-items: center;
             gap: 4px;
         }
-
         .store-name .rating .review-count {
             color: var(--text-muted);
             font-weight: 400;
             font-size: 0.8rem;
         }
-
         .store-name .badge-free {
             display: inline-block;
             background: rgba(0, 184, 148, 0.15);
@@ -220,8 +190,6 @@
             border: 1px solid rgba(0, 184, 148, 0.20);
             white-space: nowrap;
         }
-
-        /* ===== STATS ===== */
         .stats {
             display: flex;
             flex-wrap: wrap;
@@ -234,11 +202,9 @@
             border: 1px solid var(--border-subtle);
             backdrop-filter: blur(4px);
         }
-
         .stats .stat-item {
             text-align: center;
         }
-
         .stats .stat-item .number {
             font-size: 1.8rem;
             font-weight: 800;
@@ -248,7 +214,6 @@
             background-clip: text;
             letter-spacing: -0.5px;
         }
-
         .stats .stat-item .label {
             font-size: 0.75rem;
             color: var(--text-secondary);
@@ -256,8 +221,6 @@
             letter-spacing: 0.5px;
             font-weight: 500;
         }
-
-        /* ===== SECTION TITLE ===== */
         .section-title {
             color: var(--accent-light);
             font-size: 1.1rem;
@@ -268,15 +231,12 @@
             border-left: 4px solid var(--accent);
             padding-left: 12px;
         }
-
-        /* ===== MENU GRID ===== */
         .grid-menu {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 14px;
             margin-bottom: 16px;
         }
-
         .menu-card {
             background: var(--bg-card);
             border-radius: var(--radius);
@@ -294,7 +254,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .menu-card::before {
             content: '';
             position: absolute;
@@ -303,17 +262,14 @@
             opacity: 0;
             transition: var(--transition);
         }
-
         .menu-card:hover::before {
             opacity: 0.06;
         }
-
         .menu-card:hover {
             transform: translateY(-4px);
             border-color: var(--accent);
             box-shadow: 0 8px 32px var(--accent-glow);
         }
-
         .menu-card i {
             color: var(--accent-light);
             font-size: 38px;
@@ -322,12 +278,10 @@
             z-index: 1;
             transition: var(--transition);
         }
-
         .menu-card:hover i {
             transform: scale(1.05);
             filter: drop-shadow(0 0 16px var(--accent-glow));
         }
-
         .menu-card span {
             font-size: 15px;
             font-weight: 500;
@@ -336,8 +290,6 @@
             position: relative;
             z-index: 1;
         }
-
-        /* ===== DETAIL MODAL ===== */
         .detail-overlay {
             position: fixed;
             inset: 0;
@@ -350,11 +302,7 @@
             padding: 20px;
             animation: fadeOverlay 0.25s ease;
         }
-
-        .detail-overlay.open {
-            display: flex;
-        }
-
+        .detail-overlay.open { display: flex; }
         .detail-modal {
             background: var(--bg-card);
             max-width: 600px;
@@ -368,7 +316,6 @@
             overflow-y: auto;
             box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
         }
-
         .detail-modal .detail-close {
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid var(--border-subtle);
@@ -384,14 +331,12 @@
             align-items: center;
             justify-content: center;
         }
-
         .detail-modal .detail-close:hover {
             background: var(--accent);
             color: #fff;
             border-color: var(--accent);
             transform: rotate(90deg);
         }
-
         .detail-modal h2 {
             font-size: 1.8rem;
             font-weight: 700;
@@ -399,21 +344,18 @@
             color: var(--text-primary);
             letter-spacing: -0.5px;
         }
-
         .detail-modal .price {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--accent-light);
             margin: 2px 0 10px;
         }
-
         .detail-modal .desc {
             color: var(--text-secondary);
             font-size: 1rem;
             margin-bottom: 18px;
             line-height: 1.7;
         }
-
         .detail-modal .variant-title {
             font-weight: 600;
             font-size: 1.05rem;
@@ -421,14 +363,12 @@
             margin: 14px 0 12px;
             letter-spacing: -0.2px;
         }
-
         .detail-modal .variant-list {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin: 4px 0 20px;
         }
-
         .detail-modal .variant-item {
             display: flex;
             flex-direction: column;
@@ -439,31 +379,26 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         .detail-modal .variant-item:hover {
             border-color: var(--accent);
             background: rgba(77, 123, 253, 0.06);
         }
-
         .detail-modal .variant-item.active {
             border-color: var(--accent);
             background: rgba(77, 123, 253, 0.10);
             box-shadow: 0 0 0 2px var(--accent-glow);
         }
-
         .detail-modal .variant-item .vname {
             font-weight: 500;
             color: var(--text-primary);
             font-size: 1rem;
         }
-
         .detail-modal .variant-item .vprice {
             font-weight: 700;
             color: var(--accent-light);
             font-size: 0.95rem;
             margin-top: 2px;
         }
-
         .detail-modal .add-cart-btn {
             width: 100%;
             padding: 18px;
@@ -481,13 +416,10 @@
             justify-content: center;
             gap: 10px;
         }
-
         .detail-modal .add-cart-btn:hover {
             transform: scale(1.02);
             box-shadow: 0 0 32px var(--accent-glow);
         }
-
-        /* ===== KERANJANG ===== */
         .cart-overlay {
             position: fixed;
             inset: 0;
@@ -499,12 +431,10 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-
         .cart-overlay.open {
             display: flex;
             opacity: 1;
         }
-
         .cart-panel {
             background: var(--bg-card);
             width: 100%;
@@ -520,12 +450,10 @@
             display: flex;
             flex-direction: column;
         }
-
         .cart-overlay.open .cart-panel {
             transform: translateX(0);
             opacity: 1;
         }
-
         .cart-panel .cart-header {
             display: flex;
             justify-content: space-between;
@@ -535,7 +463,6 @@
             border-bottom: 1px solid var(--border-subtle);
             flex-shrink: 0;
         }
-
         .cart-panel .cart-header .cart-title {
             font-size: 1.3rem;
             font-weight: 700;
@@ -544,7 +471,6 @@
             align-items: center;
             gap: 10px;
         }
-
         .cart-panel .cart-header .cart-title .cart-badge-total {
             background: var(--accent);
             color: #fff;
@@ -556,7 +482,6 @@
             min-width: 24px;
             text-align: center;
         }
-
         .cart-panel .cart-header .cart-close {
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid var(--border-subtle);
@@ -571,20 +496,17 @@
             align-items: center;
             justify-content: center;
         }
-
         .cart-panel .cart-header .cart-close:hover {
             background: var(--accent);
             color: #fff;
             transform: rotate(90deg);
         }
-
         .cart-items-container {
             flex: 1;
             overflow-y: auto;
             padding-right: 4px;
             margin-bottom: 12px;
         }
-
         .cart-items-container::-webkit-scrollbar {
             width: 3px;
         }
@@ -592,7 +514,6 @@
             background: var(--accent);
             border-radius: 20px;
         }
-
         .cart-item {
             display: flex;
             gap: 14px;
@@ -601,7 +522,6 @@
             align-items: center;
             animation: fadeSlideUp 0.3s ease;
         }
-
         .cart-item .item-icon {
             width: 48px;
             height: 48px;
@@ -614,12 +534,10 @@
             flex-shrink: 0;
             border: 1px solid var(--border-subtle);
         }
-
         .cart-item .item-info {
             flex: 1;
             min-width: 0;
         }
-
         .cart-item .item-info .item-name {
             font-weight: 600;
             color: var(--text-primary);
@@ -629,26 +547,22 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
         .cart-item .item-info .item-variant {
             font-size: 0.75rem;
             color: var(--text-muted);
         }
-
         .cart-item .item-info .item-price {
             font-weight: 700;
             color: var(--accent-light);
             font-size: 0.9rem;
             margin-top: 2px;
         }
-
         .cart-item .item-actions {
             display: flex;
             align-items: center;
             gap: 10px;
             flex-shrink: 0;
         }
-
         .cart-item .item-actions .qty-control {
             display: flex;
             align-items: center;
@@ -658,7 +572,6 @@
             border: 1px solid var(--border-subtle);
             padding: 2px;
         }
-
         .cart-item .item-actions .qty-control button {
             background: none;
             border: none;
@@ -673,12 +586,10 @@
             align-items: center;
             justify-content: center;
         }
-
         .cart-item .item-actions .qty-control button:hover {
             background: var(--accent);
             color: #fff;
         }
-
         .cart-item .item-actions .qty-control .qty-num {
             font-weight: 600;
             font-size: 0.85rem;
@@ -686,7 +597,6 @@
             min-width: 24px;
             text-align: center;
         }
-
         .cart-item .item-actions .item-remove {
             background: none;
             border: none;
@@ -696,12 +606,10 @@
             font-size: 0.9rem;
             padding: 4px;
         }
-
         .cart-item .item-actions .item-remove:hover {
             color: #ef4444;
             transform: scale(1.1);
         }
-
         .cart-empty {
             text-align: center;
             padding: 40px 20px;
@@ -712,43 +620,36 @@
             align-items: center;
             justify-content: center;
         }
-
         .cart-empty i {
             font-size: 3.5rem;
             color: var(--border-subtle);
             margin-bottom: 16px;
         }
-
         .cart-empty h3 {
             font-size: 1.1rem;
             color: var(--text-secondary);
             margin-bottom: 4px;
         }
-
         .cart-empty p {
             font-size: 0.85rem;
         }
-
         .cart-footer {
             border-top: 1px solid var(--border-subtle);
             padding-top: 16px;
             flex-shrink: 0;
         }
-
         .cart-footer .cart-summary {
             display: flex;
             flex-direction: column;
             gap: 6px;
             margin-bottom: 14px;
         }
-
         .cart-footer .cart-summary .summary-row {
             display: flex;
             justify-content: space-between;
             font-size: 0.85rem;
             color: var(--text-secondary);
         }
-
         .cart-footer .cart-summary .summary-row.total {
             font-size: 1.1rem;
             font-weight: 700;
@@ -757,17 +658,14 @@
             padding-top: 10px;
             margin-top: 4px;
         }
-
         .cart-footer .cart-summary .summary-row.total .total-price {
             color: var(--accent-light);
         }
-
         .cart-footer .cart-actions {
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
-
         .cart-footer .cart-actions button {
             width: 100%;
             padding: 14px;
@@ -782,28 +680,23 @@
             justify-content: center;
             gap: 8px;
         }
-
         .cart-footer .cart-actions .btn-checkout {
             background: var(--green);
             color: #fff;
         }
-
         .cart-footer .cart-actions .btn-checkout:hover {
             background: #00c9a0;
             box-shadow: 0 0 30px rgba(0, 184, 148, 0.25);
             transform: scale(1.01);
         }
-
         .cart-footer .cart-actions .btn-payment {
             background: linear-gradient(135deg, var(--accent), var(--accent-light));
             color: #fff;
         }
-
         .cart-footer .cart-actions .btn-payment:hover {
             box-shadow: 0 0 30px var(--accent-glow);
             transform: scale(1.01);
         }
-
         .cart-footer .cart-actions .btn-clear {
             background: rgba(239, 68, 68, 0.08);
             color: #ef4444;
@@ -811,12 +704,9 @@
             padding: 8px;
             border: 1px solid rgba(239, 68, 68, 0.15);
         }
-
         .cart-footer .cart-actions .btn-clear:hover {
             background: rgba(239, 68, 68, 0.15);
         }
-
-        /* ===== PROFIL ===== */
         .profile-page {
             background: var(--bg-card);
             border-radius: var(--radius);
@@ -825,7 +715,6 @@
             backdrop-filter: blur(4px);
             margin: 16px 0;
         }
-
         .profile-cover {
             width: 100%;
             aspect-ratio: 16/9;
@@ -833,17 +722,14 @@
             display: block;
             opacity: 0.5;
         }
-
         .profile-body {
             padding: 20px 22px 30px;
             text-align: center;
         }
-
         .profile-body .profile-logo {
             margin-top: -56px;
             margin-bottom: 8px;
         }
-
         .profile-body .profile-logo img {
             width: 100px;
             height: 100px;
@@ -854,25 +740,21 @@
             object-fit: contain;
             padding: 6px;
         }
-
         .profile-body h2 {
             font-size: 1.5rem;
             font-weight: 700;
             margin: 4px 0 2px;
             letter-spacing: -0.5px;
         }
-
         .profile-body .owner-label {
             color: var(--text-muted);
             font-size: 0.85rem;
             margin-bottom: 16px;
         }
-
         .profile-body .profile-section {
             text-align: left;
             margin-top: 20px;
         }
-
         .profile-body .profile-section h3 {
             font-size: 1.05rem;
             font-weight: 700;
@@ -881,21 +763,18 @@
             border-left: 3px solid var(--accent);
             padding-left: 10px;
         }
-
         .profile-body .bio {
             color: var(--text-secondary);
             font-size: 0.9rem;
             line-height: 1.7;
             margin-bottom: 4px;
         }
-
         .contact-box {
             background: rgba(255, 255, 255, 0.03);
             border-radius: var(--radius-sm);
             padding: 14px 16px;
             border: 1px solid var(--border-subtle);
         }
-
         .contact-item {
             display: flex;
             align-items: center;
@@ -903,29 +782,24 @@
             padding: 8px 0;
             border-bottom: 1px solid var(--border-subtle);
         }
-
         .contact-item:last-child {
             border-bottom: none;
         }
-
         .contact-item i {
             color: var(--accent-light);
             width: 20px;
             font-size: 1rem;
         }
-
         .contact-item span {
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
-
         .social-icons {
             display: flex;
             gap: 14px;
             justify-content: center;
             margin-top: 6px;
         }
-
         .social-icon {
             display: flex;
             align-items: center;
@@ -940,7 +814,6 @@
             transition: var(--transition);
             text-decoration: none;
         }
-
         .social-icon:hover {
             background: var(--accent);
             color: #fff;
@@ -948,15 +821,12 @@
             transform: translateY(-3px);
             box-shadow: 0 0 20px var(--accent-glow);
         }
-
         .contact-form {
             margin-top: 4px;
         }
-
         .form-group {
             margin-bottom: 12px;
         }
-
         .form-group label {
             display: block;
             font-size: 0.85rem;
@@ -964,7 +834,6 @@
             color: var(--text-secondary);
             margin-bottom: 4px;
         }
-
         .form-group input,
         .form-group textarea {
             width: 100%;
@@ -977,18 +846,15 @@
             transition: var(--transition);
             outline: none;
         }
-
         .form-group input:focus,
         .form-group textarea:focus {
             border-color: var(--accent);
             box-shadow: 0 0 0 3px var(--accent-glow);
         }
-
         .form-group input::placeholder,
         .form-group textarea::placeholder {
             color: var(--text-muted);
         }
-
         .btn-send {
             width: 100%;
             padding: 12px;
@@ -1001,13 +867,10 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         .btn-send:hover {
             transform: scale(1.02);
             box-shadow: 0 0 24px var(--accent-glow);
         }
-
-        /* ===== TOPUP MODAL ===== */
         .topup-overlay {
             position: fixed;
             inset: 0;
@@ -1019,11 +882,7 @@
             justify-content: center;
             padding: 20px;
         }
-
-        .topup-overlay.open {
-            display: flex;
-        }
-
+        .topup-overlay.open { display: flex; }
         .topup-modal {
             background: var(--bg-card);
             max-width: 500px;
@@ -1034,18 +893,15 @@
             max-height: 90vh;
             overflow-y: auto;
         }
-
         .topup-modal h2 {
             font-size: 1.5rem;
             margin-bottom: 4px;
         }
-
         .topup-modal .desc {
             color: var(--text-secondary);
             font-size: 0.9rem;
             margin-bottom: 16px;
         }
-
         .topup-close {
             float: right;
             background: none;
@@ -1055,18 +911,15 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         .topup-close:hover {
             color: var(--text-primary);
         }
-
         .topup-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 16px;
             margin-top: 6px;
         }
-
         .topup-item {
             display: flex;
             flex-direction: column;
@@ -1080,16 +933,13 @@
             background: transparent;
             border: none;
         }
-
         .topup-item:hover {
             transform: translateY(-4px);
         }
-
         .topup-item:hover img {
             transform: scale(1.05);
             filter: drop-shadow(0 0 20px var(--accent-glow));
         }
-
         .topup-item img {
             width: 80px;
             height: 80px;
@@ -1098,7 +948,6 @@
             transition: var(--transition);
             border-radius: 12px;
         }
-
         .topup-item span {
             font-size: 0.75rem;
             font-weight: 600;
@@ -1106,8 +955,6 @@
             text-align: center;
             line-height: 1.3;
         }
-
-        /* ===== ANIME MODAL ===== */
         .anime-overlay {
             position: fixed;
             inset: 0;
@@ -1119,11 +966,7 @@
             justify-content: center;
             padding: 20px;
         }
-
-        .anime-overlay.open {
-            display: flex;
-        }
-
+        .anime-overlay.open { display: flex; }
         .anime-modal {
             background: var(--bg-card);
             max-width: 600px;
@@ -1134,18 +977,15 @@
             max-height: 90vh;
             overflow-y: auto;
         }
-
         .anime-modal h2 {
             font-size: 1.5rem;
             margin-bottom: 4px;
         }
-
         .anime-modal .desc {
             color: var(--text-secondary);
             font-size: 0.9rem;
             margin-bottom: 12px;
         }
-
         .anime-close {
             float: right;
             background: none;
@@ -1155,17 +995,14 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         .anime-close:hover {
             color: var(--text-primary);
         }
-
         .anime-input-wrap {
             display: flex;
             gap: 10px;
             margin-bottom: 12px;
         }
-
         .anime-input-wrap input {
             flex: 1;
             padding: 12px 16px;
@@ -1177,12 +1014,10 @@
             outline: none;
             transition: var(--transition);
         }
-
         .anime-input-wrap input:focus {
             border-color: var(--accent);
             box-shadow: 0 0 0 3px var(--accent-glow);
         }
-
         .anime-input-wrap button {
             padding: 12px 24px;
             background: linear-gradient(135deg, var(--accent), var(--accent-light));
@@ -1194,18 +1029,15 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         .anime-input-wrap button:hover {
             transform: scale(1.02);
             box-shadow: 0 0 24px var(--accent-glow);
         }
-
         .anime-tabs {
             display: flex;
             gap: 10px;
             margin: 4px 0 14px;
         }
-
         .anime-tab {
             flex: 1;
             padding: 10px;
@@ -1218,25 +1050,21 @@
             background: var(--bg-primary);
             color: var(--text-muted);
         }
-
         .anime-tab.active {
             background: var(--accent);
             color: #fff;
             box-shadow: 0 0 20px var(--accent-glow);
         }
-
         .anime-tab:hover:not(.active) {
             background: var(--bg-card-hover);
             color: var(--text-primary);
         }
-
         .anime-list {
             display: flex;
             flex-direction: column;
             gap: 12px;
             margin-top: 8px;
         }
-
         .anime-card {
             display: flex;
             gap: 14px;
@@ -1247,12 +1075,10 @@
             transition: var(--transition);
             align-items: center;
         }
-
         .anime-card:hover {
             border-color: var(--accent);
             background: var(--bg-card-hover);
         }
-
         .anime-card .poster {
             width: 60px;
             height: 85px;
@@ -1261,13 +1087,11 @@
             overflow: hidden;
             background: var(--bg-card);
         }
-
         .anime-card .poster img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .anime-card .poster .fallback {
             width: 100%;
             height: 100%;
@@ -1277,12 +1101,10 @@
             color: var(--text-muted);
             font-size: 1.5rem;
         }
-
         .anime-card .info {
             flex: 1;
             min-width: 0;
         }
-
         .anime-card .info .title {
             font-weight: 700;
             font-size: 0.95rem;
@@ -1292,7 +1114,6 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
         .anime-card .info .meta {
             font-size: 0.75rem;
             color: var(--text-secondary);
@@ -1301,7 +1122,6 @@
             flex-wrap: wrap;
             margin-bottom: 2px;
         }
-
         .anime-card .info .meta .badge {
             background: rgba(255, 255, 255, 0.06);
             padding: 0 8px;
@@ -1310,12 +1130,10 @@
             align-items: center;
             gap: 4px;
         }
-
         .anime-card .info .meta .episode-badge {
             color: var(--accent-light);
             font-weight: 600;
         }
-
         .anime-card .info .countdown {
             font-size: 0.75rem;
             color: var(--gold);
@@ -1325,7 +1143,6 @@
             align-items: center;
             gap: 4px;
         }
-
         .anime-card .info .rating {
             font-size: 0.75rem;
             color: var(--text-secondary);
@@ -1334,7 +1151,6 @@
             margin-top: 2px;
             align-items: center;
         }
-
         .anime-card .info .rating .score {
             color: var(--gold);
             font-weight: 600;
@@ -1342,14 +1158,12 @@
             align-items: center;
             gap: 4px;
         }
-
         .anime-card .info .rating .episodes {
             color: var(--text-muted);
             display: flex;
             align-items: center;
             gap: 4px;
         }
-
         .anime-card .info .btn-watch {
             margin-top: 8px;
             padding: 6px 16px;
@@ -1365,13 +1179,10 @@
             align-items: center;
             gap: 6px;
         }
-
         .anime-card .info .btn-watch:hover {
             transform: scale(1.04);
             box-shadow: 0 0 20px var(--accent-glow);
         }
-
-        /* ===== BOT CONTROLLER MODAL ===== */
         .bot-controller-overlay {
             position: fixed;
             inset: 0;
@@ -1383,11 +1194,7 @@
             justify-content: center;
             padding: 20px;
         }
-
-        .bot-controller-overlay.open {
-            display: flex;
-        }
-
+        .bot-controller-overlay.open { display: flex; }
         .bot-controller-modal {
             background: var(--bg-card);
             max-width: 600px;
@@ -1398,18 +1205,15 @@
             max-height: 90vh;
             overflow-y: auto;
         }
-
         .bot-controller-modal h2 {
             font-size: 1.5rem;
             margin-bottom: 4px;
         }
-
         .bot-controller-modal .desc {
             color: var(--text-secondary);
             font-size: 0.9rem;
             margin-bottom: 16px;
         }
-
         .bot-controller-close {
             float: right;
             background: none;
@@ -1419,17 +1223,14 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         .bot-controller-close:hover {
             color: var(--text-primary);
         }
-
         .bot-tabs {
             display: flex;
             gap: 10px;
             margin-bottom: 16px;
         }
-
         .bot-tab {
             flex: 1;
             padding: 10px;
@@ -1442,30 +1243,24 @@
             background: var(--bg-primary);
             color: var(--text-muted);
         }
-
         .bot-tab.active {
             background: var(--accent);
             color: #fff;
             box-shadow: 0 0 20px var(--accent-glow);
         }
-
         .bot-tab:hover:not(.active) {
             background: var(--bg-card-hover);
             color: var(--text-primary);
         }
-
         .bot-view {
             display: block;
         }
-
         .bot-view.hidden {
             display: none;
         }
-
         .bot-header-section {
             margin-bottom: 16px;
         }
-
         .bot-header-section h3 {
             font-size: 1.1rem;
             font-weight: 700;
@@ -1474,18 +1269,15 @@
             align-items: center;
             gap: 8px;
         }
-
         .bot-header-section p {
             color: var(--text-secondary);
             font-size: 0.85rem;
         }
-
         .bot-input-group {
             display: flex;
             gap: 8px;
             margin-bottom: 12px;
         }
-
         .bot-input-group input {
             flex: 1;
             padding: 12px 14px;
@@ -1497,16 +1289,13 @@
             outline: none;
             transition: var(--transition);
         }
-
         .bot-input-group input:focus {
             border-color: var(--accent);
             box-shadow: 0 0 0 3px var(--accent-glow);
         }
-
         .bot-input-group input::placeholder {
             color: var(--text-muted);
         }
-
         .bot-btn-primary {
             padding: 12px 20px;
             background: linear-gradient(135deg, var(--accent), var(--accent-light));
@@ -1522,12 +1311,10 @@
             gap: 8px;
             white-space: nowrap;
         }
-
         .bot-btn-primary:hover {
             transform: scale(1.02);
             box-shadow: 0 0 20px var(--accent-glow);
         }
-
         .bot-status-banner {
             font-size: 0.85rem;
             padding: 10px 14px;
@@ -1538,40 +1325,33 @@
             margin-bottom: 12px;
             border: 1px solid transparent;
         }
-
         .bot-status-banner.info {
             background: rgba(99, 102, 241, 0.1);
             border-color: rgba(99, 102, 241, 0.2);
             color: #818cf8;
         }
-
         .bot-status-banner.success {
             background: rgba(16, 185, 129, 0.1);
             border-color: rgba(16, 185, 129, 0.2);
             color: var(--green);
         }
-
         .bot-status-banner.error {
             background: rgba(239, 68, 68, 0.1);
             border-color: rgba(239, 68, 68, 0.2);
             color: #ef4444;
         }
-
         .bot-status-banner.hidden {
             display: none;
         }
-
         .bot-panel {
             display: none;
             flex-direction: column;
             gap: 12px;
             margin-top: 4px;
         }
-
         .bot-panel:not(.hidden) {
             display: flex;
         }
-
         .bot-identity {
             background: var(--bg-primary);
             padding: 12px 16px;
@@ -1583,7 +1363,6 @@
             flex-wrap: wrap;
             gap: 8px;
         }
-
         .bot-identity-left {
             display: flex;
             align-items: center;
@@ -1591,11 +1370,9 @@
             color: var(--text-secondary);
             font-size: 0.85rem;
         }
-
         .bot-identity-left strong {
             color: var(--text-primary);
         }
-
         .bot-status-indicator {
             width: 8px;
             height: 8px;
@@ -1604,13 +1381,11 @@
             box-shadow: 0 0 10px var(--green);
             flex-shrink: 0;
         }
-
         .bot-id-text {
             font-family: 'Fira Code', monospace;
             color: var(--text-muted);
             font-size: 0.75rem;
         }
-
         .bot-terminal {
             background: #0a0d14;
             border: 1px solid var(--border-subtle);
@@ -1623,34 +1398,27 @@
             overflow-y: auto;
             min-height: 100px;
         }
-
         .bot-terminal-line {
             margin-bottom: 4px;
             line-height: 1.5;
             word-wrap: break-word;
         }
-
         .bot-term-time {
             color: var(--text-muted);
             margin-right: 6px;
         }
-
         .bot-term-info {
             color: #60a5fa;
         }
-
         .bot-term-success {
             color: var(--green);
         }
-
         .bot-term-error {
             color: #ef4444;
         }
-
         .bot-term-text {
             color: var(--text-primary);
         }
-
         .bot-list {
             display: flex;
             flex-direction: column;
@@ -1659,7 +1427,6 @@
             overflow-y: auto;
             padding-right: 4px;
         }
-
         .bot-item {
             background: var(--bg-primary);
             border: 1px solid var(--border-subtle);
@@ -1670,11 +1437,9 @@
             align-items: center;
             transition: var(--transition);
         }
-
         .bot-item:hover {
             border-color: var(--accent);
         }
-
         .bot-meta {
             display: flex;
             flex-direction: column;
@@ -1682,7 +1447,6 @@
             overflow: hidden;
             flex: 1;
         }
-
         .bot-title {
             font-weight: 600;
             font-size: 0.9rem;
@@ -1694,13 +1458,11 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
         .bot-subtitle {
             font-size: 0.7rem;
             color: var(--text-secondary);
             font-family: 'Fira Code', monospace;
         }
-
         .bot-badge {
             font-size: 0.6rem;
             padding: 2px 8px;
@@ -1711,32 +1473,27 @@
             font-family: 'Inter', sans-serif;
             flex-shrink: 0;
         }
-
         .bot-badge.active {
             background: rgba(16, 185, 129, 0.15);
             color: var(--green);
             border: 1px solid rgba(16, 185, 129, 0.2);
         }
-
         .bot-badge.banned {
             background: rgba(239, 68, 68, 0.15);
             color: #ef4444;
             border: 1px solid rgba(239, 68, 68, 0.2);
         }
-
         .bot-badge.checking {
             background: var(--bg-card);
             color: var(--text-muted);
             border: 1px solid var(--border-subtle);
         }
-
         .bot-action-group {
             display: flex;
             gap: 6px;
             flex-shrink: 0;
             margin-left: 8px;
         }
-
         .bot-btn-icon {
             padding: 6px 10px;
             background: var(--bg-card);
@@ -1747,19 +1504,13 @@
             transition: var(--transition);
             font-size: 0.8rem;
         }
-
         .bot-btn-icon:hover {
             background: var(--border-subtle);
         }
-
         .bot-btn-icon.danger:hover {
             background: rgba(239, 68, 68, 0.15);
             color: #ef4444;
         }
-
-        /* ============================================================
-           OSINT MODAL
-           ============================================================ */
         .osint-overlay {
             position: fixed;
             inset: 0;
@@ -1772,9 +1523,7 @@
             padding: 20px;
             animation: fadeOverlay 0.3s ease;
         }
-
         .osint-overlay.open { display: flex; }
-
         .osint-modal {
             background: var(--bg-card);
             max-width: 680px;
@@ -1788,10 +1537,8 @@
             overflow-y: auto;
             box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
         }
-
         .osint-modal::-webkit-scrollbar { width: 4px; }
         .osint-modal::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 20px; }
-
         .osint-close {
             float: right;
             background: rgba(255, 255, 255, 0.06);
@@ -1807,18 +1554,15 @@
             align-items: center;
             justify-content: center;
         }
-
         .osint-close:hover {
             background: var(--accent);
             color: #fff;
             border-color: var(--accent);
             transform: rotate(90deg);
         }
-
         .osint-modal .modal-icon { font-size: 2.5rem; color: var(--accent-light); margin-bottom: 4px; }
         .osint-modal h2 { font-size: 1.6rem; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; letter-spacing: -0.3px; }
         .osint-modal .sub-desc { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px; }
-
         .osint-form {
             background: var(--bg-primary);
             border-radius: var(--radius-sm);
@@ -1826,7 +1570,6 @@
             border: 1px solid var(--border-subtle);
             margin: 8px 0 12px;
         }
-
         .osint-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .osint-form .form-group label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
         .osint-form .form-group input, .osint-form .form-group select {
@@ -1862,7 +1605,6 @@
         }
         .osint-form .btn-query:hover { transform: scale(1.02); box-shadow: 0 0 30px var(--accent-glow); }
         .osint-form .btn-query:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
         .osint-result {
             background: #0a0d14;
             border-radius: var(--radius-sm);
@@ -1898,7 +1640,6 @@
         .osint-result .result-body .success { color: var(--green); }
         .osint-result .result-body .info { color: #60a5fa; }
         .osint-result .result-body .image-result img { max-width: 100%; border-radius: var(--radius-sm); margin-top: 8px; }
-
         .osint-badge {
             display: inline-flex;
             align-items: center;
@@ -1912,7 +1653,6 @@
             border: 1px solid rgba(77, 123, 253, 0.15);
             margin-bottom: 10px;
         }
-
         .osint-footer {
             display: flex;
             gap: 12px;
@@ -1957,18 +1697,13 @@
             min-width: 140px;
         }
         .osint-footer .btn-secondary:hover { background: rgba(255, 255, 255, 0.10); color: var(--text-primary); border-color: var(--accent); }
-
         @media (max-width: 500px) {
             .osint-form .form-row { grid-template-columns: 1fr; }
             .osint-modal { padding: 20px 16px; }
             .osint-footer { flex-direction: column; }
             .osint-footer .btn-primary, .osint-footer .btn-secondary { flex: 1; min-width: unset; }
         }
-
-        /* ============================================================
-           AI CHAT MODAL — GROQ
-           ============================================================ */
-        .ai-overlay {
+        .ssweb-overlay {
             position: fixed;
             inset: 0;
             background: rgba(0, 0, 0, 0.85);
@@ -1980,10 +1715,8 @@
             padding: 20px;
             animation: fadeOverlay 0.3s ease;
         }
-
-        .ai-overlay.open { display: flex; }
-
-        .ai-modal {
+        .ssweb-overlay.open { display: flex; }
+        .ssweb-modal {
             background: var(--bg-card);
             max-width: 680px;
             width: 100%;
@@ -1993,21 +1726,17 @@
             backdrop-filter: blur(12px);
             animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             max-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+            overflow-y: auto;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.6);
         }
-
-        .ai-modal .ai-header {
+        .ssweb-modal .ssweb-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding-bottom: 12px;
             border-bottom: 1px solid var(--border-subtle);
-            flex-shrink: 0;
         }
-
-        .ai-modal .ai-header .ai-title {
+        .ssweb-modal .ssweb-header .ssweb-title {
             display: flex;
             align-items: center;
             gap: 10px;
@@ -2015,11 +1744,9 @@
             font-weight: 700;
             color: var(--text-primary);
         }
-
-        .ai-modal .ai-header .ai-title i { color: var(--accent-light); }
-
-        .ai-modal .ai-close {
-            background: rgba(255, 255, 255, 0.06);
+        .ssweb-modal .ssweb-header .ssweb-title i { color: var(--accent-light); }
+        .ssweb-close {
+            background: rgba(255,255,255,0.06);
             border: 1px solid var(--border-subtle);
             color: var(--text-muted);
             width: 38px;
@@ -2032,178 +1759,11 @@
             align-items: center;
             justify-content: center;
         }
-
-        .ai-modal .ai-close:hover {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-            transform: rotate(90deg);
-        }
-
-        .ai-chat-box {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px 4px 12px;
-            margin: 4px 0 12px;
-            max-height: 400px;
-            min-height: 250px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .ai-chat-box::-webkit-scrollbar { width: 4px; }
-        .ai-chat-box::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 20px; }
-
-        .ai-message {
-            max-width: 85%;
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            font-size: 0.9rem;
-            line-height: 1.6;
-            word-wrap: break-word;
-            animation: fadeSlideUp 0.3s ease;
-        }
-
-        .ai-message.user {
-            align-self: flex-end;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            color: #fff;
-            border-bottom-right-radius: 4px;
-        }
-
-        .ai-message.ai {
-            align-self: flex-start;
-            background: var(--bg-primary);
-            border: 1px solid var(--border-subtle);
-            color: var(--text-secondary);
-            border-bottom-left-radius: 4px;
-        }
-
-        .ai-message .msg-time { font-size: 0.55rem; color: var(--text-muted); margin-top: 4px; display: block; opacity: 0.7; }
-        .ai-message.user .msg-time { color: rgba(255,255,255,0.6); }
-
-        .ai-message .typing-indicator { display: flex; gap: 4px; padding: 4px 0; }
-        .ai-message .typing-indicator span { width: 8px; height: 8px; background: var(--text-muted); border-radius: 50%; animation: typingBounce 1.4s infinite both; }
-        .ai-message .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-        .ai-message .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typingBounce {
-            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-            40% { transform: scale(1); opacity: 1; }
-        }
-
-        .ai-input-wrap {
-            display: flex;
-            gap: 10px;
-            padding-top: 12px;
-            border-top: 1px solid var(--border-subtle);
-            flex-shrink: 0;
-        }
-
-        .ai-input-wrap input {
-            flex: 1;
-            padding: 12px 16px;
-            border-radius: 60px;
-            border: 1px solid var(--border-subtle);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            outline: none;
-            transition: var(--transition);
-        }
-
-        .ai-input-wrap input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
-        .ai-input-wrap input::placeholder { color: var(--text-muted); }
-
-        .ai-input-wrap .btn-send-ai {
-            padding: 12px 24px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            color: #fff;
-            border: none;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-        }
-
-        .ai-input-wrap .btn-send-ai:hover { transform: scale(1.02); box-shadow: 0 0 24px var(--accent-glow); }
-        .ai-input-wrap .btn-send-ai:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-        .ai-status {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-align: center;
-            padding: 4px 0 0;
-            flex-shrink: 0;
-        }
-
-        /* ============================================================
-           WHATSAPP SENDER MODAL — AUTORESBOT
-           ============================================================ */
-        .sender-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(16px);
-            z-index: 1003;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            animation: fadeOverlay 0.3s ease;
-        }
-        .sender-overlay.open { display: flex; }
-
-        .sender-modal {
-            background: var(--bg-card);
-            max-width: 600px;
-            width: 100%;
-            border-radius: var(--radius);
-            padding: 28px 24px;
-            border: 1px solid var(--border-subtle);
-            backdrop-filter: blur(12px);
-            animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 24px 80px rgba(0,0,0,0.6);
-        }
-
-        .sender-close {
-            float: right;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid var(--border-subtle);
-            color: var(--text-muted);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .sender-close:hover {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-            transform: rotate(90deg);
-        }
-
-        .sender-modal .modal-icon { font-size: 2.5rem; color: var(--accent-light); margin-bottom: 4px; }
-        .sender-modal h2 { font-size: 1.6rem; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
-        .sender-modal .sub-desc { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px; }
-
-        .sender-form .form-group { margin-bottom: 14px; }
-        .sender-form .form-group label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
-        .sender-form .form-group input, .sender-form .form-group textarea {
+        .ssweb-close:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: rotate(90deg); }
+        .ssweb-form { margin: 12px 0 16px; }
+        .ssweb-form .form-group { margin-bottom: 12px; }
+        .ssweb-form .form-group label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
+        .ssweb-form .form-group input {
             width: 100%;
             padding: 10px 14px;
             border-radius: var(--radius-sm);
@@ -2213,12 +1773,10 @@
             font-size: 0.9rem;
             outline: none;
             transition: var(--transition);
-            resize: vertical;
         }
-        .sender-form .form-group input:focus, .sender-form .form-group textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
-        .sender-form .form-group small { display: block; color: var(--text-muted); font-size: 0.6rem; margin-top: 2px; }
-
-        .sender-form .btn-send-sender {
+        .ssweb-form .form-group input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+        .ssweb-form .form-group small { display: block; color: var(--text-muted); font-size: 0.6rem; margin-top: 2px; }
+        .ssweb-form .btn-ssweb {
             width: 100%;
             padding: 12px;
             background: linear-gradient(135deg, var(--accent), var(--accent-light));
@@ -2234,35 +1792,200 @@
             justify-content: center;
             gap: 10px;
         }
-
-        .sender-form .btn-send-sender:hover { transform: scale(1.02); box-shadow: 0 0 30px var(--accent-glow); }
-        .sender-form .btn-send-sender:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-        .sender-result {
+        .ssweb-form .btn-ssweb:hover { transform: scale(1.02); box-shadow: 0 0 30px var(--accent-glow); }
+        .ssweb-form .btn-ssweb:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .ssweb-result {
             margin-top: 12px;
-            padding: 10px 14px;
             border-radius: var(--radius-sm);
-            font-size: 0.85rem;
+            overflow: hidden;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-subtle);
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .ssweb-result img { width: 100%; height: auto; display: block; }
+        .ssweb-result .placeholder { color: var(--text-muted); font-size: 0.85rem; padding: 20px; text-align: center; }
+        .ssweb-result .error { color: #ef4444; padding: 20px; text-align: center; }
+        .ssweb-result .loading { color: var(--accent-light); padding: 20px; display: flex; align-items: center; gap: 8px; justify-content: center; }
+        .ssweb-result .btn-download-ss, .ssweb-result .btn-open-ss {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        .ssweb-result .btn-download-ss {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: #fff;
+        }
+        .ssweb-result .btn-download-ss:hover { transform: scale(1.02); box-shadow: 0 0 20px var(--accent-glow); }
+        .ssweb-result .btn-open-ss {
+            background: rgba(255,255,255,0.06);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
+        }
+        .ssweb-result .btn-open-ss:hover { background: rgba(255,255,255,0.10); color: var(--text-primary); border-color: var(--accent); }
+        .upload-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(16px);
+            z-index: 1003;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeOverlay 0.3s ease;
+        }
+        .upload-overlay.open { display: flex; }
+        .upload-modal {
+            background: var(--bg-card);
+            max-width: 600px;
+            width: 100%;
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(12px);
+            animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+        }
+        .upload-modal .upload-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .upload-modal .upload-header .upload-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .upload-modal .upload-header .upload-title i { color: var(--accent-light); }
+        .upload-close {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .upload-close:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: rotate(90deg); }
+        .upload-dropzone {
+            border: 2px dashed var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 30px 20px;
+            text-align: center;
+            margin: 16px 0;
+            transition: var(--transition);
+            cursor: pointer;
+            background: var(--bg-primary);
+        }
+        .upload-dropzone:hover { border-color: var(--accent); background: var(--bg-card-hover); }
+        .upload-dropzone i { font-size: 3rem; color: var(--text-muted); margin-bottom: 8px; }
+        .upload-dropzone p { color: var(--text-secondary); font-size: 0.9rem; }
+        .upload-dropzone .file-types { color: var(--text-muted); font-size: 0.7rem; margin-top: 4px; }
+        .upload-dropzone.dragover { border-color: var(--accent); background: rgba(77,123,253,0.05); }
+        .upload-progress {
+            display: none;
+            margin: 12px 0;
+        }
+        .upload-progress .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--bg-primary);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .upload-progress .progress-bar .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            transition: width 0.3s ease;
+        }
+        .upload-progress .progress-text { color: var(--text-muted); font-size: 0.75rem; margin-top: 4px; }
+        .upload-result {
+            margin-top: 12px;
+            padding: 14px;
+            border-radius: var(--radius-sm);
+            background: var(--bg-primary);
+            border: 1px solid var(--border-subtle);
             display: none;
         }
-        .sender-result.success { display: block; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); color: var(--green); }
-        .sender-result.error { display: block; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; }
-        .sender-result.info { display: block; background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2); color: #818cf8; }
-
-        /* ============================================================
-           PAGE
-           ============================================================ */
+        .upload-result .result-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .upload-result .result-link input {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-subtle);
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            min-width: 150px;
+        }
+        .upload-result .result-link .btn-copy-link {
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .upload-result .result-link .btn-copy-link:hover { background: var(--accent-light); }
+        .upload-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: #fff;
+            border: none;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .upload-btn:hover { transform: scale(1.02); box-shadow: 0 0 30px var(--accent-glow); }
+        .upload-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
         .page { display: none; }
         .page.active { display: block; animation: fadeIn 0.25s ease; }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: 0; }
         }
-
-        /* ============================================================
-           BOTTOM NAV
-           ============================================================ */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -2279,7 +2002,6 @@
             padding: 8px 4px 18px;
             box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.5);
         }
-
         .bottom-nav .nav-item {
             display: flex;
             flex-direction: column;
@@ -2298,11 +2020,9 @@
             background: transparent;
             border: none;
         }
-
         .bottom-nav .nav-item i { font-size: 1.6rem; transition: var(--transition); }
         .bottom-nav .nav-item.active { color: var(--accent-light); }
         .bottom-nav .nav-item.active i { transform: translateY(-2px); filter: drop-shadow(0 0 16px var(--accent-glow)); }
-
         .bottom-nav .nav-item .badge {
             position: absolute;
             top: -4px;
@@ -2318,14 +2038,9 @@
             line-height: 20px;
             box-shadow: 0 0 16px var(--accent-glow);
         }
-
         .bottom-nav .nav-item.payment-item { color: var(--text-muted); }
         .bottom-nav .nav-item.payment-item.active { color: var(--accent-light); }
         .bottom-nav .nav-item.payment-item.active i { filter: drop-shadow(0 0 16px var(--accent-glow)); }
-
-        /* ============================================================
-           RESPONSIF
-           ============================================================ */
         @media (max-width: 500px) {
             .grid-menu { gap: 12px; }
             .menu-card { padding: 22px 10px; min-height: 110px; }
@@ -2379,11 +2094,10 @@
             .osint-modal { padding: 20px 16px; }
             .osint-footer { flex-direction: column; }
             .osint-footer .btn-primary, .osint-footer .btn-secondary { flex: 1; min-width: unset; }
-            .ai-modal { padding: 20px 16px; max-width: 100%; }
-            .ai-chat-box { max-height: 300px; min-height: 180px; }
-            .sender-modal { padding: 20px 16px; max-width: 100%; }
+            .ssweb-modal { padding: 20px 16px; max-width: 100%; }
+            .ssweb-result { min-height: 60px; }
+            .upload-modal { padding: 20px 16px; max-width: 100%; }
         }
-
         @media (max-width: 380px) {
             .grid-menu { gap: 10px; }
             .menu-card { padding: 16px 8px; min-height: 90px; }
@@ -2420,19 +2134,16 @@
             .osint-form .form-row { grid-template-columns: 1fr; }
             .osint-modal { padding: 14px 12px; }
             .osint-footer { flex-direction: column; }
-            .ai-modal { padding: 14px 12px; }
-            .ai-chat-box { max-height: 240px; min-height: 140px; }
-            .ai-input-wrap { flex-direction: column; }
-            .ai-input-wrap .btn-send-ai { width: 100%; justify-content: center; }
-            .sender-modal { padding: 14px 12px; }
+            .ssweb-modal { padding: 14px 12px; }
+            .ssweb-result { min-height: 50px; }
+            .upload-modal { padding: 14px 12px; }
         }
     </style>
 </head>
 <body>
 
     <div class="app-container">
-
-        <!-- ===== HEADER ===== -->
+        <!-- HEADER -->
         <header class="top-header">
             <div class="logo-area">
                 <img src="https://files.catbox.moe/ijemcy.png" alt="logo" />
@@ -2440,7 +2151,7 @@
             </div>
         </header>
 
-        <!-- ===== HALAMAN BERANDA ===== -->
+        <!-- HOME -->
         <div class="page active" id="page-home">
             <div class="hero">
                 <video src="https://files.catbox.moe/trw5j2.mp4" autoplay loop playsinline class="hero-video" id="heroVideo"></video>
@@ -2476,7 +2187,7 @@
             <div class="grid-menu" id="gridLayanan"></div>
         </div>
 
-        <!-- ===== HALAMAN PROFIL ===== -->
+        <!-- PROFILE -->
         <div class="page" id="page-profile">
             <div class="profile-page">
                 <img class="profile-cover" src="https://files.catbox.moe/iai8aa.png" alt="cover" />
@@ -2521,7 +2232,7 @@
             </div>
         </div>
 
-        <!-- ===== KERANJANG ===== -->
+        <!-- CART -->
         <div class="cart-overlay" id="cartOverlay">
             <div class="cart-panel">
                 <div class="cart-header">
@@ -2544,7 +2255,7 @@
             </div>
         </div>
 
-        <!-- ===== DETAIL MODAL ===== -->
+        <!-- DETAIL MODAL -->
         <div class="detail-overlay" id="detailOverlay">
             <div class="detail-modal">
                 <button class="detail-close" id="detailCloseBtn"><i class="fas fa-times"></i></button>
@@ -2557,7 +2268,7 @@
             </div>
         </div>
 
-        <!-- ===== TOPUP MODAL ===== -->
+        <!-- TOPUP MODAL -->
         <div class="topup-overlay" id="topupOverlay">
             <div class="topup-modal">
                 <button class="topup-close" id="topupCloseBtn"><i class="fas fa-times"></i></button>
@@ -2567,7 +2278,7 @@
             </div>
         </div>
 
-        <!-- ===== ANIME MODAL ===== -->
+        <!-- ANIME MODAL -->
         <div class="anime-overlay" id="animeOverlay">
             <div class="anime-modal">
                 <button class="anime-close" id="animeCloseBtn"><i class="fas fa-times"></i></button>
@@ -2588,7 +2299,7 @@
             </div>
         </div>
 
-        <!-- ===== BOT CONTROLLER MODAL ===== -->
+        <!-- BOT CONTROLLER MODAL -->
         <div class="bot-controller-overlay" id="botControllerOverlay">
             <div class="bot-controller-modal">
                 <button class="bot-controller-close" id="botControllerCloseBtn"><i class="fas fa-times"></i></button>
@@ -2629,7 +2340,7 @@
             </div>
         </div>
 
-        <!-- ===== OSINT MODAL ===== -->
+        <!-- OSINT MODAL -->
         <div class="osint-overlay" id="osintOverlay">
             <div class="osint-modal">
                 <button class="osint-close" id="osintCloseBtn"><i class="fas fa-times"></i></button>
@@ -2669,55 +2380,59 @@
             </div>
         </div>
 
-        <!-- ===== AI CHAT MODAL — GROQ ===== -->
-        <div class="ai-overlay" id="aiOverlay">
-            <div class="ai-modal">
-                <div class="ai-header">
-                    <div class="ai-title"><i class="fas fa-robot"></i> AI Chat <span style="font-size:0.6rem;background:rgba(77,123,253,0.15);color:var(--accent-light);padding:2px 10px;border-radius:30px;border:1px solid rgba(77,123,253,0.2);">Groq</span></div>
-                    <button class="ai-close" id="aiCloseBtn"><i class="fas fa-times"></i></button>
+        <!-- SSWEB MODAL -->
+        <div class="ssweb-overlay" id="sswebOverlay">
+            <div class="ssweb-modal">
+                <div class="ssweb-header">
+                    <div class="ssweb-title"><i class="fas fa-camera"></i> Screenshot Website</div>
+                    <button class="ssweb-close" id="sswebCloseBtn"><i class="fas fa-times"></i></button>
                 </div>
-                <div class="ai-chat-box" id="aiChatBox">
-                    <div class="ai-message ai"><span>👋 Halo! Aku adalah AI dari Groq. Tanyakan apa saja — aku siap membantu!</span><span class="msg-time">Sekarang</span></div>
+                <p style="color:var(--text-secondary);font-size:0.85rem;margin:6px 0 10px;">Masukkan URL website untuk mengambil screenshot.</p>
+                <div class="ssweb-form">
+                    <div class="form-group">
+                        <label><i class="fas fa-link"></i> URL Website</label>
+                        <input type="text" id="sswebUrl" placeholder="https://example.com" />
+                        <small>Contoh: https://joell-shop.vercel.app</small>
+                    </div>
+                    <button class="btn-ssweb" id="sswebBtn"><i class="fas fa-paper-plane"></i> Ambil Screenshot</button>
                 </div>
-                <div class="ai-input-wrap">
-                    <input type="text" id="aiInput" placeholder="Tanyakan sesuatu..." />
-                    <button class="btn-send-ai" id="aiSendBtn"><i class="fas fa-paper-plane"></i> Kirim</button>
+                <div class="ssweb-result" id="sswebResult">
+                    <div class="placeholder"><i class="fas fa-image" style="font-size:2rem;display:block;margin-bottom:8px;"></i>Masukkan URL dan klik tombol di atas.</div>
                 </div>
-                <div class="ai-status" id="aiStatus"><i class="fas fa-circle" style="color:var(--green);font-size:0.5rem;margin-right:4px;"></i> Siap</div>
             </div>
         </div>
 
-        <!-- ===== WHATSAPP SENDER MODAL — AUTORESBOT ===== -->
-        <div class="sender-overlay" id="senderOverlay">
-            <div class="sender-modal">
-                <button class="sender-close" id="senderCloseBtn"><i class="fas fa-times"></i></button>
-                <div class="modal-icon"><i class="fas fa-comment"></i></div>
-                <h2>WhatsApp Sender</h2>
-                <p class="sub-desc"><i class="fas fa-bolt" style="color:var(--accent-light);margin-right:6px;"></i>Kirim pesan WhatsApp otomatis via Autoresbot API.</p>
-                <form class="sender-form" id="senderForm">
-                    <div class="form-group">
-                        <label><i class="fas fa-link"></i> Endpoint API</label>
-                        <input type="text" id="senderEndpoint" value="https://api.autoresbot.com/send" placeholder="https://api.autoresbot.com/send" />
-                        <small>Masukkan endpoint API Autoresbot yang benar.</small>
+        <!-- ===== UPLOAD MODAL — CATBOX (FIX) ===== -->
+        <div class="upload-overlay" id="uploadOverlay">
+            <div class="upload-modal">
+                <div class="upload-header">
+                    <div class="upload-title"><i class="fas fa-cloud-upload-alt"></i> Upload File</div>
+                    <button class="upload-close" id="uploadCloseBtn"><i class="fas fa-times"></i></button>
+                </div>
+                <p style="color:var(--text-secondary);font-size:0.85rem;margin:6px 0 10px;">Unggah gambar/video/musik — dapatkan link permanen (mirip Catbox).</p>
+                <div class="upload-dropzone" id="uploadDropzone">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Klik atau seret file ke sini</p>
+                    <span class="file-types">Maks 200 MB · Gambar, Video, Audio</span>
+                </div>
+                <input type="file" id="uploadFileInput" style="display:none;" />
+                <button class="upload-btn" id="uploadBtn"><i class="fas fa-upload"></i> Upload File</button>
+                <div class="upload-progress" id="uploadProgress">
+                    <div class="progress-bar"><div class="progress-fill" id="uploadProgressFill"></div></div>
+                    <div class="progress-text" id="uploadProgressText">Mengupload...</div>
+                </div>
+                <div class="upload-result" id="uploadResult">
+                    <div class="result-link">
+                        <input type="text" id="uploadResultLink" readonly />
+                        <button class="btn-copy-link" id="uploadCopyBtn"><i class="fas fa-copy"></i> Salin</button>
                     </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-phone"></i> Nomor Tujuan</label>
-                        <input type="text" id="senderPhone" placeholder="6281234567890" />
-                        <small>Masukkan dengan kode negara, tanpa tanda +</small>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-comment-dots"></i> Pesan</label>
-                        <textarea id="senderMessage" rows="4" placeholder="Tulis pesan Anda di sini..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-send-sender" id="senderSendBtn"><i class="fas fa-paper-plane"></i> Kirim Pesan</button>
-                </form>
-                <div id="senderResult" class="sender-result"></div>
+                </div>
             </div>
         </div>
 
     </div>
 
-    <!-- ===== BOTTOM NAV ===== -->
+    <!-- BOTTOM NAV -->
     <nav class="bottom-nav" id="bottomNav">
         <button class="nav-item active" data-page="home" id="navHome"><i class="fas fa-home"></i> Beranda</button>
         <button class="nav-item" id="navSearch"><i class="fas fa-search"></i> Cari</button>
@@ -2806,8 +2521,8 @@
             { id: 15, name: 'Info Anime', price: 0, desc: 'Cari info anime favoritmu (judul, sinopsis, rating, episode, dll.).', icon: 'fa-film', category: 'layanan', isAnime: true, variants: [{ name: 'Cari Anime', price: 0 }] },
             { id: 16, name: 'Bot Controller', price: 0, desc: 'Kelola bot Telegram Anda — autentikasi, kirim pesan, dan lihat history bot.', icon: 'fa-robot', category: 'layanan', isBotController: true, variants: [{ name: 'Buka Controller', price: 0 }] },
             { id: 17, name: 'WhatsApp OSINT', price: 0, desc: 'Alat OSINT untuk mendapatkan informasi dari nomor WhatsApp (foto profil, status, bisnis, perangkat, privasi, dll.).', icon: 'fa-search', category: 'layanan', isOsint: true, variants: [{ name: 'Buka Tools', price: 0 }] },
-            { id: 18, name: 'AI Chat', price: 0, desc: 'Chat dengan AI menggunakan Groq — cepat, pintar, dan gratis.', icon: 'fa-robot', category: 'layanan', isAi: true, variants: [{ name: 'Buka Chat', price: 0 }] },
-            { id: 19, name: 'WhatsApp Sender', price: 0, desc: 'Kirim pesan WhatsApp otomatis via Autoresbot API.', icon: 'fa-comment', category: 'layanan', isSender: true, variants: [{ name: 'Buka Sender', price: 0 }] }
+            { id: 18, name: 'Screenshot Website', price: 0, desc: 'Ambil screenshot dari website mana saja secara instan.', icon: 'fa-camera', category: 'layanan', isSsweb: true, variants: [{ name: 'Buka SSWEB', price: 0 }] },
+            { id: 19, name: 'Upload File', price: 0, desc: 'Unggah gambar/video/musik dan dapatkan link permanen (mirip Catbox).', icon: 'fa-cloud-upload-alt', category: 'layanan', isUpload: true, variants: [{ name: 'Buka Uploader', price: 0 }] }
         ];
 
         // ============================================================
@@ -2846,7 +2561,7 @@
         function renderMenuCards(productList) {
             let html = '';
             productList.forEach(p => {
-                html += `<div class="menu-card" data-id="${p.id}" data-external="${p.isExternal ? p.externalUrl : ''}" data-topup="${p.isTopup || false}" data-anime="${p.isAnime || false}" data-bot="${p.isBotController || false}" data-osint="${p.isOsint || false}" data-ai="${p.isAi || false}" data-sender="${p.isSender || false}"><i class="fas ${p.icon}"></i><span>${p.name}</span></div>`;
+                html += `<div class="menu-card" data-id="${p.id}" data-external="${p.isExternal ? p.externalUrl : ''}" data-topup="${p.isTopup || false}" data-anime="${p.isAnime || false}" data-bot="${p.isBotController || false}" data-osint="${p.isOsint || false}" data-ssweb="${p.isSsweb || false}" data-upload="${p.isUpload || false}"><i class="fas ${p.icon}"></i><span>${p.name}</span></div>`;
             });
             return html;
         }
@@ -3323,185 +3038,257 @@
         })();
 
         // ============================================================
-        //  AI CHAT — GROQ (Model: llama-3.1-70b-versatile)
+        //  SSWEB — SCREENSHOT WEBSITE
         // ============================================================
         (function() {
-            const overlay = document.getElementById('aiOverlay');
-            const closeBtn = document.getElementById('aiCloseBtn');
-            const chatBox = document.getElementById('aiChatBox');
-            const input = document.getElementById('aiInput');
-            const sendBtn = document.getElementById('aiSendBtn');
-            const statusEl = document.getElementById('aiStatus');
-            const API_KEY = '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';
-            const API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-            const MODEL = 'llama-3.1-70b-versatile'; // Model terbaru yang aktif
-            let isProcessing = false;
+            const overlay = document.getElementById('sswebOverlay');
+            const closeBtn = document.getElementById('sswebCloseBtn');
+            const urlInput = document.getElementById('sswebUrl');
+            const btn = document.getElementById('sswebBtn');
+            const resultDiv = document.getElementById('sswebResult');
 
-            window.openAiChat = function() {
+            window.openSsweb = function() {
                 overlay.classList.add('open');
-                input.focus();
-                statusEl.innerHTML = '<i class="fas fa-circle" style="color:var(--green);font-size:0.5rem;margin-right:4px;"></i> Siap';
+                urlInput.value = '';
+                resultDiv.innerHTML = `<div class="placeholder"><i class="fas fa-image" style="font-size:2rem;display:block;margin-bottom:8px;"></i>Masukkan URL dan klik tombol di atas.</div>`;
+                urlInput.focus();
             };
 
             closeBtn.addEventListener('click', function() { overlay.classList.remove('open'); });
             overlay.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
 
-            async function sendMessage() {
-                const text = input.value.trim();
-                if (!text || isProcessing) return;
-                addMessage('user', text);
-                input.value = '';
-                statusEl.innerHTML = '<i class="fas fa-circle" style="color:var(--gold);font-size:0.5rem;margin-right:4px;"></i> Mengetik...';
-                sendBtn.disabled = true;
-                isProcessing = true;
-                const typingId = addTypingIndicator();
+            btn.addEventListener('click', async function() {
+                const url = urlInput.value.trim();
+                if (!url) {
+                    resultDiv.innerHTML = `<div class="error">⚠️ Masukkan URL terlebih dahulu.</div>`;
+                    return;
+                }
+
+                let validUrl;
+                try {
+                    validUrl = new URL(url);
+                } catch (_) {
+                    try {
+                        validUrl = new URL('https://' + url);
+                    } catch (_2) {
+                        resultDiv.innerHTML = `<div class="error">❌ URL tidak valid. Pastikan diawali dengan http:// atau https://</div>`;
+                        return;
+                    }
+                }
+
+                const finalUrl = validUrl.href;
+
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+                resultDiv.innerHTML = `<div class="loading"><i class="fas fa-spinner fa-spin"></i> Mengambil screenshot...</div>`;
 
                 try {
-                    const response = await fetch(API_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${API_KEY}` },
-                        body: JSON.stringify({
-                            model: MODEL,
-                            messages: [
-                                { role: 'system', content: 'Kamu adalah asisten AI yang ramah dan membantu. Jawab dalam bahasa Indonesia.' },
-                                { role: 'user', content: text }
-                            ],
-                            temperature: 0.7,
-                            max_tokens: 1024
-                        })
+                    const microlinkUrl = `https://api.microlink.io?url=${encodeURIComponent(finalUrl)}&screenshot=true&embed=screenshot.url`;
+                    const response = await fetch(microlinkUrl, {
+                        headers: { 'Accept': 'application/json' }
                     });
-                    removeTypingIndicator(typingId);
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(errorData.error?.message || `HTTP ${response.status}`);
-                    }
                     const data = await response.json();
-                    const reply = data.choices[0]?.message?.content || 'Maaf, tidak ada respons.';
-                    addMessage('ai', reply);
-                    statusEl.innerHTML = '<i class="fas fa-circle" style="color:var(--green);font-size:0.5rem;margin-right:4px;"></i> Siap';
+
+                    if (response.ok && data.data && data.data.screenshot && data.data.screenshot.url) {
+                        const imgUrl = data.data.screenshot.url;
+                        resultDiv.innerHTML = `
+                            <img src="${imgUrl}" alt="Screenshot ${finalUrl}" loading="lazy" />
+                            <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;width:100%;padding:0 8px;">
+                                <a href="${imgUrl}" download="screenshot-${Date.now()}.png" class="btn-download-ss">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                                <button onclick="window.open('${imgUrl}','_blank')" class="btn-open-ss">
+                                    <i class="fas fa-external-link-alt"></i> Buka Tab
+                                </button>
+                            </div>
+                        `;
+                    } else {
+                        const fallbackUrl = `https://image.thum.io/get/width/1200/crop/800/${encodeURIComponent(finalUrl)}`;
+                        resultDiv.innerHTML = `
+                            <img src="${fallbackUrl}" alt="Screenshot ${finalUrl}" loading="lazy" 
+                                 onerror="this.parentElement.innerHTML='<div class=\\'error\\'>❌ Gagal mengambil screenshot. Coba lagi nanti.</div>'" />
+                            <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;width:100%;padding:0 8px;">
+                                <a href="${fallbackUrl}" download="screenshot-${Date.now()}.png" class="btn-download-ss">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        `;
+                    }
                 } catch (error) {
-                    removeTypingIndicator(typingId);
-                    addMessage('ai', `❌ Terjadi kesalahan: ${error.message}`);
-                    statusEl.innerHTML = '<i class="fas fa-circle" style="color:#ef4444;font-size:0.5rem;margin-right:4px;"></i> Error';
-                    console.error('Groq API Error:', error);
-                }
-                sendBtn.disabled = false;
-                isProcessing = false;
-                input.focus();
-                scrollToBottom();
-            }
-
-            function addMessage(role, content) {
-                const div = document.createElement('div');
-                div.className = `ai-message ${role}`;
-                const time = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-                div.innerHTML = `<span>${content}</span><span class="msg-time">${time}</span>`;
-                chatBox.appendChild(div);
-                scrollToBottom();
-                return div;
-            }
-
-            function addTypingIndicator() {
-                const div = document.createElement('div');
-                div.className = 'ai-message ai';
-                const id = `typing-${Date.now()}`;
-                div.id = id;
-                div.innerHTML = `<div class="typing-indicator"><span></span><span></span><span></span></div>`;
-                chatBox.appendChild(div);
-                scrollToBottom();
-                return id;
-            }
-            function removeTypingIndicator(id) {
-                const el = document.getElementById(id);
-                if (el) el.remove();
-            }
-            function scrollToBottom() { chatBox.scrollTop = chatBox.scrollHeight; }
-
-            sendBtn.addEventListener('click', sendMessage);
-            input.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    sendMessage();
+                    resultDiv.innerHTML = `<div class="error">❌ Network error: ${error.message}</div>`;
+                } finally {
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Ambil Screenshot';
                 }
             });
+
+            urlInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') btn.click(); });
+
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && overlay.classList.contains('open')) overlay.classList.remove('open');
             });
         })();
 
         // ============================================================
-        //  WHATSAPP SENDER — AUTORESBOT
+        //  UPLOAD FILE — CATBOX (FIX, TANPA CORS ERROR)
         // ============================================================
         (function() {
-            const overlay = document.getElementById('senderOverlay');
-            const closeBtn = document.getElementById('senderCloseBtn');
-            const form = document.getElementById('senderForm');
-            const endpointInput = document.getElementById('senderEndpoint');
-            const phoneInput = document.getElementById('senderPhone');
-            const messageInput = document.getElementById('senderMessage');
-            const sendBtn = document.getElementById('senderSendBtn');
-            const resultDiv = document.getElementById('senderResult');
-            const API_KEY = '031272880cf63be23912721f';
+            const overlay = document.getElementById('uploadOverlay');
+            const closeBtn = document.getElementById('uploadCloseBtn');
+            const dropzone = document.getElementById('uploadDropzone');
+            const fileInput = document.getElementById('uploadFileInput');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const progressDiv = document.getElementById('uploadProgress');
+            const progressFill = document.getElementById('uploadProgressFill');
+            const progressText = document.getElementById('uploadProgressText');
+            const resultDiv = document.getElementById('uploadResult');
+            const resultLink = document.getElementById('uploadResultLink');
+            const copyBtn = document.getElementById('uploadCopyBtn');
 
-            window.openSender = function() {
+            let selectedFile = null;
+
+            window.openUpload = function() {
                 overlay.classList.add('open');
-                resultDiv.className = 'sender-result';
-                resultDiv.style.display = 'none';
-                phoneInput.value = '';
-                messageInput.value = '';
-                endpointInput.value = 'https://api.autoresbot.com/send';
+                resetUI();
             };
+
+            function resetUI() {
+                selectedFile = null;
+                fileInput.value = '';
+                progressDiv.style.display = 'none';
+                resultDiv.style.display = 'none';
+                dropzone.innerHTML = `
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Klik atau seret file ke sini</p>
+                    <span class="file-types">Maks 200 MB · Gambar, Video, Audio</span>
+                `;
+                uploadBtn.disabled = false;
+                uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload File';
+            }
 
             closeBtn.addEventListener('click', function() { overlay.classList.remove('open'); });
             overlay.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
 
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                const endpoint = endpointInput.value.trim();
-                const phone = phoneInput.value.trim();
-                const message = messageInput.value.trim();
+            dropzone.addEventListener('click', function() { fileInput.click(); });
 
-                if (!endpoint) { showResult('error', '❌ Endpoint API tidak boleh kosong.'); return; }
-                if (!phone) { showResult('error', '❌ Masukkan nomor tujuan.'); return; }
-                if (!message) { showResult('error', '❌ Masukkan pesan.'); return; }
-
-                const cleanPhone = phone.replace(/[^0-9]/g, '');
-                if (cleanPhone.length < 8 || cleanPhone.length > 15) {
-                    showResult('error', '❌ Format nomor tidak valid. Gunakan 8-15 digit dengan kode negara.');
-                    return;
-                }
-
-                sendBtn.disabled = true;
-                sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
-                showResult('info', '⏳ Mengirim pesan...');
-
-                try {
-                    const response = await fetch(endpoint, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${API_KEY}` },
-                        body: JSON.stringify({
-                            phone: cleanPhone, message: message, number: cleanPhone, text: message, apikey: API_KEY
-                        })
-                    });
-                    const data = await response.json();
-                    if (response.ok) {
-                        showResult('success', `✅ Pesan berhasil dikirim ke ${cleanPhone}. Response: ${JSON.stringify(data)}`);
-                    } else {
-                        showResult('error', `❌ Gagal: HTTP ${response.status} - ${JSON.stringify(data)}`);
-                    }
-                } catch (error) {
-                    showResult('error', `❌ Network Error: ${error.message}`);
-                } finally {
-                    sendBtn.disabled = false;
-                    sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Pesan';
+            fileInput.addEventListener('change', function(e) {
+                if (this.files.length > 0) {
+                    selectedFile = this.files[0];
+                    dropzone.innerHTML = `
+                        <i class="fas fa-file" style="color:var(--accent-light);"></i>
+                        <p style="font-weight:600;color:var(--text-primary);">${selectedFile.name}</p>
+                        <span class="file-types">${(selectedFile.size / 1024 / 1024).toFixed(2)} MB</span>
+                    `;
                 }
             });
 
-            function showResult(type, msg) {
-                resultDiv.className = `sender-result ${type}`;
-                resultDiv.textContent = msg;
-                resultDiv.style.display = 'block';
-            }
+            dropzone.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('dragover');
+            });
+            dropzone.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+            });
+            dropzone.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+                if (e.dataTransfer.files.length > 0) {
+                    selectedFile = e.dataTransfer.files[0];
+                    fileInput.files = e.dataTransfer.files;
+                    dropzone.innerHTML = `
+                        <i class="fas fa-file" style="color:var(--accent-light);"></i>
+                        <p style="font-weight:600;color:var(--text-primary);">${selectedFile.name}</p>
+                        <span class="file-types">${(selectedFile.size / 1024 / 1024).toFixed(2)} MB</span>
+                    `;
+                }
+            });
+
+            uploadBtn.addEventListener('click', async function() {
+                if (!selectedFile) {
+                    alert('Pilih file terlebih dahulu.');
+                    return;
+                }
+
+                if (selectedFile.size > 200 * 1024 * 1024) {
+                    alert('File terlalu besar. Maksimal 200 MB.');
+                    return;
+                }
+
+                uploadBtn.disabled = true;
+                uploadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengupload...';
+                progressDiv.style.display = 'block';
+                progressFill.style.width = '0%';
+                progressText.textContent = 'Mengupload...';
+
+                const formData = new FormData();
+                formData.append('fileToUpload', selectedFile);
+                formData.append('reqtype', 'fileupload');
+
+                try {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'https://catbox.moe/user/api.php', true);
+
+                    xhr.upload.onprogress = function(e) {
+                        if (e.lengthComputable) {
+                            const percent = Math.round((e.loaded / e.total) * 100);
+                            progressFill.style.width = percent + '%';
+                            progressText.textContent = `Mengupload ${percent}%`;
+                        }
+                    };
+
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            const response = xhr.responseText.trim();
+                            if (response.startsWith('https://') || response.startsWith('http://')) {
+                                resultLink.value = response;
+                                resultDiv.style.display = 'block';
+                                progressText.textContent = '✅ Upload berhasil!';
+                                progressFill.style.width = '100%';
+                            } else {
+                                alert('❌ Gagal upload: ' + response);
+                                progressDiv.style.display = 'none';
+                            }
+                        } else {
+                            alert('❌ Gagal upload. Status: ' + xhr.status);
+                            progressDiv.style.display = 'none';
+                        }
+                        uploadBtn.disabled = false;
+                        uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload File';
+                    };
+
+                    xhr.onerror = function() {
+                        alert('❌ Network error. Coba lagi.');
+                        progressDiv.style.display = 'none';
+                        uploadBtn.disabled = false;
+                        uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload File';
+                    };
+
+                    xhr.send(formData);
+                } catch (error) {
+                    alert('❌ Error: ' + error.message);
+                    progressDiv.style.display = 'none';
+                    uploadBtn.disabled = false;
+                    uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload File';
+                }
+            });
+
+            copyBtn.addEventListener('click', function() {
+                const link = resultLink.value;
+                if (link) {
+                    navigator.clipboard.writeText(link).then(() => {
+                        const original = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-check"></i> Tersalin!';
+                        setTimeout(() => { this.innerHTML = original; }, 2000);
+                    }).catch(() => {
+                        resultLink.select();
+                        document.execCommand('copy');
+                        const original = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-check"></i> Tersalin!';
+                        setTimeout(() => { this.innerHTML = original; }, 2000);
+                    });
+                }
+            });
 
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && overlay.classList.contains('open')) overlay.classList.remove('open');
@@ -3578,8 +3365,8 @@
                 const productId = parseInt(card.dataset.id);
                 if (!isNaN(productId)) {
                     const product = products.find(p => p.id === productId);
-                    if (product && product.isSender) { window.openSender(); return; }
-                    if (product && product.isAi) { window.openAiChat(); return; }
+                    if (product && product.isUpload) { window.openUpload(); return; }
+                    if (product && product.isSsweb) { window.openSsweb(); return; }
                     if (product && product.isOsint) { window.openOsint(); return; }
                     if (product && product.isTopup) { openTopup(); return; }
                     if (product && product.isAnime) { openAnime(); return; }
@@ -3722,4 +3509,4 @@
         updateCartUI();
     </script>
 </body>
-                                                                                                     </html>
+    </html>
