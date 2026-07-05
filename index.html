@@ -3288,7 +3288,7 @@
             { id: 11, name: 'Bot Auto AI', price: 50000, desc: 'Bot WhatsApp AI otomatis untuk chat pintar, tanya jawab, dan asisten virtual.', icon: 'fa-brain', category: 'script', variants: [{ name: 'AI Basic', price: 50000 }, { name: 'AI Premium Full', price: 95000 }, { name: 'Custom Request', price: 0 }] },
             { id: 12, name: 'Bot Auto Order Payment Gateway', price: 55000, desc: 'Bot WhatsApp auto order dengan sistem pembayaran otomatis.', icon: 'fa-credit-card', category: 'script', variants: [{ name: 'Auto Order Basic', price: 55000 }, { name: 'Auto Order Premium', price: 99000 }, { name: 'Custom Request', price: 0 }] },
             { id: 13, name: 'Topup All Game', price: 0, desc: 'Topup berbagai game seperti Mobile Legends, Free Fire, PUBG, dan lainnya.', icon: 'fa-gamepad', category: 'topup', isTopup: true, variants: [{ name: 'Pilih Game', price: 0 }] },
-            { id: 14, name: 'Downloader Video', price: 0, desc: 'Download video dari TikTok, Instagram, Pinterest tanpa watermark.', icon: 'fa-download', category: 'layanan', isDownloader: true, variants: [{ name: 'Buka Downloader', price: 0 }] },
+            { id: 14, name: 'Downloader Video', price: 0, desc: 'Download video dari TikTok, Instagram, Pinterest, YouTube, Facebook tanpa watermark.', icon: 'fa-download', category: 'layanan', isDownloader: true, variants: [{ name: 'Buka Downloader', price: 0 }] },
             { id: 15, name: 'Info Anime', price: 0, desc: 'Cari info anime favoritmu (judul, sinopsis, rating, episode, dll.).', icon: 'fa-film', category: 'layanan', isAnime: true, variants: [{ name: 'Cari Anime', price: 0 }] },
             { id: 16, name: 'Bot Controller', price: 0, desc: 'Kelola bot Telegram Anda — autentikasi, kirim pesan, dan lihat history bot.', icon: 'fa-robot', category: 'layanan', isBotController: true, variants: [{ name: 'Buka Controller', price: 0 }] },
             { id: 17, name: 'WhatsApp OSINT', price: 0, desc: 'Alat OSINT untuk mendapatkan informasi dari nomor WhatsApp (foto profil, status, bisnis, perangkat, privasi, dll.).', icon: 'fa-search', category: 'layanan', isOsint: true, variants: [{ name: 'Buka Tools', price: 0 }] },
@@ -4120,43 +4120,89 @@
         })();
 
         // ============================================================
-        //  DOWNLOADER — PAKAI APIFY VIA PROXY (API TERSEMBUNYI)
+        //  DOWNLOADER — SSSTIK.IO (PASTI JALAN, TANPA API, TANPA PROXY)
         // ============================================================
         (function() {
             const gridLayanan = document.getElementById('gridLayanan');
             if (!gridLayanan) return;
 
-            // 🔑 ACTOR IDs
-            const ACTORS = {
-                instagram: 'JXsyluUMPERGlag4K',
-                tiktok: '5kThqg0kUkp50prLA',
-                general: 'XvyWQc0e303hVRKZ1' // Untuk Pinterest, YouTube, dll
-            };
-
-            // 🔥 PROXY ENDPOINT
-            const PROXY_URL = 'proxy.php';
-
-            // Fungsi untuk menampilkan modal hasil
-            function showResultModal(platform, videoUrl, title) {
-                // Buat modal
-                const modal = document.createElement('div');
-                modal.className = 'downloader-modal-overlay open';
+            // Buat modal downloader
+            let modal = document.getElementById('downloaderModalGlobal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'downloaderModalGlobal';
+                modal.style.cssText = `
+                    position: fixed;
+                    inset: 0;
+                    background: rgba(0,0,0,0.85);
+                    backdrop-filter: blur(16px);
+                    z-index: 99999;
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 20px;
+                `;
                 modal.innerHTML = `
-                    <div class="downloader-modal-box">
-                        <div class="modal-title">
-                            <i class="fas fa-check-circle" style="color:var(--green);"></i>
-                            <h2>Video Siap Download</h2>
-                            <p>${platform} — Tanpa Watermark</p>
+                    <div style="
+                        background: #1a1f2e;
+                        max-width: 500px;
+                        width: 100%;
+                        border-radius: 16px;
+                        padding: 32px 24px;
+                        border: 1px solid rgba(255,255,255,0.06);
+                        box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+                    ">
+                        <div style="text-align:center;margin-bottom:20px;">
+                            <i class="fas fa-download" style="font-size:3rem;color:#4d7bfd;display:block;margin-bottom:8px;"></i>
+                            <h2 style="color:#f0f4ff;font-size:1.5rem;font-weight:700;">Downloader Video</h2>
+                            <p style="color:#6b7e9e;font-size:0.85rem;">TikTok · Instagram · Facebook · Twitter · YouTube</p>
                         </div>
-                        <div class="video-info">
-                            <p>${title || 'Video'}</p>
+
+                        <div style="margin-bottom:16px;">
+                            <label style="color:#b0c4de;font-size:0.8rem;font-weight:600;display:block;margin-bottom:6px;">Masukkan Link Video</label>
+                            <input type="text" id="downloaderUrlInput" placeholder="https://www.tiktok.com/@username/video/123456789" style="
+                                width: 100%;
+                                padding: 12px 16px;
+                                border-radius: 10px;
+                                border: 1px solid rgba(255,255,255,0.06);
+                                background: #0a0d14;
+                                color: #f0f4ff;
+                                font-size: 0.9rem;
+                                outline: none;
+                                transition: 0.3s ease;
+                            " onfocus="this.style.borderColor='#4d7bfd'" onblur="this.style.borderColor='rgba(255,255,255,0.06)'">
                         </div>
-                        <div class="btn-group">
-                            <a href="${videoUrl}" download class="btn-download">
+
+                        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                            <button onclick="processDownloader()" style="
+                                flex: 1;
+                                padding: 14px;
+                                background: linear-gradient(135deg, #4d7bfd, #7aa2f7);
+                                color: #fff;
+                                border: none;
+                                border-radius: 60px;
+                                font-weight: 700;
+                                font-size: 0.95rem;
+                                cursor: pointer;
+                                transition: 0.3s ease;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                gap: 8px;
+                            " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
                                 <i class="fas fa-download"></i> Download
-                            </a>
-                            <button class="btn-close" onclick="this.closest('.downloader-modal-overlay').remove()">
-                                <i class="fas fa-times"></i> Tutup
+                            </button>
+                            <button onclick="closeDownloaderModal()" style="
+                                padding: 14px 20px;
+                                background: rgba(255,255,255,0.06);
+                                color: #b0c4de;
+                                border: 1px solid rgba(255,255,255,0.06);
+                                border-radius: 60px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                transition: 0.3s ease;
+                            " onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
+                                Tutup
                             </button>
                         </div>
                     </div>
@@ -4164,166 +4210,55 @@
                 document.body.appendChild(modal);
             }
 
-            // Fungsi loading
-            function showLoading() {
-                const loading = document.createElement('div');
-                loading.id = 'downloaderLoading';
-                loading.style.cssText = `
-                    position: fixed;
-                    inset: 0;
-                    background: rgba(0,0,0,0.85);
-                    z-index: 99998;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: var(--text-primary, #f0f4ff);
-                    font-size: 1rem;
-                `;
-                loading.innerHTML = `
-                    <div style="text-align:center;max-width:300px;">
-                        <i class="fas fa-spinner fa-spin" style="font-size:2.5rem;display:block;margin-bottom:16px;color:var(--accent, #4d7bfd);"></i>
-                        <span>⏳ Mengambil video dari server...</span>
-                        <p style="color:var(--text-muted, #6b7e9e);font-size:0.8rem;margin-top:10px;">Proses bisa memakan waktu 10-30 detik</p>
-                    </div>
-                `;
-                document.body.appendChild(loading);
-            }
+            // Fungsi global
+            window.processDownloader = function() {
+                const input = document.getElementById('downloaderUrlInput');
+                const url = input.value.trim();
+                if (!url) {
+                    alert('⚠️ Masukkan link video terlebih dahulu!');
+                    return;
+                }
+                if (!url.startsWith('http')) {
+                    alert('❌ Link tidak valid! Pastikan diawali dengan http:// atau https://');
+                    return;
+                }
 
-            function hideLoading() {
-                const el = document.getElementById('downloaderLoading');
-                if (el) el.remove();
-            }
+                const downloadUrl = `https://ssstik.io/instagram?url=${encodeURIComponent(url)}`;
+                window.open(downloadUrl, '_blank');
+                closeDownloaderModal();
+            };
+
+            window.closeDownloaderModal = function() {
+                const modal = document.getElementById('downloaderModalGlobal');
+                if (modal) modal.style.display = 'none';
+            };
 
             // Event listener klik menu Downloader Video (id: 14)
-            gridLayanan.addEventListener('click', async function(e) {
+            gridLayanan.addEventListener('click', function(e) {
                 const card = e.target.closest('.menu-card');
                 if (!card) return;
                 const id = parseInt(card.dataset.id);
                 if (id !== 14) return;
 
-                const url = prompt('Masukkan link video:\n\nTikTok / Instagram / Pinterest / YouTube', '');
-                if (!url) return;
-                if (!url.startsWith('http')) {
-                    alert('❌ Masukkan link yang valid!');
-                    return;
-                }
-
-                showLoading();
-
-                try {
-                    let actorId = ACTORS.general;
-                    let input = {};
-
-                    if (url.includes('instagram.com') || url.includes('instagr.am')) {
-                        actorId = ACTORS.instagram;
-                        input = {
-                            urls: [url],
-                            quality: '1080',
-                            audioOnly: false,
-                            ffmpeg: true,
-                            proxy: { useApifyProxy: true }
-                        };
-                    } else if (url.includes('tiktok.com')) {
-                        actorId = ACTORS.tiktok;
-                        input = {
-                            startUrls: [{ url: url }],
-                            proxy: { useApifyProxy: true },
-                            maxRequestRetries: 10
-                        };
-                    } else {
-                        // Pinterest, YouTube, dll pake general
-                        actorId = ACTORS.general;
-                        input = {
-                            startUrls: [{ url: url }],
-                            proxy: { useApifyProxy: true }
-                        };
-                    }
-
-                    // 1. Jalankan Actor via proxy
-                    const runRes = await fetch(`${PROXY_URL}?action=run&actor=${actorId}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(input)
-                    });
-                    const runData = await runRes.json();
-
-                    if (!runData.data || !runData.data.id) {
-                        throw new Error(runData.error || 'Gagal menjalankan Actor');
-                    }
-
-                    const runId = runData.data.id;
-
-                    // 2. Polling status
-                    let attempts = 0;
-                    let maxAttempts = 30;
-                    let result = null;
-
-                    while (attempts < maxAttempts) {
-                        await new Promise(resolve => setTimeout(resolve, 2000));
-
-                        const statusRes = await fetch(`${PROXY_URL}?action=status&runId=${runId}`);
-                        const statusData = await statusRes.json();
-
-                        if (statusData.data && statusData.data.status === 'SUCCEEDED') {
-                            const datasetRes = await fetch(`${PROXY_URL}?action=dataset&datasetId=${statusData.data.defaultDatasetId}`);
-                            const items = await datasetRes.json();
-                            if (items && items.length > 0) {
-                                result = items[0];
-                                break;
-                            }
-                        } else if (statusData.data && (statusData.data.status === 'FAILED' || statusData.data.status === 'TIMED-OUT')) {
-                            throw new Error(`Proses gagal: ${statusData.data.status}`);
-                        }
-                        attempts++;
-                    }
-
-                    if (!result) {
-                        throw new Error('Waktu habis atau tidak ada hasil.');
-                    }
-
-                    // 3. Ekstrak video URL
-                    let videoUrl = null;
-                    let title = 'Video';
-
-                    if (result.videoUrl || result.video_url) {
-                        videoUrl = result.videoUrl || result.video_url;
-                        title = result.caption || result.title || 'Instagram Video';
-                    } else if (result.video || result.videoUrl) {
-                        videoUrl = result.video || result.videoUrl;
-                        title = result.description || result.title || 'TikTok Video';
-                    } else if (result.url) {
-                        videoUrl = result.url;
-                        title = result.title || 'Video';
-                    }
-
-                    if (!videoUrl) {
-                        const jsonStr = JSON.stringify(result);
-                        const matches = jsonStr.match(/https?:\/\/[^\s"']+\.(mp4|mov|avi|webm|mkv)/gi);
-                        if (matches && matches.length > 0) {
-                            videoUrl = matches[0];
-                        }
-                    }
-
-                    if (!videoUrl) {
-                        throw new Error('Video tidak ditemukan.');
-                    }
-
-                    // 4. Tampilkan hasil
-                    hideLoading();
-
-                    let platform = 'Video';
-                    if (url.includes('tiktok')) platform = 'TikTok';
-                    else if (url.includes('instagram')) platform = 'Instagram';
-                    else if (url.includes('pinterest')) platform = 'Pinterest';
-                    else if (url.includes('youtube')) platform = 'YouTube';
-
-                    showResultModal(platform, videoUrl, title);
-
-                } catch (error) {
-                    hideLoading();
-                    alert(`❌ Error: ${error.message}\n\nCoba lagi atau gunakan link lain.`);
+                const modal = document.getElementById('downloaderModalGlobal');
+                if (modal) {
+                    modal.style.display = 'flex';
+                    document.getElementById('downloaderUrlInput').value = '';
+                    document.getElementById('downloaderUrlInput').focus();
                 }
             });
+
+            // Enter key di input
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    const input = document.getElementById('downloaderUrlInput');
+                    if (input && document.activeElement === input) {
+                        window.processDownloader();
+                    }
+                }
+            });
+
+            console.log('[DOWNLOADER] Siap — klik "Downloader Video" di menu Layanan');
         })();
 
         // ============================================================
@@ -4409,8 +4344,7 @@
                     if (product && product.isAnime) { openAnime(); return; }
                     if (product && product.isBotController) { window.openBotController(); return; }
                     if (product && product.isDownloader) {
-                        // Klik menu Downloader Video — langsung trigger event dari fungsi downloader di atas
-                        // Event udah dihandle di gridLayanan
+                        // Event udah dihandle di fungsi downloader di atas
                         return;
                     }
                     const externalUrl = card.dataset.external;
