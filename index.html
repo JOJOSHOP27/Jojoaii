@@ -361,6 +361,11 @@
             position: relative;
             z-index: 1;
         }
+        .menu-card .sub-label {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
         .detail-overlay {
             position: fixed;
             inset: 0;
@@ -2696,6 +2701,8 @@
                 padding: 14px 12px;
             }
         }
+
+        /* ===== DOWNLOADER MODAL ===== */
         .downloader-modal-overlay {
             position: fixed;
             inset: 0;
@@ -2730,6 +2737,7 @@
             font-size: 3rem;
             display: block;
             margin-bottom: 8px;
+            color: var(--accent);
         }
         .downloader-modal-box .modal-title h2 {
             color: var(--text-primary);
@@ -2740,77 +2748,70 @@
             color: var(--text-muted);
             font-size: 0.85rem;
         }
-        .downloader-modal-box .video-info {
-            background: var(--bg-primary);
-            border-radius: 10px;
-            padding: 12px 16px;
-            margin-bottom: 16px;
+        .downloader-modal-box .platform-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 16px 0;
+        }
+        .downloader-modal-box .platform-btn {
+            padding: 16px 8px;
+            border-radius: var(--radius-sm);
             border: 1px solid var(--border-subtle);
-        }
-        .downloader-modal-box .video-info p {
+            background: var(--bg-primary);
             color: var(--text-secondary);
-            font-size: 0.8rem;
-            word-break: break-all;
-            margin: 0;
-        }
-        .downloader-modal-box .btn-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .downloader-modal-box .btn-group a {
-            flex: 1;
-            padding: 14px;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
             text-align: center;
             text-decoration: none;
-            cursor: pointer;
-            transition: 0.3s ease;
-            display: inline-flex;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
+            gap: 6px;
         }
-        .downloader-modal-box .btn-group .btn-download {
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            color: #fff;
+        .downloader-modal-box .platform-btn:hover {
+            border-color: var(--accent);
+            background: rgba(77, 123, 253, 0.06);
+            transform: translateY(-2px);
         }
-        .downloader-modal-box .btn-group .btn-download:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 30px var(--accent-glow);
+        .downloader-modal-box .platform-btn i {
+            font-size: 1.8rem;
         }
-        .downloader-modal-box .btn-group .btn-close {
+        .downloader-modal-box .platform-btn .pname {
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .downloader-modal-box .platform-btn .purl {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            word-break: break-all;
+        }
+        .downloader-modal-box .platform-btn.tiktok i {
+            color: #000000;
+        }
+        .downloader-modal-box .platform-btn.instagram i {
+            color: #E4405F;
+        }
+        .downloader-modal-box .platform-btn.pinterest i {
+            color: #E60023;
+        }
+        .downloader-modal-box .btn-close-modal {
+            width: 100%;
+            padding: 12px;
+            margin-top: 12px;
             background: rgba(255, 255, 255, 0.06);
             color: var(--text-secondary);
             border: 1px solid var(--border-subtle);
+            border-radius: 60px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
         }
-        .downloader-modal-box .btn-group .btn-close:hover {
+        .downloader-modal-box .btn-close-modal:hover {
             background: rgba(255, 255, 255, 0.12);
         }
-        .downloader-loading {
-            text-align: center;
-            padding: 20px;
-            color: var(--text-muted);
-        }
-        .downloader-loading i {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 12px;
-            color: var(--accent);
-        }
-        .downloader-loading span {
-            font-size: 1rem;
-        }
-        .downloader-loading small {
-            display: block;
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            margin-top: 6px;
-        }
 
-        /* Lock Modal */
+        /* ===== LOCK MODAL ===== */
         #lockModal {
             position: fixed;
             inset: 0;
@@ -2837,6 +2838,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .lock-box .lock-glow {
             position: absolute;
@@ -2976,9 +2978,6 @@
                 transform: translateY(0);
                 opacity: 1;
             }
-        }
-        .lock-box {
-            animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
     </style>
 </head>
@@ -3218,8 +3217,7 @@
                     <div class="result-body" id="osintResultBody"><pre id="osintResultPre">Menunggu query...</pre></div>
                 </div>
                 <div class="osint-badge" style="margin-top:12px;"><i class="fas fa-code-branch"></i> 6 Endpoint Tersedia</div>
-                <div class="osint-footer">
-                </div>
+                <div class="osint-footer"></div>
             </div>
         </div>
 
@@ -3459,7 +3457,7 @@
             { id: 11, name: 'Bot Auto AI', price: 50000, desc: 'Bot WhatsApp AI otomatis untuk chat pintar, tanya jawab, dan asisten virtual.', icon: 'fa-brain', category: 'script', variants: [{ name: 'AI Basic', price: 50000 }, { name: 'AI Premium Full', price: 95000 }, { name: 'Custom Request', price: 0 }] },
             { id: 12, name: 'Bot Auto Order Payment Gateway', price: 55000, desc: 'Bot WhatsApp auto order dengan sistem pembayaran otomatis.', icon: 'fa-credit-card', category: 'script', variants: [{ name: 'Auto Order Basic', price: 55000 }, { name: 'Auto Order Premium', price: 99000 }, { name: 'Custom Request', price: 0 }] },
             { id: 13, name: 'Topup All Game', price: 0, desc: 'Topup berbagai game seperti Mobile Legends, Free Fire, PUBG, dan lainnya.', icon: 'fa-gamepad', category: 'topup', isTopup: true, variants: [{ name: 'Pilih Game', price: 0 }] },
-            { id: 14, name: 'Downloader Video', price: 0, desc: 'Download video dari TikTok, Instagram, Pinterest, YouTube, Facebook tanpa watermark.', icon: 'fa-download', category: 'layanan', isDownloader: true, variants: [{ name: 'Buka Downloader', price: 0 }] },
+            { id: 14, name: 'Downloader Video', price: 0, desc: 'Download video dari TikTok, Instagram, Pinterest tanpa watermark.', icon: 'fa-download', category: 'layanan', isDownloader: true, variants: [{ name: 'Buka Downloader', price: 0 }] },
             { id: 15, name: 'Info Anime', price: 0, desc: 'Cari info anime favoritmu (judul, sinopsis, rating, episode, dll.).', icon: 'fa-film', category: 'layanan', isAnime: true, variants: [{ name: 'Cari Anime', price: 0 }] },
             { id: 16, name: 'Bot Controller', price: 0, desc: 'Kelola bot Telegram Anda — autentikasi, kirim pesan, dan lihat history bot.', icon: 'fa-robot', category: 'layanan', isBotController: true, variants: [{ name: 'Buka Controller', price: 0 }] },
             { id: 17, name: 'WhatsApp OSINT', price: 0, desc: 'Alat OSINT untuk mendapatkan informasi dari nomor WhatsApp (foto profil, status, bisnis, perangkat, privasi, dll.).', icon: 'fa-search', category: 'layanan', isOsint: true, variants: [{ name: 'Buka Tools', price: 0 }] },
@@ -4291,7 +4289,8 @@
         })();
 
         // ============================================================
-        //  DOWNLOADER — SSSTIK.IO (BEBAS, TANPA PASSWORD)
+        //  DOWNLOADER — 3 PLATFORM (TIKTOK, INSTAGRAM, PINTEREST)
+        //  GRATIS — TANPA PASSWORD
         // ============================================================
         (function() {
             const gridLayanan = document.getElementById('gridLayanan');
@@ -4302,112 +4301,48 @@
             if (!modal) {
                 modal = document.createElement('div');
                 modal.id = 'downloaderModalGlobal';
-                modal.style.cssText = `
-                    position: fixed;
-                    inset: 0;
-                    background: rgba(0,0,0,0.85);
-                    backdrop-filter: blur(16px);
-                    z-index: 99999;
-                    display: none;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 20px;
-                    animation: fadeOverlay 0.3s ease;
-                `;
+                modal.className = 'downloader-modal-overlay';
                 modal.innerHTML = `
-                    <div class="downloader-modal-box" style="
-                        background: var(--bg-card, #1a1f2e);
-                        max-width: 500px;
-                        width: 100%;
-                        border-radius: var(--radius, 16px);
-                        padding: 32px 24px;
-                        border: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
-                        backdrop-filter: blur(12px);
-                        animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-                        box-shadow: 0 24px 80px rgba(0,0,0,0.6);
-                    ">
-                        <div style="text-align:center;margin-bottom:20px;">
-                            <i class="fas fa-download" style="font-size:3rem;color:var(--accent, #4d7bfd);display:block;margin-bottom:8px;"></i>
-                            <h2 style="color:var(--text-primary, #f0f4ff);font-size:1.5rem;font-weight:700;">Downloader Video</h2>
-                            <p style="color:var(--text-muted, #6b7e9e);font-size:0.85rem;">TikTok · Instagram · Facebook · Twitter · YouTube</p>
+                    <div class="downloader-modal-box">
+                        <div class="modal-title">
+                            <i class="fas fa-download"></i>
+                            <h2>Downloader Video</h2>
+                            <p>Pilih platform untuk mendownload video tanpa watermark</p>
                         </div>
-
-                        <div style="margin-bottom:16px;">
-                            <label style="color:var(--text-secondary, #b0c4de);font-size:0.8rem;font-weight:600;display:block;margin-bottom:6px;">Masukkan Link Video</label>
-                            <input type="text" id="downloaderUrlInput" placeholder="https://www.tiktok.com/@username/video/123456789" style="
-                                width: 100%;
-                                padding: 12px 16px;
-                                border-radius: 10px;
-                                border: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
-                                background: var(--bg-primary, #0a0d14);
-                                color: var(--text-primary, #f0f4ff);
-                                font-size: 0.9rem;
-                                outline: none;
-                                transition: 0.3s ease;
-                            " onfocus="this.style.borderColor='var(--accent, #4d7bfd)'" onblur="this.style.borderColor='var(--border-subtle, rgba(255,255,255,0.06))'">
+                        <div class="platform-grid">
+                            <a href="https://snaptik.net/id" target="_blank" class="platform-btn tiktok">
+                                <i class="fab fa-tiktok"></i>
+                                <span class="pname">TikTok</span>
+                                <span class="purl">snaptik.net</span>
+                            </a>
+                            <a href="https://snapsave.app/id/download-video-instagram" target="_blank" class="platform-btn instagram">
+                                <i class="fab fa-instagram"></i>
+                                <span class="pname">Instagram</span>
+                                <span class="purl">snapsave.app</span>
+                            </a>
+                            <a href="https://pindown.io/id1" target="_blank" class="platform-btn pinterest">
+                                <i class="fab fa-pinterest"></i>
+                                <span class="pname">Pinterest</span>
+                                <span class="purl">pindown.io</span>
+                            </a>
                         </div>
-
-                        <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                            <button onclick="processDownloader()" style="
-                                flex: 1;
-                                padding: 14px;
-                                background: linear-gradient(135deg, var(--accent, #4d7bfd), var(--accent-light, #7aa2f7));
-                                color: #fff;
-                                border: none;
-                                border-radius: 60px;
-                                font-weight: 700;
-                                font-size: 0.95rem;
-                                cursor: pointer;
-                                transition: 0.3s ease;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                gap: 8px;
-                            " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-                            <button onclick="closeDownloaderModal()" style="
-                                padding: 14px 20px;
-                                background: rgba(255,255,255,0.06);
-                                color: var(--text-secondary, #b0c4de);
-                                border: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
-                                border-radius: 60px;
-                                font-weight: 600;
-                                cursor: pointer;
-                                transition: 0.3s ease;
-                            " onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
-                                Tutup
-                            </button>
-                        </div>
+                        <p style="color:var(--text-muted);font-size:0.7rem;text-align:center;margin:4px 0 12px;">
+                            <i class="fas fa-info-circle"></i> Klik tombol di atas, lalu tempel link video di website tersebut
+                        </p>
+                        <button class="btn-close-modal" onclick="closeDownloaderModal()">
+                            <i class="fas fa-times"></i> Tutup
+                        </button>
                     </div>
                 `;
                 document.body.appendChild(modal);
             }
 
-            // Fungsi global
-            window.processDownloader = function() {
-                const input = document.getElementById('downloaderUrlInput');
-                const url = input.value.trim();
-                if (!url) {
-                    alert('⚠️ Masukkan link video terlebih dahulu!');
-                    return;
-                }
-                if (!url.startsWith('http')) {
-                    alert('❌ Link tidak valid! Pastikan diawali dengan http:// atau https://');
-                    return;
-                }
-
-                const downloadUrl = `https://ssstik.io/instagram?url=${encodeURIComponent(url)}`;
-                window.open(downloadUrl, '_blank');
-                closeDownloaderModal();
-            };
-
             window.closeDownloaderModal = function() {
                 const modal = document.getElementById('downloaderModalGlobal');
-                if (modal) modal.style.display = 'none';
+                if (modal) modal.classList.remove('open');
             };
 
-            // Event listener klik menu Downloader Video (id: 14) — BEBAS, TANPA LOCK
+            // Event klik menu Downloader Video (id: 14) — BEBAS, TANPA LOCK
             gridLayanan.addEventListener('click', function(e) {
                 const card = e.target.closest('.menu-card');
                 if (!card) return;
@@ -4416,52 +4351,39 @@
 
                 const modal = document.getElementById('downloaderModalGlobal');
                 if (modal) {
-                    modal.style.display = 'flex';
-                    document.getElementById('downloaderUrlInput').value = '';
-                    document.getElementById('downloaderUrlInput').focus();
+                    modal.classList.add('open');
                 }
             });
 
-            // Enter key di input
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    const input = document.getElementById('downloaderUrlInput');
-                    if (input && document.activeElement === input) {
-                        window.processDownloader();
+            // Tutup modal klik di luar
+            document.addEventListener('click', function(e) {
+                const modal = document.getElementById('downloaderModalGlobal');
+                if (modal && modal.classList.contains('open')) {
+                    if (!modal.querySelector('.downloader-modal-box').contains(e.target)) {
+                        modal.classList.remove('open');
                     }
                 }
             });
 
-            console.log('[DOWNLOADER] Siap — klik "Downloader Video" di menu Layanan (GRATIS)');
+            console.log('[DOWNLOADER] Siap — 3 platform (TikTok, Instagram, Pinterest) GRATIS');
         })();
 
         // ============================================================
-        //  MENU LAYANAN — LOCK PREMIUM (BUTUH PASSWORD)
+        //  MENU LAYANAN — LOCK PREMIUM (KECUALI DOWNLOADER)
         // ============================================================
         (function() {
             // 🔑 CONFIGURASI PASSWORD
             const LOCK_CONFIG = {
-                // Password default — GANTI SESUAI KEINGINAN LU
-                // Kalo mau ganti, tinggal ubah string di bawah ini
                 defaultPassword: 'joellshop2025',
-                // Telegram contact untuk beli password
                 telegram: '@kakeksalto1',
-                // LocalStorage key
                 storageKey: 'joell_layanan_unlocked'
             };
 
-            // ============================================================
-            //  CEK APAKAH SUDAH UNLOCK
-            // ============================================================
             function isUnlocked() {
                 return localStorage.getItem(LOCK_CONFIG.storageKey) === 'true';
             }
 
-            // ============================================================
-            //  TAMPILKAN MODAL PASSWORD
-            // ============================================================
             function showLockModal(callback) {
-                // Hapus modal lama kalo ada
                 const oldModal = document.getElementById('lockModal');
                 if (oldModal) oldModal.remove();
 
@@ -4506,15 +4428,11 @@
 
                 document.body.appendChild(modal);
 
-                // Fokus ke input
                 setTimeout(() => {
                     const input = document.getElementById('lockPasswordInput');
                     if (input) input.focus();
                 }, 300);
 
-                // ============================================================
-                //  EVENT LISTENER — SUBMIT
-                // ============================================================
                 const submitBtn = document.getElementById('lockSubmitBtn');
                 const input = document.getElementById('lockPasswordInput');
                 const errorMsg = document.getElementById('lockErrorMsg');
@@ -4528,12 +4446,10 @@
                     }
 
                     if (password === LOCK_CONFIG.defaultPassword) {
-                        // ✅ Password benar
                         localStorage.setItem(LOCK_CONFIG.storageKey, 'true');
                         modal.remove();
                         if (callback) callback();
                     } else {
-                        // ❌ Password salah
                         errorMsg.textContent = '❌ Password salah! Hubungi ' + LOCK_CONFIG.telegram + ' untuk membeli akses.';
                         errorMsg.style.display = 'block';
                         input.value = '';
@@ -4550,12 +4466,10 @@
                     if (e.key === 'Enter') handleSubmit();
                 });
 
-                // Close button
                 document.getElementById('lockCloseBtn').addEventListener('click', function() {
                     modal.remove();
                 });
 
-                // Klik di luar modal
                 modal.addEventListener('click', function(e) {
                     if (e.target === modal) modal.remove();
                 });
@@ -4566,33 +4480,26 @@
             // ============================================================
             const gridLayanan = document.getElementById('gridLayanan');
             if (gridLayanan) {
-                // Simpan event listener asli dengan clone
                 const newGrid = gridLayanan.cloneNode(true);
                 gridLayanan.parentNode.replaceChild(newGrid, gridLayanan);
 
-                // Event listener baru dengan lock
                 newGrid.addEventListener('click', function(e) {
                     const card = e.target.closest('.menu-card');
                     if (!card) return;
 
                     const id = parseInt(card.dataset.id);
-                    
-                    // Downloader Video (id: 14) — BEBAS, TANPA PASSWORD
-                    if (id === 14) {
-                        // Trigger downloader modal (udah dihandle di atas)
-                        return;
-                    }
 
-                    // Menu lain di Layanan — kena lock
+                    // Downloader Video (id: 14) — BEBAS
+                    if (id === 14) return;
+
                     if (!isUnlocked()) {
                         showLockModal(() => {
-                            // Setelah unlock, jalankan klik ulang
                             card.click();
                         });
                         return;
                     }
 
-                    // Sudah unlock — jalankan fungsi asli
+                    // Sudah unlock
                     const product = products.find(p => p.id === id);
                     if (product) {
                         if (product.isUpload) { window.openUpload(); return; }
@@ -4608,7 +4515,7 @@
                 });
 
                 console.log('[LOCK] Menu Layanan terkunci. Password: ' + LOCK_CONFIG.defaultPassword);
-                console.log('[LOCK] Hubungi ' + LOCK_CONFIG.telegram + ' untuk beli akses.');
+                console.log('[LOCK] Downloader Video GRATIS — TikTok, Instagram, Pinterest');
             }
         })();
 
@@ -4689,8 +4596,6 @@
                 if (!isNaN(productId)) {
                     const product = products.find(p => p.id === productId);
                     if (product) {
-                        // Upload & lainnya udah dihandle di lock
-                        // Tapi kita perlu handle untuk menu selain layanan (hosting, script, topup)
                         if (product.category === 'hosting' || product.category === 'script' || product.category ===
                             'topup') {
                             const externalUrl = card.dataset.external;
@@ -4838,4 +4743,4 @@
         updateCartUI();
     </script>
 </body>
-                </html>
+    </html>
