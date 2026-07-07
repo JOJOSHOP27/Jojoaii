@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
         }
         :root {
             --bg-primary: #0a0d14;
@@ -324,6 +324,8 @@
             min-height: 130px;
             position: relative;
             overflow: hidden;
+            text-decoration: none;
+            color: var(--text-secondary);
         }
         .menu-card::before {
             content: '';
@@ -2702,115 +2704,6 @@
             }
         }
 
-        /* ===== DOWNLOADER MODAL ===== */
-        .downloader-modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(16px);
-            z-index: 99999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            animation: fadeOverlay 0.3s ease;
-        }
-        .downloader-modal-overlay.open {
-            display: flex;
-        }
-        .downloader-modal-box {
-            background: var(--bg-card);
-            max-width: 500px;
-            width: 100%;
-            border-radius: var(--radius);
-            padding: 32px 24px;
-            border: 1px solid var(--border-subtle);
-            backdrop-filter: blur(12px);
-            animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
-        }
-        .downloader-modal-box .modal-title {
-            text-align: center;
-            margin-bottom: 16px;
-        }
-        .downloader-modal-box .modal-title i {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 8px;
-            color: var(--accent);
-        }
-        .downloader-modal-box .modal-title h2 {
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        .downloader-modal-box .modal-title p {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-        .downloader-modal-box .platform-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 12px;
-            margin: 16px 0;
-        }
-        .downloader-modal-box .platform-btn {
-            padding: 16px 8px;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-subtle);
-            background: var(--bg-primary);
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: var(--transition);
-            text-align: center;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-        }
-        .downloader-modal-box .platform-btn:hover {
-            border-color: var(--accent);
-            background: rgba(77, 123, 253, 0.06);
-            transform: translateY(-2px);
-        }
-        .downloader-modal-box .platform-btn i {
-            font-size: 1.8rem;
-        }
-        .downloader-modal-box .platform-btn .pname {
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-        .downloader-modal-box .platform-btn .purl {
-            font-size: 0.55rem;
-            color: var(--text-muted);
-            word-break: break-all;
-        }
-        .downloader-modal-box .platform-btn.tiktok i {
-            color: #000000;
-        }
-        .downloader-modal-box .platform-btn.instagram i {
-            color: #E4405F;
-        }
-        .downloader-modal-box .platform-btn.pinterest i {
-            color: #E60023;
-        }
-        .downloader-modal-box .btn-close-modal {
-            width: 100%;
-            padding: 12px;
-            margin-top: 12px;
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--text-secondary);
-            border: 1px solid var(--border-subtle);
-            border-radius: 60px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .downloader-modal-box .btn-close-modal:hover {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
         /* ===== LOCK MODAL ===== */
         #lockModal {
             position: fixed;
@@ -3029,6 +2922,26 @@
             <div class="grid-menu" id="gridTopup"></div>
             <div class="section-title">Layanan</div>
             <div class="grid-menu" id="gridLayanan"></div>
+
+            <!-- ===== DOWNLOADER — 3 TOMBOL LANGSUNG ===== -->
+            <div class="section-title">Downloader Video</div>
+            <div class="grid-menu" style="grid-template-columns: 1fr 1fr 1fr;">
+                <a href="https://snaptik.net/id" target="_blank" class="menu-card" style="text-decoration:none;border-color:#00000033;">
+                    <i class="fab fa-tiktok" style="color:#000000;"></i>
+                    <span>TikTok</span>
+                    <span class="sub-label">snaptik.net</span>
+                </a>
+                <a href="https://snapsave.app/id/download-video-instagram" target="_blank" class="menu-card" style="text-decoration:none;border-color:#E4405F33;">
+                    <i class="fab fa-instagram" style="color:#E4405F;"></i>
+                    <span>Instagram</span>
+                    <span class="sub-label">snapsave.app</span>
+                </a>
+                <a href="https://pindown.io/id1" target="_blank" class="menu-card" style="text-decoration:none;border-color:#E6002333;">
+                    <i class="fab fa-pinterest" style="color:#E60023;"></i>
+                    <span>Pinterest</span>
+                    <span class="sub-label">pindown.io</span>
+                </a>
+            </div>
         </div>
 
         <!-- PROFILE -->
@@ -3324,24 +3237,18 @@
         })();
 
         // ============================================================
-        //  VIDEO HERO — SOUND TOGGLE (ELEGAN)
+        //  VIDEO HERO — SOUND TOGGLE
         // ============================================================
         (function() {
             const video = document.getElementById('heroVideo');
             const toggleBtn = document.getElementById('soundToggle');
             const icon = toggleBtn.querySelector('i');
-
             let isMuted = true;
-
-            // Set default: MUTED
             video.muted = true;
             video.volume = 1.0;
-
             toggleBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
-
                 if (isMuted) {
-                    // UNMUTE
                     video.muted = false;
                     video.volume = 1.0;
                     icon.className = 'fas fa-volume-up';
@@ -3349,21 +3256,16 @@
                     isMuted = false;
                     video.play().catch(() => {});
                 } else {
-                    // MUTE
                     video.muted = true;
                     icon.className = 'fas fa-volume-mute';
                     toggleBtn.classList.remove('unmuted');
                     isMuted = true;
                 }
             });
-
             toggleBtn.title = 'Klik untuk menyalakan suara';
-
             toggleBtn.addEventListener('mouseenter', function() {
                 this.title = isMuted ? 'Klik untuk menyalakan suara' : 'Klik untuk mematikan suara';
             });
-
-            console.log('[HERO] Sound toggle ready — default MUTED');
         })();
 
         // ============================================================
@@ -3372,22 +3274,15 @@
         (function() {
             const video = document.getElementById('heroVideo');
             if (!video) return;
-
             const BACKUP_VIDEO = 'https://cdn.dinzid.biz.id/hutao.mp4';
             const BACKUP_IMAGE = 'https://files.catbox.moe/ijemcy.png';
-
             let fallbackUsed = false;
-
             video.addEventListener('error', function(e) {
                 if (fallbackUsed) return;
                 fallbackUsed = true;
-                console.warn('[HERO] Video error, using fallback...');
-
-                // Coba pake backup video
                 this.src = BACKUP_VIDEO;
                 this.load();
                 this.play().catch(() => {
-                    // Kalau video backup juga gagal, pake gambar
                     this.style.display = 'none';
                     const hero = document.querySelector('.hero');
                     if (hero && !hero.querySelector('.hero-fallback')) {
@@ -3395,31 +3290,20 @@
                         img.src = BACKUP_IMAGE;
                         img.className = 'hero-fallback';
                         img.style.cssText =
-                            `
-                            width: 100%;
-                            aspect-ratio: 16/9;
-                            object-fit: cover;
-                            background: #0a0d14;
-                            display: block;
-                        `;
+                            'width:100%;aspect-ratio:16/9;object-fit:cover;background:#0a0d14;display:block;';
                         img.alt = 'Hero Image';
                         hero.appendChild(img);
-
-                        // Sembunyikan tombol suara
                         const toggle = document.getElementById('soundToggle');
                         if (toggle) toggle.style.display = 'none';
                     }
                 });
             });
-
-            // Cek apakah video bisa diputar setelah 3 detik
             setTimeout(() => {
                 if (video.readyState === 0 && !fallbackUsed) {
                     video.src = BACKUP_VIDEO;
                     video.load();
                 }
             }, 3000);
-
         })();
 
         // ============================================================
@@ -3476,7 +3360,8 @@
         //  FUNGSI
         // ============================================================
         function goToPayment(productName, totalPrice) {
-            window.open(`https://joell-payment.vercel.app/?product=${encodeURIComponent(productName)}&total=${totalPrice}`, '_blank');
+            window.open('https://joell-payment.vercel.app/?product=' + encodeURIComponent(productName) + '&total=' + totalPrice,
+                '_blank');
         }
 
         function renderTopupGames() {
@@ -3485,104 +3370,119 @@
             topupGames.forEach(game => {
                 const div = document.createElement('div');
                 div.className = 'topup-item';
-                div.innerHTML = `<img src="${game.logo}" alt="${game.name}" loading="lazy" /><span>${game.name}</span>`;
-                div.addEventListener('click', () => window.open(game.url, '_blank'));
+                div.innerHTML = '<img src="' + game.logo + '" alt="' + game.name + '" loading="lazy" /><span>' + game
+                    .name + '</span>';
+                div.addEventListener('click', function() { window.open(game.url, '_blank'); });
                 grid.appendChild(div);
             });
         }
 
         function renderMenus() {
-            document.getElementById('gridHosting').innerHTML = renderMenuCards(products.filter(p => p.category === 'hosting'));
-            document.getElementById('gridScript').innerHTML = renderMenuCards(products.filter(p => p.category === 'script'));
-            document.getElementById('gridTopup').innerHTML = renderMenuCards(products.filter(p => p.category === 'topup'));
-            document.getElementById('gridLayanan').innerHTML = renderMenuCards(products.filter(p => p.category === 'layanan'));
+            document.getElementById('gridHosting').innerHTML = renderMenuCards(products.filter(function(p) { return p
+                    .category === 'hosting'; }));
+            document.getElementById('gridScript').innerHTML = renderMenuCards(products.filter(function(p) { return p
+                    .category === 'script'; }));
+            document.getElementById('gridTopup').innerHTML = renderMenuCards(products.filter(function(p) { return p
+                    .category === 'topup'; }));
+            document.getElementById('gridLayanan').innerHTML = renderMenuCards(products.filter(function(p) { return p
+                    .category === 'layanan'; }));
         }
 
         function renderMenuCards(productList) {
-            let html = '';
-            productList.forEach(p => {
-                html += `<div class="menu-card" data-id="${p.id}" data-external="${p.isExternal ? p.externalUrl : ''}" data-topup="${p.isTopup || false}" data-anime="${p.isAnime || false}" data-bot="${p.isBotController || false}" data-osint="${p.isOsint || false}" data-ssweb="${p.isSsweb || false}" data-upload="${p.isUpload || false}" data-downloader="${p.isDownloader || false}"><i class="fas ${p.icon}"></i><span>${p.name}</span></div>`;
+            var html = '';
+            productList.forEach(function(p) {
+                html += '<div class="menu-card" data-id="' + p.id + '" data-external="' + (p.isExternal ? p
+                    .externalUrl : '') + '" data-topup="' + (p.isTopup || false) + '" data-anime="' + (p
+                    .isAnime || false) + '" data-bot="' + (p.isBotController || false) + '" data-osint="' +
+                    (p.isOsint || false) + '" data-ssweb="' + (p.isSsweb || false) + '" data-upload="' + (
+                        p.isUpload || false) + '" data-downloader="' + (p.isDownloader || false) + '"><i class="fas ' +
+                    p.icon + '"></i><span>' + p.name + '</span></div>';
             });
             return html;
         }
 
         function updateCartUI() {
-            const count = cart.reduce((sum, i) => sum + i.qty, 0);
+            var count = 0;
+            cart.forEach(function(i) { count += i.qty; });
             document.getElementById('navCartBadge').textContent = count;
             document.getElementById('cartBadgeTotal').textContent = count;
-            const container = document.getElementById('cartItems');
-            const footer = document.getElementById('cartFooter');
+            var container = document.getElementById('cartItems');
+            var footer = document.getElementById('cartFooter');
             if (cart.length === 0) {
                 container.innerHTML =
-                    `<div class="cart-empty"><i class="fas fa-shopping-bag"></i><h3>Keranjang kosong</h3><p>Yuk, isi dengan produk favoritmu!</p></div>`;
+                    '<div class="cart-empty"><i class="fas fa-shopping-bag"></i><h3>Keranjang kosong</h3><p>Yuk, isi dengan produk favoritmu!</p></div>';
                 footer.style.display = 'none';
                 return;
             }
             footer.style.display = 'block';
-            let html = '';
-            let subtotal = 0;
-            cart.forEach((item, idx) => {
-                const sub = item.price * item.qty;
+            var html = '';
+            var subtotal = 0;
+            cart.forEach(function(item, idx) {
+                var sub = item.price * item.qty;
                 subtotal += sub;
-                const priceText = item.price === 0 ? 'Harga sesuai request' : `Rp ${sub.toLocaleString()}`;
-                html += `<div class="cart-item" data-index="${idx}">
-                    <div class="item-icon"><i class="fas ${item.icon || 'fa-box'}"></i></div>
-                    <div class="item-info">
-                        <div class="item-name">${item.name}</div>
-                        <div class="item-variant">${item.variant}</div>
-                        <div class="item-price">${priceText}</div>
-                    </div>
-                    <div class="item-actions">
-                        <div class="qty-control">
-                            <button class="qty-minus" data-index="${idx}"><i class="fas fa-minus"></i></button>
-                            <span class="qty-num">${item.qty}</span>
-                            <button class="qty-plus" data-index="${idx}"><i class="fas fa-plus"></i></button>
-                        </div>
-                        <button class="item-remove" data-index="${idx}"><i class="fas fa-trash-alt"></i></button>
-                    </div>
-                </div>`;
+                var priceText = item.price === 0 ? 'Harga sesuai request' : 'Rp ' + sub.toLocaleString();
+                html += '<div class="cart-item" data-index="' + idx + '"><div class="item-icon"><i class="fas ' +
+                    (item.icon || 'fa-box') + '"></i></div><div class="item-info"><div class="item-name">' +
+                    item.name + '</div><div class="item-variant">' + item.variant +
+                    '</div><div class="item-price">' + priceText + '</div></div><div class="item-actions"><div class="qty-control"><button class="qty-minus" data-index="' +
+                    idx + '"><i class="fas fa-minus"></i></button><span class="qty-num">' + item.qty +
+                    '</span><button class="qty-plus" data-index="' + idx +
+                    '"><i class="fas fa-plus"></i></button></div><button class="item-remove" data-index="' + idx +
+                    '"><i class="fas fa-trash-alt"></i></button></div></div>';
             });
             container.innerHTML = html;
-            document.querySelectorAll('.qty-minus').forEach(btn => {
+            document.querySelectorAll('.qty-minus').forEach(function(btn) {
                 btn.addEventListener('click', function() {
-                    const idx = parseInt(this.dataset.index);
-                    if (cart[idx].qty > 1) { cart[idx].qty -= 1; } else {
-                        if (confirm('Hapus item ini dari keranjang?')) { cart.splice(idx, 1); } else { return; }
+                    var idx = parseInt(this.dataset.index);
+                    if (cart[idx].qty > 1) {
+                        cart[idx].qty -= 1;
+                    } else {
+                        if (confirm('Hapus item ini dari keranjang?')) {
+                            cart.splice(idx, 1);
+                        } else { return; }
                     }
                     localStorage.setItem('joellCart', JSON.stringify(cart));
                     updateCartUI();
                 });
             });
-            document.querySelectorAll('.qty-plus').forEach(btn => {
+            document.querySelectorAll('.qty-plus').forEach(function(btn) {
                 btn.addEventListener('click', function() {
-                    const idx = parseInt(this.dataset.index);
+                    var idx = parseInt(this.dataset.index);
                     cart[idx].qty += 1;
                     localStorage.setItem('joellCart', JSON.stringify(cart));
                     updateCartUI();
                 });
             });
-            document.querySelectorAll('.item-remove').forEach(btn => {
+            document.querySelectorAll('.item-remove').forEach(function(btn) {
                 btn.addEventListener('click', function() {
-                    const idx = parseInt(this.dataset.index);
-                    if (confirm(`Hapus "${cart[idx].name}" dari keranjang?`)) {
+                    var idx = parseInt(this.dataset.index);
+                    if (confirm('Hapus "' + cart[idx].name + '" dari keranjang?')) {
                         cart.splice(idx, 1);
                         localStorage.setItem('joellCart', JSON.stringify(cart));
                         updateCartUI();
                     }
                 });
             });
-            const total = subtotal;
-            document.getElementById('cartSubtotal').textContent = `Rp ${subtotal.toLocaleString()}`;
-            document.getElementById('cartShipping').textContent = `Rp 0`;
-            document.getElementById('cartTotalDisplay').textContent = `Rp ${total.toLocaleString()}`;
+            var total = subtotal;
+            document.getElementById('cartSubtotal').textContent = 'Rp ' + subtotal.toLocaleString();
+            document.getElementById('cartShipping').textContent = 'Rp 0';
+            document.getElementById('cartTotalDisplay').textContent = 'Rp ' + total.toLocaleString();
             localStorage.setItem('joellCart', JSON.stringify(cart));
         }
 
         function addToCart(productId, variantName, variantPrice) {
-            const p = products.find(x => x.id === productId);
+            var p = null;
+            for (var i = 0; i < products.length; i++) {
+                if (products[i].id === productId) { p = products[i]; break; }
+            }
             if (!p) return;
-            const existing = cart.find(item => item.id === productId && item.variant === variantName);
-            if (existing) { existing.qty += 1; } else {
+            var existing = null;
+            for (var j = 0; j < cart.length; j++) {
+                if (cart[j].id === productId && cart[j].variant === variantName) { existing = cart[j]; break; }
+            }
+            if (existing) {
+                existing.qty += 1;
+            } else {
                 cart.push({ id: p.id, name: p.name, price: variantPrice, variant: variantName, qty: 1, icon: p.icon ||
                         'fa-box' });
             }
@@ -3601,31 +3501,39 @@
         });
 
         function openDetail(productId) {
-            const p = products.find(x => x.id === productId);
+            var p = null;
+            for (var i = 0; i < products.length; i++) {
+                if (products[i].id === productId) { p = products[i]; break; }
+            }
             if (!p) return;
             currentProductId = p.id;
             selectedVariant = null;
             document.getElementById('detailName').textContent = p.name;
-            const minPrice = Math.min(...p.variants.map(v => v.price));
-            document.getElementById('detailPrice').textContent = `Rp ${minPrice.toLocaleString()}`;
+            var minPrice = Infinity;
+            for (var j = 0; j < p.variants.length; j++) {
+                if (p.variants[j].price < minPrice) minPrice = p.variants[j].price;
+            }
+            document.getElementById('detailPrice').textContent = 'Rp ' + minPrice.toLocaleString();
             document.getElementById('detailDesc').textContent = p.desc;
-            const list = document.getElementById('variantList');
+            var list = document.getElementById('variantList');
             list.innerHTML = '';
-            p.variants.forEach((v, index) => {
-                const priceText = v.price === 0 ? 'Harga sesuai request' : `Rp ${v.price.toLocaleString()}`;
-                const div = document.createElement('div');
+            p.variants.forEach(function(v, index) {
+                var priceText = v.price === 0 ? 'Harga sesuai request' : 'Rp ' + v.price.toLocaleString();
+                var div = document.createElement('div');
                 div.className = 'variant-item';
                 div.dataset.index = index;
-                div.innerHTML = `<span class="vname">${v.name}</span><span class="vprice">${priceText}</span>`;
+                div.innerHTML = '<span class="vname">' + v.name + '</span><span class="vprice">' + priceText +
+                    '</span>';
                 list.appendChild(div);
                 div.addEventListener('click', function() {
-                    document.querySelectorAll('.variant-item').forEach(el => el.classList.remove('active'));
+                    document.querySelectorAll('.variant-item').forEach(function(el) { el.classList.remove(
+                            'active'); });
                     this.classList.add('active');
                     selectedVariant = p.variants[index];
                 });
             });
             if (p.variants.length > 0) {
-                const firstItem = list.querySelector('.variant-item');
+                var firstItem = list.querySelector('.variant-item');
                 if (firstItem) { firstItem.classList.add('active');
                     selectedVariant = p.variants[0]; }
             }
@@ -3637,72 +3545,74 @@
         // ============================================================
         async function getLatestAnime() {
             try {
-                const response = await fetch('https://api.jikan.moe/v4/seasons/now?limit=10');
-                const data = await response.json();
+                var response = await fetch('https://api.jikan.moe/v4/seasons/now?limit=10');
+                var data = await response.json();
                 return data.data || [];
-            } catch (error) { console.error('Gagal ambil anime terbaru:', error); return []; }
+            } catch (error) { return []; }
         }
         async function getUpcomingAnime() {
             try {
-                const response = await fetch('https://api.jikan.moe/v4/seasons/upcoming?limit=10');
-                const data = await response.json();
+                var response = await fetch('https://api.jikan.moe/v4/seasons/upcoming?limit=10');
+                var data = await response.json();
                 return data.data || [];
-            } catch (error) { console.error('Gagal ambil anime upcoming:', error); return []; }
+            } catch (error) { return []; }
         }
+
         function renderAnimeList(animeList, containerId) {
-            const container = document.getElementById(containerId);
+            var container = document.getElementById(containerId);
             if (!container) return;
             if (animeList.length === 0) {
                 container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px;">Tidak ada anime.</p>';
                 return;
             }
-            let html = '';
-            animeList.forEach(anime => {
-                const title = anime.title || 'Judul Tidak Diketahui';
-                const image = anime.images?.jpg?.image_url || '';
-                const score = anime.score || 'N/A';
-                const episodes = anime.episodes || '?';
-                const type = anime.type || 'TV';
-                const airingDate = anime.aired?.from ? new Date(anime.aired.from) : null;
-                let countdownText = 'TBA';
+            var html = '';
+            animeList.forEach(function(anime) {
+                var title = anime.title || 'Judul Tidak Diketahui';
+                var image = anime.images?.jpg?.image_url || '';
+                var score = anime.score || 'N/A';
+                var episodes = anime.episodes || '?';
+                var type = anime.type || 'TV';
+                var airingDate = anime.aired?.from ? new Date(anime.aired.from) : null;
+                var countdownText = 'TBA';
                 if (airingDate) {
-                    const now = new Date();
-                    const diff = airingDate - now;
+                    var now = new Date();
+                    var diff = airingDate - now;
                     if (diff > 0) {
-                        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                        countdownText = `${days}d ${hours}h ${mins}m`;
+                        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        var mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                        countdownText = days + 'd ' + hours + 'h ' + mins + 'm';
                     } else { countdownText = 'Sedang tayang'; }
                 }
-                const epDisplay = episodes !== '?' ? `EP${episodes}` : 'EP?';
-                html += `<div class="anime-card">
-                    <div class="poster">${image ? `<img src="${image}" alt="${title}" loading="lazy" />` : `<div class="fallback"><i class="fas fa-film"></i></div>`}</div>
-                    <div class="info">
-                        <div class="title">${title}</div>
-                        <div class="meta"><span class="badge episode-badge"><i class="fas fa-play-circle"></i> ${epDisplay}</span><span class="badge"><i class="fas fa-tv"></i> ${type}</span></div>
-                        <div class="countdown"><i class="fas fa-clock"></i> ${countdownText}</div>
-                        <div class="rating"><span class="score"><i class="fas fa-star"></i> ${score}</span><span class="episodes"><i class="fas fa-video"></i> ${episodes} episode</span></div>
-                        <button class="btn-watch" data-title="${encodeURIComponent(title)}"><i class="fas fa-play"></i> Nonton</button>
-                    </div>
-                </div>`;
+                var epDisplay = episodes !== '?' ? 'EP' + episodes : 'EP?';
+                html += '<div class="anime-card"><div class="poster">' + (image ? '<img src="' + image +
+                    '" alt="' + title + '" loading="lazy" />' :
+                    '<div class="fallback"><i class="fas fa-film"></i></div>') +
+                    '</div><div class="info"><div class="title">' + title +
+                    '</div><div class="meta"><span class="badge episode-badge"><i class="fas fa-play-circle"></i> ' +
+                    epDisplay + '</span><span class="badge"><i class="fas fa-tv"></i> ' + type +
+                    '</span></div><div class="countdown"><i class="fas fa-clock"></i> ' + countdownText +
+                    '</div><div class="rating"><span class="score"><i class="fas fa-star"></i> ' + score +
+                    '</span><span class="episodes"><i class="fas fa-video"></i> ' + episodes +
+                    ' episode</span></div><button class="btn-watch" data-title="' + encodeURIComponent(title) +
+                    '"><i class="fas fa-play"></i> Nonton</button></div></div>';
             });
             container.innerHTML = html;
-            container.querySelectorAll('.btn-watch').forEach(btn => {
+            container.querySelectorAll('.btn-watch').forEach(function(btn) {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    const title = decodeURIComponent(this.dataset.title);
-                    window.open(
-                        `https://www.google.com/search?q=nonton+${encodeURIComponent(title)}+streaming+sub+indo`,
-                        '_blank');
+                    var title = decodeURIComponent(this.dataset.title);
+                    window.open('https://www.google.com/search?q=nonton+' + encodeURIComponent(title) +
+                        '+streaming+sub+indo', '_blank');
                 });
             });
         }
         async function loadAnime() {
-            const [latest, upcoming] = await Promise.all([getLatestAnime(), getUpcomingAnime()]);
-            renderAnimeList(latest, 'animeLatest');
-            renderAnimeList(upcoming, 'animeUpcoming');
+            var results = await Promise.all([getLatestAnime(), getUpcomingAnime()]);
+            renderAnimeList(results[0], 'animeLatest');
+            renderAnimeList(results[1], 'animeUpcoming');
         }
+
         function openAnime() {
             document.getElementById('animeOverlay').classList.add('open');
             loadAnime();
@@ -3710,110 +3620,88 @@
         }
 
         // ============================================================
-        //  BOT CONTROLLER
+        //  BOT CONTROLLER (SEDERHANA)
         // ============================================================
         (function() {
-            const overlay = document.getElementById('botControllerOverlay');
-            const closeBtn = document.getElementById('botControllerCloseBtn');
-            const tabController = document.querySelector('.bot-tab[data-tab="controller"]');
-            const tabLibrary = document.querySelector('.bot-tab[data-tab="library"]');
-            const viewController = document.getElementById('botViewController');
-            const viewLibrary = document.getElementById('botViewLibrary');
-            const tokenInput = document.getElementById('botTokenInput');
-            const checkBtn = document.getElementById('botCheckBtn');
-            const statusBox = document.getElementById('botStatusBox');
-            const panelKontrol = document.getElementById('botPanelKontrol');
-            const botName = document.getElementById('botName');
-            const botId = document.getElementById('botId');
-            const pesanInput = document.getElementById('botPesanInput');
-            const kirimBtn = document.getElementById('botKirimBtn');
-            const logArea = document.getElementById('botLogArea');
-            const botListContainer = document.getElementById('botListContainer');
-            let currentToken = '',
+            var overlay = document.getElementById('botControllerOverlay');
+            var closeBtn = document.getElementById('botControllerCloseBtn');
+            var tokenInput = document.getElementById('botTokenInput');
+            var checkBtn = document.getElementById('botCheckBtn');
+            var statusBox = document.getElementById('botStatusBox');
+            var panelKontrol = document.getElementById('botPanelKontrol');
+            var botName = document.getElementById('botName');
+            var botId = document.getElementById('botId');
+            var pesanInput = document.getElementById('botPesanInput');
+            var kirimBtn = document.getElementById('botKirimBtn');
+            var logArea = document.getElementById('botLogArea');
+            var currentToken = '',
                 currentBotId = '',
                 currentChatId = null;
 
-            function botSetStatus(msg, type = 'info') {
-                statusBox.className = `bot-status-banner ${type}`;
-                statusBox.innerHTML = `<span>${msg}</span>`;
+            function botSetStatus(msg, type) {
+                type = type || 'info';
+                statusBox.className = 'bot-status-banner ' + type;
+                statusBox.innerHTML = '<span>' + msg + '</span>';
                 statusBox.classList.remove('hidden');
             }
 
             function botGetTimestamp() {
-                const now = new Date();
-                return `[${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}]`;
+                var now = new Date();
+                return '[' + String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2,
+                    '0') + ':' + String(now.getSeconds()).padStart(2, '0') + ']';
             }
 
             function botAddLog(type, text) {
-                const div = document.createElement('div');
+                var div = document.createElement('div');
                 div.className = 'bot-terminal-line';
-                let colorClass = 'bot-term-info';
+                var colorClass = 'bot-term-info';
                 if (type === 'SUCCESS') colorClass = 'bot-term-success';
                 if (type === 'ERROR') colorClass = 'bot-term-error';
-                if (type === 'SYS') colorClass = 'bot-term-info';
-                div.innerHTML =
-                    `<span class="bot-term-time">${botGetTimestamp()}</span><span class="${colorClass}">[${type}]</span><span class="bot-term-text">${text}</span>`;
+                div.innerHTML = '<span class="bot-term-time">' + botGetTimestamp() + '</span><span class="' +
+                    colorClass + '">[' + type + ']</span><span class="bot-term-text">' + text + '</span>';
                 logArea.appendChild(div);
                 logArea.scrollTop = logArea.scrollHeight;
             }
 
-            function botClearLog() { logArea.innerHTML = ''; }
-
-            function botSaveToStorage(token, botData) {
-                let bots = JSON.parse(localStorage.getItem('joell_bots') || '[]');
-                const existing = bots.findIndex(b => b.token === token);
-                const newBot = { token, id: botData.id, name: botData.first_name, username: botData.username || '' };
-                if (existing !== -1) bots[existing] = newBot;
-                else bots.push(newBot);
-                localStorage.setItem('joell_bots', JSON.stringify(bots));
-            }
-
-            function botRemoveFromStorage(token) {
-                let bots = JSON.parse(localStorage.getItem('joell_bots') || '[]');
-                bots = bots.filter(b => b.token !== token);
-                localStorage.setItem('joell_bots', JSON.stringify(bots));
-                botLoadList();
-            }
-
             async function botCheckToken(token) {
                 try {
-                    const res = await fetch(`https://api.telegram.org/bot${token}/getMe`);
-                    const data = await res.json();
+                    var res = await fetch('https://api.telegram.org/bot' + token + '/getMe');
+                    var data = await res.json();
                     return data.ok && data.result ? { valid: true, bot: data.result } : { valid: false,
                     error: data.description || 'Invalid token' };
-                } catch { return { valid: false, error: 'Network error' }; }
+                } catch (err) { return { valid: false, error: 'Network error' }; }
             }
 
             async function botGetFirstChatId(token) {
                 try {
-                    const res = await fetch(`https://api.telegram.org/bot${token}/getUpdates?limit=1`);
-                    const data = await res.json();
+                    var res = await fetch('https://api.telegram.org/bot' + token + '/getUpdates?limit=1');
+                    var data = await res.json();
                     if (data.ok && data.result.length > 0) {
-                        const update = data.result[0];
+                        var update = data.result[0];
                         if (update.message) return update.message.chat.id;
                         if (update.callback_query) return update.callback_query.message.chat.id;
                     }
                     return null;
-                } catch { return null; }
+                } catch (err) { return null; }
             }
 
             async function botSendMessage(token, chatId, text) {
                 try {
-                    const form = new FormData();
+                    var form = new FormData();
                     form.append('chat_id', chatId);
                     form.append('text', text);
-                    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, { method: 'POST',
+                    var res = await fetch('https://api.telegram.org/bot' + token + '/sendMessage', { method: 'POST',
                         body: form });
                     return await res.json();
-                } catch { return { ok: false, description: 'Network error' }; }
+                } catch (err) { return { ok: false, description: 'Network error' }; }
             }
 
             async function botConnect(token) {
                 tokenInput.value = token;
                 botSetStatus('Menghubungkan...', 'info');
-                const result = await botCheckToken(token);
+                var result = await botCheckToken(token);
                 if (!result.valid) {
-                    botSetStatus(`Gagal: ${result.error}`, 'error');
+                    botSetStatus('Gagal: ' + result.error, 'error');
                     panelKontrol.classList.add('hidden');
                     return false;
                 }
@@ -3821,108 +3709,63 @@
                 currentBotId = result.bot.id;
                 botName.textContent = result.bot.first_name || 'Bot';
                 botId.textContent = result.bot.id;
-                botSaveToStorage(token, result.bot);
-                const chatId = await botGetFirstChatId(token);
+                var chatId = await botGetFirstChatId(token);
                 currentChatId = chatId || null;
-                botSetStatus(chatId ? `Terhubung. Chat ID: ${chatId}` : 'Terhubung. Menunggu interaksi user.', chatId ?
+                botSetStatus(chatId ? 'Terhubung. Chat ID: ' + chatId : 'Terhubung. Menunggu interaksi user.', chatId ?
                     'success' : 'info');
                 panelKontrol.classList.remove('hidden');
-                botClearLog();
                 botAddLog('SYS', 'Sesi terautentikasi.');
-                if (currentChatId) botAddLog('INFO', `Chat ID: ${currentChatId}`);
+                if (currentChatId) botAddLog('INFO', 'Chat ID: ' + currentChatId);
                 return true;
             }
-            checkBtn.addEventListener('click', () => {
-                const token = tokenInput.value.trim();
-                if (!token) return botSetStatus('Token diperlukan.', 'error');
+
+            checkBtn.addEventListener('click', function() {
+                var token = tokenInput.value.trim();
+                if (!token) { botSetStatus('Token diperlukan.', 'error'); return; }
                 botConnect(token);
             });
+
             kirimBtn.addEventListener('click', async function() {
-                const text = pesanInput.value.trim();
-                if (!text) return botAddLog('ERROR', 'Pesan kosong.');
-                if (!currentToken) return botAddLog('ERROR', 'Tidak ada sesi aktif.');
-                let chatId = currentChatId;
+                var text = pesanInput.value.trim();
+                if (!text) { botAddLog('ERROR', 'Pesan kosong.'); return; }
+                if (!currentToken) { botAddLog('ERROR', 'Tidak ada sesi aktif.'); return; }
+                var chatId = currentChatId;
                 if (!chatId) {
                     chatId = await botGetFirstChatId(currentToken);
                     if (chatId) { currentChatId = chatId;
-                        botAddLog('INFO', `Chat ID ditemukan: ${chatId}`); } else return botAddLog('ERROR',
-                        'Chat ID tidak ditemukan. Bot perlu diinisialisasi di Telegram.');
+                        botAddLog('INFO', 'Chat ID ditemukan: ' + chatId); } else { botAddLog('ERROR',
+                            'Chat ID tidak ditemukan.'); return; }
                 }
-                botAddLog('INFO', `Mengirim pesan...`);
-                const result = await botSendMessage(currentToken, chatId, text);
+                botAddLog('INFO', 'Mengirim pesan...');
+                var result = await botSendMessage(currentToken, chatId, text);
                 if (result.ok) {
-                    botAddLog('SUCCESS', `Pesan terkirim: "${text}"`);
+                    botAddLog('SUCCESS', 'Pesan terkirim: "' + text + '"');
                     pesanInput.value = '';
                 } else {
-                    botAddLog('ERROR', `Gagal: ${result.description}`);
+                    botAddLog('ERROR', 'Gagal: ' + result.description);
                     if (result.description && result.description.includes('chat not found')) currentChatId = null;
                 }
             });
-            tabController.addEventListener('click', () => {
-                tabController.classList.add('active');
-                tabLibrary.classList.remove('active');
-                viewController.classList.remove('hidden');
-                viewLibrary.classList.add('hidden');
-            });
-            tabLibrary.addEventListener('click', () => {
-                tabLibrary.classList.add('active');
-                tabController.classList.remove('active');
-                viewLibrary.classList.remove('hidden');
-                viewController.classList.add('hidden');
-                botLoadList();
-            });
 
-            async function botLoadList() {
-                const bots = JSON.parse(localStorage.getItem('joell_bots') || '[]');
-                botListContainer.innerHTML = '';
-                if (bots.length === 0) {
-                    botListContainer.innerHTML =
-                        `<div style="text-align:center;padding:20px;color:var(--text-muted);font-size:0.85rem;">Belum ada bot tersimpan.</div>`;
-                    return;
-                }
-                for (const bot of bots) {
-                    const card = document.createElement('div');
-                    card.className = 'bot-item';
-                    card.innerHTML =
-                        `<div class="bot-meta"><div class="bot-title">${bot.name}<span class="bot-badge checking" id="bbadge-${bot.id}">Verifying</span></div><div class="bot-subtitle">ID: ${bot.id} ${bot.username ? `| @${bot.username}` : ''}</div></div><div class="bot-action-group"><button class="bot-btn-icon" onclick="window.botUse('${bot.token}')"><i class="fas fa-log-in"></i></button><button class="bot-btn-icon danger" onclick="window.botDelete('${bot.token}')"><i class="fas fa-trash-alt"></i></button></div>`;
-                    botListContainer.appendChild(card);
-                    const res = await botCheckToken(bot.token);
-                    const badge = document.getElementById(`bbadge-${bot.id}`);
-                    if (badge) {
-                        badge.className = `bot-badge ${res.valid ? 'active' : 'banned'}`;
-                        badge.textContent = res.valid ? 'Active' : 'Revoked';
-                    }
-                }
-            }
-            window.botUse = (token) => { tabController.click();
-                botConnect(token); };
-            window.botDelete = (token) => {
-                if (confirm('Hapus bot ini dari penyimpanan?')) botRemoveFromStorage(token);
-            };
-            pesanInput.addEventListener('keypress', e => { if (e.key === 'Enter') kirimBtn.click(); });
-            tokenInput.addEventListener('keypress', e => { if (e.key === 'Enter') checkBtn.click(); });
-            closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
-            overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
-            window.openBotController = function() {
-                overlay.classList.add('open');
-                botLoadList();
-            };
+            closeBtn.addEventListener('click', function() { overlay.classList.remove('open'); });
+            overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.classList.remove('open'); });
+            window.openBotController = function() { overlay.classList.add('open'); };
         })();
 
         // ============================================================
         //  OSINT
         // ============================================================
         (function() {
-            const overlay = document.getElementById('osintOverlay');
-            const closeBtn = document.getElementById('osintCloseBtn');
-            const phoneInput = document.getElementById('osintPhone');
-            const endpointSelect = document.getElementById('osintEndpoint');
-            const queryBtn = document.getElementById('osintQueryBtn');
-            const resultDiv = document.getElementById('osintResult');
-            const resultPre = document.getElementById('osintResultPre');
-            const resultCopyBtn = document.getElementById('osintResultCopyBtn');
-            const API_KEY = 'a306d58d00msh5264c55372d6410p14feb6jsn101a605f6cd6';
-            const API_HOST = 'whatsapp-osint.p.rapidapi.com';
+            var overlay = document.getElementById('osintOverlay');
+            var closeBtn = document.getElementById('osintCloseBtn');
+            var phoneInput = document.getElementById('osintPhone');
+            var endpointSelect = document.getElementById('osintEndpoint');
+            var queryBtn = document.getElementById('osintQueryBtn');
+            var resultDiv = document.getElementById('osintResult');
+            var resultPre = document.getElementById('osintResultPre');
+            var resultCopyBtn = document.getElementById('osintResultCopyBtn');
+            var API_KEY = 'a306d58d00msh5264c55372d6410p14feb6jsn101a605f6cd6';
+            var API_HOST = 'whatsapp-osint.p.rapidapi.com';
             window.openOsint = function() {
                 overlay.classList.add('open');
                 resultDiv.classList.add('hidden');
@@ -3932,14 +3775,14 @@
             closeBtn.addEventListener('click', function() { overlay.classList.remove('open'); });
             overlay.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
             queryBtn.addEventListener('click', async function() {
-                const phone = phoneInput.value.trim();
-                const endpoint = endpointSelect.value;
+                var phone = phoneInput.value.trim();
+                var endpoint = endpointSelect.value;
                 if (!phone) {
                     resultPre.textContent = '❌ Masukkan nomor telepon terlebih dahulu.';
                     resultDiv.classList.remove('hidden');
                     return;
                 }
-                const cleanPhone = phone.replace(/[^0-9]/g, '');
+                var cleanPhone = phone.replace(/[^0-9]/g, '');
                 if (cleanPhone.length < 8 || cleanPhone.length > 15) {
                     resultPre.textContent = '❌ Format nomor tidak valid. Gunakan 8-15 digit dengan kode negara.';
                     resultDiv.classList.remove('hidden');
@@ -3950,31 +3793,36 @@
                 resultPre.textContent = '⏳ Mengirim request ke API...';
                 resultDiv.classList.remove('hidden');
                 try {
-                    let url = `https://whatsapp-osint.p.rapidapi.com${endpoint}`;
-                    const headers = { 'x-rapidapi-key': API_KEY, 'x-rapidapi-host': API_HOST };
-                    let options = { method: 'GET', headers };
+                    var url = 'https://whatsapp-osint.p.rapidapi.com' + endpoint;
+                    var headers = { 'x-rapidapi-key': API_KEY, 'x-rapidapi-host': API_HOST };
+                    var options = { method: 'GET', headers: headers };
                     if (endpoint === '/bizos') {
                         options.method = 'POST';
                         options.headers['Content-Type'] = 'application/json';
                         options.body = JSON.stringify({ phone: cleanPhone });
                     } else {
-                        url += `?phone=${cleanPhone}`;
+                        url += '?phone=' + cleanPhone;
                     }
-                    const response = await fetch(url, options);
-                    const data = await response.json();
+                    var response = await fetch(url, options);
+                    var data = await response.json();
                     if (response.ok) {
                         if (endpoint === '/wspic/b64' && data.data) {
                             resultPre.innerHTML =
-                                `<span class="success">✅ Foto profil berhasil diambil</span><div class="image-result"><img src="data:image/jpeg;base64,${data.data}" alt="Profile Picture" /></div><br><span class="info">📱 Nomor: ${cleanPhone}</span><br><span class="info">📦 Base64 length: ${data.data.length}</span>`;
+                                '<span class="success">✅ Foto profil berhasil diambil</span><div class="image-result"><img src="data:image/jpeg;base64,' +
+                                data.data +
+                                '" alt="Profile Picture" /></div><br><span class="info">📱 Nomor: ' +
+                                cleanPhone + '</span><br><span class="info">📦 Base64 length: ' + data
+                                .data.length + '</span>';
                         } else {
                             resultPre.textContent = JSON.stringify(data, null, 2);
                         }
                     } else {
-                        resultPre.textContent = `❌ Error ${response.status}: ${JSON.stringify(data, null, 2)}`;
+                        resultPre.textContent = '❌ Error ' + response.status + ': ' + JSON.stringify(data, null,
+                            2);
                         resultPre.className = 'error';
                     }
                 } catch (error) {
-                    resultPre.textContent = `❌ Network Error: ${error.message}`;
+                    resultPre.textContent = '❌ Network Error: ' + error.message;
                     resultPre.className = 'error';
                 } finally {
                     queryBtn.disabled = false;
@@ -3983,21 +3831,21 @@
             });
             phoneInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') queryBtn.click(); });
             resultCopyBtn.addEventListener('click', function() {
-                const text = resultPre.textContent;
-                navigator.clipboard.writeText(text).then(() => {
-                    const original = this.innerHTML;
+                var text = resultPre.textContent;
+                navigator.clipboard.writeText(text).then(function() {
+                    var original = this.innerHTML;
                     this.innerHTML = '<i class="fas fa-check"></i> Tersalin!';
-                    setTimeout(() => { this.innerHTML = original; }, 2000);
-                }).catch(() => {
-                    const range = document.createRange();
+                    setTimeout(function() { this.innerHTML = original; }.bind(this), 2000);
+                }.bind(this)).catch(function() {
+                    var range = document.createRange();
                     range.selectNode(resultPre);
                     window.getSelection().removeAllRanges();
                     window.getSelection().addRange(range);
                     document.execCommand('copy');
-                    const original = this.innerHTML;
+                    var original = this.innerHTML;
                     this.innerHTML = '<i class="fas fa-check"></i> Tersalin!';
-                    setTimeout(() => { this.innerHTML = original; }, 2000);
-                });
+                    setTimeout(function() { this.innerHTML = original; }.bind(this), 2000);
+                }.bind(this));
             });
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && overlay.classList.contains('open')) overlay.classList.remove('open');
@@ -4008,17 +3856,17 @@
         //  SSWEB — SCREENSHOT WEBSITE
         // ============================================================
         (function() {
-            const overlay = document.getElementById('sswebOverlay');
-            const closeBtn = document.getElementById('sswebCloseBtn');
-            const urlInput = document.getElementById('sswebUrl');
-            const btn = document.getElementById('sswebBtn');
-            const resultDiv = document.getElementById('sswebResult');
+            var overlay = document.getElementById('sswebOverlay');
+            var closeBtn = document.getElementById('sswebCloseBtn');
+            var urlInput = document.getElementById('sswebUrl');
+            var btn = document.getElementById('sswebBtn');
+            var resultDiv = document.getElementById('sswebResult');
 
             window.openSsweb = function() {
                 overlay.classList.add('open');
                 urlInput.value = '';
                 resultDiv.innerHTML =
-                    `<div class="placeholder"><i class="fas fa-image" style="font-size:2rem;display:block;margin-bottom:8px;"></i>Masukkan URL dan klik tombol di atas.</div>`;
+                    '<div class="placeholder"><i class="fas fa-image" style="font-size:2rem;display:block;margin-bottom:8px;"></i>Masukkan URL dan klik tombol di atas.</div>';
                 urlInput.focus();
             };
 
@@ -4026,13 +3874,13 @@
             overlay.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
 
             btn.addEventListener('click', async function() {
-                const url = urlInput.value.trim();
+                var url = urlInput.value.trim();
                 if (!url) {
-                    resultDiv.innerHTML = `<div class="error">⚠️ Masukkan URL terlebih dahulu.</div>`;
+                    resultDiv.innerHTML = '<div class="error">⚠️ Masukkan URL terlebih dahulu.</div>';
                     return;
                 }
 
-                let validUrl;
+                var validUrl;
                 try {
                     validUrl = new URL(url);
                 } catch (_) {
@@ -4040,69 +3888,60 @@
                         validUrl = new URL('https://' + url);
                     } catch (_2) {
                         resultDiv.innerHTML =
-                            `<div class="error">❌ URL tidak valid. Pastikan diawali dengan http:// atau https://</div>`;
+                            '<div class="error">❌ URL tidak valid. Pastikan diawali dengan http:// atau https://</div>';
                         return;
                     }
                 }
 
-                const finalUrl = validUrl.href;
+                var finalUrl = validUrl.href;
 
                 btn.disabled = true;
                 btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
-                resultDiv.innerHTML = `<div class="loading"><i class="fas fa-spinner fa-spin"></i> Mengambil screenshot...</div>`;
+                resultDiv.innerHTML =
+                    '<div class="loading"><i class="fas fa-spinner fa-spin"></i> Mengambil screenshot...</div>';
 
                 try {
-                    // PAKAI API SCREENSHOT YANG CORS-FRIENDLY
-                    const apiUrl =
-                        `https://api.screenshotmachine.com/?key=14d2e6&url=${encodeURIComponent(finalUrl)}&dimension=1024x768&cacheLimit=0`;
-                    const response = await fetch(apiUrl);
+                    var apiUrl =
+                        'https://api.screenshotmachine.com/?key=14d2e6&url=' + encodeURIComponent(finalUrl) +
+                        '&dimension=1024x768&cacheLimit=0';
+                    var response = await fetch(apiUrl);
 
                     if (response.ok) {
-                        const blob = await response.blob();
-                        const reader = new FileReader();
+                        var blob = await response.blob();
+                        var reader = new FileReader();
                         reader.onload = function() {
-                            const imgUrl = reader.result;
-                            resultDiv.innerHTML = `
-                                <img src="${imgUrl}" alt="Screenshot ${finalUrl}" loading="lazy" />
-                                <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;width:100%;padding:0 8px;">
-                                    <a href="${imgUrl}" download="screenshot-${Date.now()}.png" class="btn-download-ss">
-                                        <i class="fas fa-download"></i> Download
-                                    </a>
-                                    <button onclick="window.open('${imgUrl}','_blank')" class="btn-open-ss">
-                                        <i class="fas fa-external-link-alt"></i> Buka Tab
-                                    </button>
-                                </div>
-                            `;
+                            var imgUrl = reader.result;
+                            resultDiv.innerHTML =
+                                '<img src="' + imgUrl + '" alt="Screenshot ' + finalUrl +
+                                '" loading="lazy" /><div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;width:100%;padding:0 8px;"><a href="' +
+                                imgUrl + '" download="screenshot-' + Date.now() +
+                                '.png" class="btn-download-ss"><i class="fas fa-download"></i> Download</a><button onclick="window.open(\'' +
+                                imgUrl + '\',\'_blank\')" class="btn-open-ss"><i class="fas fa-external-link-alt"></i> Buka Tab</button></div>';
                         };
                         reader.readAsDataURL(blob);
                     } else {
-                        // FALLBACK ke Microlink
-                        const microlinkUrl =
-                            `https://api.microlink.io?url=${encodeURIComponent(finalUrl)}&screenshot=true&embed=screenshot.url`;
-                        const microlinkResponse = await fetch(microlinkUrl, {
+                        var microlinkUrl = 'https://api.microlink.io?url=' + encodeURIComponent(finalUrl) +
+                            '&screenshot=true&embed=screenshot.url';
+                        var microlinkResponse = await fetch(microlinkUrl, {
                             headers: { 'Accept': 'application/json' }
                         });
-                        const data = await microlinkResponse.json();
+                        var data = await microlinkResponse.json();
 
                         if (data.data && data.data.screenshot && data.data.screenshot.url) {
-                            const imgUrl = data.data.screenshot.url;
-                            resultDiv.innerHTML = `
-                                <img src="${imgUrl}" alt="Screenshot ${finalUrl}" loading="lazy" />
-                                <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;width:100%;padding:0 8px;">
-                                    <a href="${imgUrl}" download="screenshot-${Date.now()}.png" class="btn-download-ss">
-                                        <i class="fas fa-download"></i> Download
-                                    </a>
-                                    <button onclick="window.open('${imgUrl}','_blank')" class="btn-open-ss">
-                                        <i class="fas fa-external-link-alt"></i> Buka Tab
-                                    </button>
-                                </div>
-                            `;
+                            var imgUrl = data.data.screenshot.url;
+                            resultDiv.innerHTML =
+                                '<img src="' + imgUrl + '" alt="Screenshot ' + finalUrl +
+                                '" loading="lazy" /><div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;width:100%;padding:0 8px;"><a href="' +
+                                imgUrl + '" download="screenshot-' + Date.now() +
+                                '.png" class="btn-download-ss"><i class="fas fa-download"></i> Download</a><button onclick="window.open(\'' +
+                                imgUrl + '\',\'_blank\')" class="btn-open-ss"><i class="fas fa-external-link-alt"></i> Buka Tab</button></div>';
                         } else {
-                            resultDiv.innerHTML = `<div class="error">❌ Gagal mengambil screenshot. Coba lagi nanti.</div>`;
+                            resultDiv.innerHTML =
+                                '<div class="error">❌ Gagal mengambil screenshot. Coba lagi nanti.</div>';
                         }
                     }
                 } catch (error) {
-                    resultDiv.innerHTML = `<div class="error">❌ Network error: ${error.message}</div>`;
+                    resultDiv.innerHTML = '<div class="error">❌ Network error: ' + error.message + '</div>';
                 } finally {
                     btn.disabled = false;
                     btn.innerHTML = '<i class="fas fa-paper-plane"></i> Ambil Screenshot';
@@ -4117,26 +3956,24 @@
         })();
 
         // ============================================================
-        //  UPLOADER — IMGUR (PASTI JALAN, CORS FRIENDLY)
+        //  UPLOADER — IMGUR
         // ============================================================
         (function() {
-            const overlay = document.getElementById('uploadOverlay');
-            const closeBtn = document.getElementById('uploadCloseBtn');
-            const dropzone = document.getElementById('uploadDropzone');
-            const fileInput = document.getElementById('uploadFileInput');
-            const uploadBtn = document.getElementById('uploadBtn');
-            const progressDiv = document.getElementById('uploadProgress');
-            const progressFill = document.getElementById('uploadProgressFill');
-            const progressText = document.getElementById('uploadProgressText');
-            const resultDiv = document.getElementById('uploadResult');
-            const resultLink = document.getElementById('uploadResultLink');
-            const copyBtn = document.getElementById('uploadCopyBtn');
-            const preview = document.getElementById('uploadPreview');
+            var overlay = document.getElementById('uploadOverlay');
+            var closeBtn = document.getElementById('uploadCloseBtn');
+            var dropzone = document.getElementById('uploadDropzone');
+            var fileInput = document.getElementById('uploadFileInput');
+            var uploadBtn = document.getElementById('uploadBtn');
+            var progressDiv = document.getElementById('uploadProgress');
+            var progressFill = document.getElementById('uploadProgressFill');
+            var progressText = document.getElementById('uploadProgressText');
+            var resultDiv = document.getElementById('uploadResult');
+            var resultLink = document.getElementById('uploadResultLink');
+            var copyBtn = document.getElementById('uploadCopyBtn');
+            var preview = document.getElementById('uploadPreview');
 
-            let selectedFile = null;
-
-            // 🔑 IMGUR CLIENT ID — PUBLIC KEY, PASTI JALAN
-            const IMGUR_CLIENT_ID = '546c25a59c58ad7';
+            var selectedFile = null;
+            var IMGUR_CLIENT_ID = '546c25a59c58ad7';
 
             window.openUpload = function() {
                 overlay.classList.add('open');
@@ -4149,51 +3986,44 @@
                 progressDiv.style.display = 'none';
                 resultDiv.style.display = 'none';
                 preview.innerHTML = '';
-                dropzone.innerHTML = `
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <p>Klik atau seret gambar ke sini</p>
-                    <span class="file-types">PNG · JPG · WEBP · GIF · Maks 10 MB</span>
-                `;
+                dropzone.innerHTML =
+                    '<i class="fas fa-cloud-upload-alt"></i><p>Klik atau seret gambar ke sini</p><span class="file-types">PNG · JPG · WEBP · GIF · Maks 10 MB</span>';
                 uploadBtn.disabled = false;
                 uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload';
             }
 
-            closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
-            overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('open'); });
+            closeBtn.addEventListener('click', function() { overlay.classList.remove('open'); });
+            overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.classList.remove('open'); });
 
-            dropzone.addEventListener('click', () => fileInput.click());
+            dropzone.addEventListener('click', function() { fileInput.click(); });
 
-            fileInput.addEventListener('change', (e) => {
+            fileInput.addEventListener('change', function(e) {
                 if (e.target.files.length > 0) {
                     selectedFile = e.target.files[0];
-                    dropzone.innerHTML = `
-                        <i class="fas fa-file-image" style="color:var(--accent-light);"></i>
-                        <p style="font-weight:600;color:var(--text-primary);">${selectedFile.name}</p>
-                        <span class="file-types">${(selectedFile.size / 1024 / 1024).toFixed(2)} MB</span>
-                    `;
+                    dropzone.innerHTML =
+                        '<i class="fas fa-file-image" style="color:var(--accent-light);"></i><p style="font-weight:600;color:var(--text-primary);">' +
+                        selectedFile.name + '</p><span class="file-types">' + (selectedFile.size / 1024 / 1024)
+                        .toFixed(2) + ' MB</span>';
                 }
             });
 
-            dropzone.addEventListener('dragover', (e) => { e.preventDefault();
+            dropzone.addEventListener('dragover', function(e) { e.preventDefault();
                 dropzone.classList.add('dragover'); });
-            dropzone.addEventListener('dragleave', () => { dropzone.classList.remove('dragover'); });
-            dropzone.addEventListener('drop', (e) => {
+            dropzone.addEventListener('dragleave', function(e) { e.preventDefault();
+                dropzone.classList.remove('dragover'); });
+            dropzone.addEventListener('drop', function(e) {
                 e.preventDefault();
                 dropzone.classList.remove('dragover');
                 if (e.dataTransfer.files.length > 0) {
                     selectedFile = e.dataTransfer.files[0];
                     fileInput.files = e.dataTransfer.files;
-                    dropzone.innerHTML = `
-                        <i class="fas fa-file-image" style="color:var(--accent-light);"></i>
-                        <p style="font-weight:600;color:var(--text-primary);">${selectedFile.name}</p>
-                        <span class="file-types">${(selectedFile.size / 1024 / 1024).toFixed(2)} MB</span>
-                    `;
+                    dropzone.innerHTML =
+                        '<i class="fas fa-file-image" style="color:var(--accent-light);"></i><p style="font-weight:600;color:var(--text-primary);">' +
+                        selectedFile.name + '</p><span class="file-types">' + (selectedFile.size / 1024 / 1024)
+                        .toFixed(2) + ' MB</span>';
                 }
             });
 
-            // ============================================================
-            //  UPLOAD KE IMGUR (CORS FRIENDLY, PASTI JALAN)
-            // ============================================================
             uploadBtn.addEventListener('click', async function() {
                 if (!selectedFile) {
                     alert('Pilih gambar dulu!');
@@ -4212,38 +4042,39 @@
                 progressText.textContent = 'Mengupload 0%';
 
                 try {
-                    const formData = new FormData();
+                    var formData = new FormData();
                     formData.append('image', selectedFile);
 
-                    const xhr = new XMLHttpRequest();
+                    var xhr = new XMLHttpRequest();
                     xhr.open('POST', 'https://api.imgur.com/3/image', true);
-                    xhr.setRequestHeader('Authorization', `Client-ID ${IMGUR_CLIENT_ID}`);
+                    xhr.setRequestHeader('Authorization', 'Client-ID ' + IMGUR_CLIENT_ID);
 
-                    xhr.upload.onprogress = (e) => {
+                    xhr.upload.onprogress = function(e) {
                         if (e.lengthComputable) {
-                            const percent = Math.round((e.loaded / e.total) * 100);
+                            var percent = Math.round((e.loaded / e.total) * 100);
                             progressFill.style.width = percent + '%';
-                            progressText.textContent = `Mengupload ${percent}%`;
+                            progressText.textContent = 'Mengupload ' + percent + '%';
                         }
                     };
 
                     xhr.onload = function() {
                         if (xhr.status === 200) {
-                            const json = JSON.parse(xhr.responseText);
+                            var json = JSON.parse(xhr.responseText);
                             if (json.success && json.data && json.data.link) {
-                                const url = json.data.link;
+                                var url = json.data.link;
                                 resultLink.value = url;
                                 resultDiv.style.display = 'block';
                                 preview.innerHTML =
-                                    `<img src="${url}" style="max-width:100%;max-height:200px;border-radius:8px;" />`;
+                                    '<img src="' + url +
+                                    '" style="max-width:100%;max-height:200px;border-radius:8px;" />';
                                 progressText.textContent = '✅ Upload berhasil!';
                                 progressFill.style.width = '100%';
-                                navigator.clipboard?.writeText(url).catch(() => {});
+                                navigator.clipboard?.writeText(url).catch(function() {});
                             } else {
                                 throw new Error('Gagal upload ke Imgur');
                             }
                         } else {
-                            throw new Error(`HTTP ${xhr.status}: ${xhr.statusText}`);
+                            throw new Error('HTTP ' + xhr.status + ': ' + xhr.statusText);
                         }
                     };
 
@@ -4262,25 +4093,24 @@
                 }
             });
 
-            // ============================================================
-            //  COPY LINK
-            // ============================================================
-            copyBtn.addEventListener('click', () => {
-                const link = resultLink.value;
+            copyBtn.addEventListener('click', function() {
+                var link = resultLink.value;
                 if (link) {
-                    navigator.clipboard.writeText(link).then(() => {
-                        copyBtn.textContent = '✅ Tersalin!';
-                        setTimeout(() => copyBtn.textContent = 'Salin', 2000);
-                    }).catch(() => {
+                    navigator.clipboard.writeText(link).then(function() {
+                        var original = this.innerHTML;
+                        this.innerHTML = '✅ Tersalin!';
+                        setTimeout(function() { this.innerHTML = original; }.bind(this), 2000);
+                    }.bind(this)).catch(function() {
                         resultLink.select();
                         document.execCommand('copy');
-                        copyBtn.textContent = '✅ Tersalin!';
-                        setTimeout(() => copyBtn.textContent = 'Salin', 2000);
-                    });
+                        var original = this.innerHTML;
+                        this.innerHTML = '✅ Tersalin!';
+                        setTimeout(function() { this.innerHTML = original; }.bind(this), 2000);
+                    }.bind(this));
                 }
             });
 
-            document.addEventListener('keydown', (e) => {
+            document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && overlay.classList.contains('open')) {
                     resetUI();
                     overlay.classList.remove('open');
@@ -4289,91 +4119,15 @@
         })();
 
         // ============================================================
-        //  DOWNLOADER — 3 PLATFORM (TIKTOK, INSTAGRAM, PINTEREST)
-        //  GRATIS — TANPA PASSWORD
+        //  DOWNLOADER — 3 TOMBOL LANGSUNG (TIDAK PAKE LOCK)
         // ============================================================
-        (function() {
-            const gridLayanan = document.getElementById('gridLayanan');
-            if (!gridLayanan) return;
-
-            // Buat modal downloader
-            let modal = document.getElementById('downloaderModalGlobal');
-            if (!modal) {
-                modal = document.createElement('div');
-                modal.id = 'downloaderModalGlobal';
-                modal.className = 'downloader-modal-overlay';
-                modal.innerHTML = `
-                    <div class="downloader-modal-box">
-                        <div class="modal-title">
-                            <i class="fas fa-download"></i>
-                            <h2>Downloader Video</h2>
-                            <p>Pilih platform untuk mendownload video tanpa watermark</p>
-                        </div>
-                        <div class="platform-grid">
-                            <a href="https://snaptik.net/id" target="_blank" class="platform-btn tiktok">
-                                <i class="fab fa-tiktok"></i>
-                                <span class="pname">TikTok</span>
-                                <span class="purl">snaptik.net</span>
-                            </a>
-                            <a href="https://snapsave.app/id/download-video-instagram" target="_blank" class="platform-btn instagram">
-                                <i class="fab fa-instagram"></i>
-                                <span class="pname">Instagram</span>
-                                <span class="purl">snapsave.app</span>
-                            </a>
-                            <a href="https://pindown.io/id1" target="_blank" class="platform-btn pinterest">
-                                <i class="fab fa-pinterest"></i>
-                                <span class="pname">Pinterest</span>
-                                <span class="purl">pindown.io</span>
-                            </a>
-                        </div>
-                        <p style="color:var(--text-muted);font-size:0.7rem;text-align:center;margin:4px 0 12px;">
-                            <i class="fas fa-info-circle"></i> Klik tombol di atas, lalu tempel link video di website tersebut
-                        </p>
-                        <button class="btn-close-modal" onclick="closeDownloaderModal()">
-                            <i class="fas fa-times"></i> Tutup
-                        </button>
-                    </div>
-                `;
-                document.body.appendChild(modal);
-            }
-
-            window.closeDownloaderModal = function() {
-                const modal = document.getElementById('downloaderModalGlobal');
-                if (modal) modal.classList.remove('open');
-            };
-
-            // Event klik menu Downloader Video (id: 14) — BEBAS, TANPA LOCK
-            gridLayanan.addEventListener('click', function(e) {
-                const card = e.target.closest('.menu-card');
-                if (!card) return;
-                const id = parseInt(card.dataset.id);
-                if (id !== 14) return;
-
-                const modal = document.getElementById('downloaderModalGlobal');
-                if (modal) {
-                    modal.classList.add('open');
-                }
-            });
-
-            // Tutup modal klik di luar
-            document.addEventListener('click', function(e) {
-                const modal = document.getElementById('downloaderModalGlobal');
-                if (modal && modal.classList.contains('open')) {
-                    if (!modal.querySelector('.downloader-modal-box').contains(e.target)) {
-                        modal.classList.remove('open');
-                    }
-                }
-            });
-
-            console.log('[DOWNLOADER] Siap — 3 platform (TikTok, Instagram, Pinterest) GRATIS');
-        })();
+        // Tombol downloader udah di HTML langsung, gak perlu JS tambahan
 
         // ============================================================
         //  MENU LAYANAN — LOCK PREMIUM (KECUALI DOWNLOADER)
         // ============================================================
         (function() {
-            // 🔑 CONFIGURASI PASSWORD
-            const LOCK_CONFIG = {
+            var LOCK_CONFIG = {
                 defaultPassword: 'joellshop2025',
                 telegram: '@kakeksalto1',
                 storageKey: 'joell_layanan_unlocked'
@@ -4384,61 +4138,29 @@
             }
 
             function showLockModal(callback) {
-                const oldModal = document.getElementById('lockModal');
+                var oldModal = document.getElementById('lockModal');
                 if (oldModal) oldModal.remove();
 
-                const modal = document.createElement('div');
+                var modal = document.createElement('div');
                 modal.id = 'lockModal';
                 modal.className = 'open';
-                modal.innerHTML = `
-                    <div class="lock-box">
-                        <div class="lock-glow"></div>
-                        <div class="lock-content">
-                            <div class="lock-icon">
-                                <i class="fas fa-lock"></i>
-                            </div>
-                            <h2>🔒 Menu Layanan</h2>
-                            <p class="lock-sub">Masukkan password untuk mengakses semua fitur Layanan</p>
-
-                            <div class="lock-input-wrap">
-                                <label>Password</label>
-                                <input type="password" id="lockPasswordInput" placeholder="Masukkan password...">
-                            </div>
-
-                            <button class="lock-btn" id="lockSubmitBtn">
-                                <i class="fas fa-unlock"></i> Buka Akses
-                            </button>
-
-                            <div class="lock-telegram">
-                                <p>
-                                    Belum punya password? Hubungi 
-                                    <a href="https://t.me/kakeksalto1" target="_blank">${LOCK_CONFIG.telegram}</a>
-                                    <br>untuk mendapatkan akses premium.
-                                </p>
-                            </div>
-
-                            <button class="lock-close" id="lockCloseBtn">
-                                <i class="fas fa-times"></i> Tutup
-                            </button>
-
-                            <div class="lock-error" id="lockErrorMsg"></div>
-                        </div>
-                    </div>
-                `;
+                modal.innerHTML = '<div class="lock-box"><div class="lock-glow"></div><div class="lock-content"><div class="lock-icon"><i class="fas fa-lock"></i></div><h2>🔒 Menu Layanan</h2><p class="lock-sub">Masukkan password untuk mengakses semua fitur Layanan</p><div class="lock-input-wrap"><label>Password</label><input type="password" id="lockPasswordInput" placeholder="Masukkan password..."></div><button class="lock-btn" id="lockSubmitBtn"><i class="fas fa-unlock"></i> Buka Akses</button><div class="lock-telegram"><p>Belum punya password? Hubungi <a href="https://t.me/kakeksalto1" target="_blank">' +
+                    LOCK_CONFIG.telegram +
+                    '</a><br>untuk mendapatkan akses premium.</p></div><button class="lock-close" id="lockCloseBtn"><i class="fas fa-times"></i> Tutup</button><div class="lock-error" id="lockErrorMsg"></div></div></div>';
 
                 document.body.appendChild(modal);
 
-                setTimeout(() => {
-                    const input = document.getElementById('lockPasswordInput');
+                setTimeout(function() {
+                    var input = document.getElementById('lockPasswordInput');
                     if (input) input.focus();
                 }, 300);
 
-                const submitBtn = document.getElementById('lockSubmitBtn');
-                const input = document.getElementById('lockPasswordInput');
-                const errorMsg = document.getElementById('lockErrorMsg');
+                var submitBtn = document.getElementById('lockSubmitBtn');
+                var input = document.getElementById('lockPasswordInput');
+                var errorMsg = document.getElementById('lockErrorMsg');
 
                 function handleSubmit() {
-                    const password = input.value.trim();
+                    var password = input.value.trim();
                     if (!password) {
                         errorMsg.textContent = '⚠️ Masukkan password!';
                         errorMsg.style.display = 'block';
@@ -4450,12 +4172,13 @@
                         modal.remove();
                         if (callback) callback();
                     } else {
-                        errorMsg.textContent = '❌ Password salah! Hubungi ' + LOCK_CONFIG.telegram + ' untuk membeli akses.';
+                        errorMsg.textContent = '❌ Password salah! Hubungi ' + LOCK_CONFIG.telegram +
+                            ' untuk membeli akses.';
                         errorMsg.style.display = 'block';
                         input.value = '';
                         input.focus();
                         input.style.borderColor = '#ef4444';
-                        setTimeout(() => {
+                        setTimeout(function() {
                             input.style.borderColor = 'rgba(255,255,255,0.06)';
                         }, 3000);
                     }
@@ -4475,32 +4198,31 @@
                 });
             }
 
-            // ============================================================
-            //  TAMBAHKAN LOCK KE MENU LAYANAN (KECUALI DOWNLOADER)
-            // ============================================================
-            const gridLayanan = document.getElementById('gridLayanan');
+            var gridLayanan = document.getElementById('gridLayanan');
             if (gridLayanan) {
-                const newGrid = gridLayanan.cloneNode(true);
+                var newGrid = gridLayanan.cloneNode(true);
                 gridLayanan.parentNode.replaceChild(newGrid, gridLayanan);
 
                 newGrid.addEventListener('click', function(e) {
-                    const card = e.target.closest('.menu-card');
+                    var card = e.target.closest('.menu-card');
                     if (!card) return;
 
-                    const id = parseInt(card.dataset.id);
+                    var id = parseInt(card.dataset.id);
 
                     // Downloader Video (id: 14) — BEBAS
                     if (id === 14) return;
 
                     if (!isUnlocked()) {
-                        showLockModal(() => {
+                        showLockModal(function() {
                             card.click();
                         });
                         return;
                     }
 
-                    // Sudah unlock
-                    const product = products.find(p => p.id === id);
+                    var product = null;
+                    for (var i = 0; i < products.length; i++) {
+                        if (products[i].id === id) { product = products[i]; break; }
+                    }
                     if (product) {
                         if (product.isUpload) { window.openUpload(); return; }
                         if (product.isSsweb) { window.openSsweb(); return; }
@@ -4508,14 +4230,11 @@
                         if (product.isTopup) { openTopup(); return; }
                         if (product.isAnime) { openAnime(); return; }
                         if (product.isBotController) { window.openBotController(); return; }
-                        const externalUrl = card.dataset.external;
+                        var externalUrl = card.dataset.external;
                         if (externalUrl) { window.open(externalUrl, '_blank'); return; }
                         openDetail(id);
                     }
                 });
-
-                console.log('[LOCK] Menu Layanan terkunci. Password: ' + LOCK_CONFIG.defaultPassword);
-                console.log('[LOCK] Downloader Video GRATIS — TikTok, Instagram, Pinterest');
             }
         })();
 
@@ -4523,11 +4242,11 @@
         //  NAVIGASI
         // ============================================================
         function navigateTo(page) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
             if (page === 'payment') { window.open('https://joell-payment.vercel.app/', '_blank'); return; }
-            const targetPage = document.getElementById(`page-${page}`);
+            var targetPage = document.getElementById('page-' + page);
             if (targetPage) targetPage.classList.add('active');
-            document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(function(item) {
                 item.classList.remove('active');
                 if (item.dataset.page === page) item.classList.add('active');
             });
@@ -4535,15 +4254,23 @@
         }
 
         function doSearch() {
-            const keyword = document.getElementById('searchInput').value.toLowerCase().trim();
-            const hostingProducts = products.filter(p => p.category === 'hosting' && (p.name.toLowerCase().includes(
-                keyword) || p.desc.toLowerCase().includes(keyword)));
-            const scriptProducts = products.filter(p => p.category === 'script' && (p.name.toLowerCase().includes(
-                keyword) || p.desc.toLowerCase().includes(keyword)));
-            const topupProducts = products.filter(p => p.category === 'topup' && (p.name.toLowerCase().includes(
-                keyword) || p.desc.toLowerCase().includes(keyword)));
-            const layananProducts = products.filter(p => p.category === 'layanan' && (p.name.toLowerCase().includes(
-                keyword) || p.desc.toLowerCase().includes(keyword)));
+            var keyword = document.getElementById('searchInput').value.toLowerCase().trim();
+            var hostingProducts = products.filter(function(p) {
+                return p.category === 'hosting' && (p.name.toLowerCase().includes(keyword) || p.desc.toLowerCase()
+                    .includes(keyword));
+            });
+            var scriptProducts = products.filter(function(p) {
+                return p.category === 'script' && (p.name.toLowerCase().includes(keyword) || p.desc.toLowerCase()
+                    .includes(keyword));
+            });
+            var topupProducts = products.filter(function(p) {
+                return p.category === 'topup' && (p.name.toLowerCase().includes(keyword) || p.desc.toLowerCase()
+                    .includes(keyword));
+            });
+            var layananProducts = products.filter(function(p) {
+                return p.category === 'layanan' && (p.name.toLowerCase().includes(keyword) || p.desc.toLowerCase()
+                    .includes(keyword));
+            });
             document.getElementById('gridHosting').innerHTML = renderMenuCards(hostingProducts);
             document.getElementById('gridScript').innerHTML = renderMenuCards(scriptProducts);
             document.getElementById('gridTopup').innerHTML = renderMenuCards(topupProducts);
@@ -4562,10 +4289,10 @@
         // ============================================================
         //  EVENT LISTENERS
         // ============================================================
-        document.querySelectorAll('.bottom-nav .nav-item[data-page]').forEach(btn => {
+        document.querySelectorAll('.bottom-nav .nav-item[data-page]').forEach(function(btn) {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                const page = this.dataset.page;
+                var page = this.dataset.page;
                 if (page === 'cart') { document.getElementById('cartOverlay').classList.toggle('open'); return; }
                 navigateTo(page);
             });
@@ -4573,7 +4300,8 @@
 
         document.getElementById('navSearch').addEventListener('click', function() {
             document.getElementById('searchInput').focus();
-            document.querySelector('.search-wrap')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            var wrap = document.querySelector('.search-wrap');
+            if (wrap) wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
 
         document.getElementById('cartCloseBtn').addEventListener('click', function() {
@@ -4588,20 +4316,28 @@
             if (e.key === 'Enter') doSearch();
         });
 
-        document.querySelectorAll('.grid-menu').forEach(grid => {
+        document.querySelectorAll('.grid-menu').forEach(function(grid) {
             grid.addEventListener('click', function(e) {
-                const card = e.target.closest('.menu-card');
+                var card = e.target.closest('.menu-card');
                 if (!card) return;
-                const productId = parseInt(card.dataset.id);
+                var productId = parseInt(card.dataset.id);
                 if (!isNaN(productId)) {
-                    const product = products.find(p => p.id === productId);
+                    var product = null;
+                    for (var i = 0; i < products.length; i++) {
+                        if (products[i].id === productId) { product = products[i]; break; }
+                    }
                     if (product) {
-                        if (product.category === 'hosting' || product.category === 'script' || product.category ===
-                            'topup') {
-                            const externalUrl = card.dataset.external;
-                            if (externalUrl) { window.open(externalUrl, '_blank'); return; }
-                            openDetail(productId);
-                        }
+                        if (product.isUpload) { window.openUpload(); return; }
+                        if (product.isSsweb) { window.openSsweb(); return; }
+                        if (product.isOsint) { window.openOsint(); return; }
+                        if (product.isTopup) { openTopup(); return; }
+                        if (product.isAnime) { openAnime(); return; }
+                        if (product.isBotController) { window.openBotController(); return; }
+                        // Downloader (id: 14) udah di-handle di lock, tapi tetep biar aman
+                        if (product.isDownloader) { return; }
+                        var externalUrl = card.dataset.external;
+                        if (externalUrl) { window.open(externalUrl, '_blank'); return; }
+                        openDetail(productId);
                     }
                 }
             });
@@ -4622,25 +4358,25 @@
 
         document.getElementById('checkoutBtn').addEventListener('click', function() {
             if (cart.length === 0) { alert('Keranjang kosong.'); return; }
-            let msg = 'Halo, saya mau pesan:\n';
-            let total = 0;
-            cart.forEach(item => {
-                const sub = item.price * item.qty;
+            var msg = 'Halo, saya mau pesan:\n';
+            var total = 0;
+            cart.forEach(function(item) {
+                var sub = item.price * item.qty;
                 total += sub;
-                const priceText = item.price === 0 ? 'Harga sesuai request' : `Rp ${sub.toLocaleString()}`;
-                msg += `- ${item.name} (${item.variant}) × ${item.qty} = ${priceText}\n`;
+                var priceText = item.price === 0 ? 'Harga sesuai request' : 'Rp ' + sub.toLocaleString();
+                msg += '- ' + item.name + ' (' + item.variant + ') × ' + item.qty + ' = ' + priceText + '\n';
             });
-            msg += `\nTotal: ${total === 0 ? 'Harga sesuai request' : `Rp ${total.toLocaleString()}`}`;
-            window.open(`https://wa.me/6287751755160?text=${encodeURIComponent(msg)}`, '_blank');
+            msg += '\nTotal: ' + (total === 0 ? 'Harga sesuai request' : 'Rp ' + total.toLocaleString());
+            window.open('https://wa.me/6287751755160?text=' + encodeURIComponent(msg), '_blank');
         });
 
         document.getElementById('paymentBtn').addEventListener('click', function() {
             if (cart.length === 0) { alert('Keranjang kosong.'); return; }
-            let total = 0;
-            let names = [];
-            cart.forEach(item => {
+            var total = 0;
+            var names = [];
+            cart.forEach(function(item) {
                 total += item.price * item.qty;
-                names.push(`${item.name} (${item.variant}) × ${item.qty}`);
+                names.push(item.name + ' (' + item.variant + ') × ' + item.qty);
             });
             goToPayment(names.join(' + '), total);
         });
@@ -4674,46 +4410,62 @@
         });
 
         document.getElementById('animeSearchBtn').addEventListener('click', async function() {
-            const query = document.getElementById('animeInput').value.trim();
-            const resultDiv = document.getElementById('animeResult');
+            var query = document.getElementById('animeInput').value.trim();
+            var resultDiv = document.getElementById('animeResult');
             if (!query) { resultDiv.innerHTML = '<p style="color:var(--text-muted);">Masukkan judul anime.</p>';
                 return; }
-            resultDiv.innerHTML = '<p style="color:var(--text-muted);"><i class="fas fa-spinner fa-spin"></i> Mencari...</p>';
+            resultDiv.innerHTML =
+                '<p style="color:var(--text-muted);"><i class="fas fa-spinner fa-spin"></i> Mencari...</p>';
             try {
-                const response = await fetch(`https://api.jikan.moe/v4/anime?q=${encodeURIComponent(query)}&limit=6`);
-                const data = await response.json();
+                var response = await fetch('https://api.jikan.moe/v4/anime?q=' + encodeURIComponent(query) +
+                    '&limit=6');
+                var data = await response.json();
                 if (data.data && data.data.length > 0) {
-                    let html = '';
-                    data.data.forEach(anime => {
-                        const title = anime.title || 'Judul Tidak Diketahui';
-                        const image = anime.images?.jpg?.image_url || '';
-                        const score = anime.score || 'N/A';
-                        const episodes = anime.episodes || '?';
-                        const type = anime.type || 'TV';
-                        const airingDate = anime.aired?.from ? new Date(anime.aired.from) : null;
-                        let countdownText = 'TBA';
+                    var html = '';
+                    data.data.forEach(function(anime) {
+                        var title = anime.title || 'Judul Tidak Diketahui';
+                        var image = anime.images?.jpg?.image_url || '';
+                        var score = anime.score || 'N/A';
+                        var episodes = anime.episodes || '?';
+                        var type = anime.type || 'TV';
+                        var airingDate = anime.aired?.from ? new Date(anime.aired.from) : null;
+                        var countdownText = 'TBA';
                         if (airingDate) {
-                            const now = new Date();
-                            const diff = airingDate - now;
+                            var now = new Date();
+                            var diff = airingDate - now;
                             if (diff > 0) {
-                                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                                countdownText = `${days}d ${hours}h ${mins}m`;
+                                var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                                var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 *
+                                60));
+                                var mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                                countdownText = days + 'd ' + hours + 'h ' + mins + 'm';
                             } else { countdownText = 'Sedang tayang'; }
                         }
-                        const epDisplay = episodes !== '?' ? `EP${episodes}` : 'EP?';
+                        var epDisplay = episodes !== '?' ? 'EP' + episodes : 'EP?';
                         html +=
-                            `<div class="anime-card"><div class="poster">${image ? `<img src="${image}" alt="${title}" loading="lazy" />` : `<div class="fallback"><i class="fas fa-film"></i></div>`}</div><div class="info"><div class="title">${title}</div><div class="meta"><span class="badge episode-badge"><i class="fas fa-play-circle"></i> ${epDisplay}</span><span class="badge"><i class="fas fa-tv"></i> ${type}</span></div><div class="countdown"><i class="fas fa-clock"></i> ${countdownText}</div><div class="rating"><span class="score"><i class="fas fa-star"></i> ${score}</span><span class="episodes"><i class="fas fa-video"></i> ${episodes} episode</span></div><button class="btn-watch" data-title="${encodeURIComponent(title)}"><i class="fas fa-play"></i> Nonton</button></div></div>`;
+                            '<div class="anime-card"><div class="poster">' + (image ? '<img src="' +
+                            image + '" alt="' + title + '" loading="lazy" />' :
+                            '<div class="fallback"><i class="fas fa-film"></i></div>') +
+                            '</div><div class="info"><div class="title">' + title +
+                            '</div><div class="meta"><span class="badge episode-badge"><i class="fas fa-play-circle"></i> ' +
+                            epDisplay +
+                            '</span><span class="badge"><i class="fas fa-tv"></i> ' + type +
+                            '</span></div><div class="countdown"><i class="fas fa-clock"></i> ' +
+                            countdownText +
+                            '</div><div class="rating"><span class="score"><i class="fas fa-star"></i> ' +
+                            score +
+                            '</span><span class="episodes"><i class="fas fa-video"></i> ' + episodes +
+                            ' episode</span></div><button class="btn-watch" data-title="' + encodeURIComponent(
+                                title) +
+                            '"><i class="fas fa-play"></i> Nonton</button></div></div>';
                     });
                     resultDiv.innerHTML = html;
-                    resultDiv.querySelectorAll('.btn-watch').forEach(btn => {
+                    resultDiv.querySelectorAll('.btn-watch').forEach(function(btn) {
                         btn.addEventListener('click', function(e) {
                             e.stopPropagation();
-                            const title = decodeURIComponent(this.dataset.title);
-                            window.open(
-                                `https://www.google.com/search?q=nonton+${encodeURIComponent(title)}+streaming+sub+indo`,
-                                '_blank');
+                            var title = decodeURIComponent(this.dataset.title);
+                            window.open('https://www.google.com/search?q=nonton+' + encodeURIComponent(
+                                title) + '+streaming+sub+indo', '_blank');
                         });
                     });
                 } else {
@@ -4724,13 +4476,13 @@
             }
         });
 
-        document.querySelectorAll('.anime-tab').forEach(tab => {
+        document.querySelectorAll('.anime-tab').forEach(function(tab) {
             tab.addEventListener('click', function() {
-                document.querySelectorAll('.anime-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.anime-tab').forEach(function(t) { t.classList.remove('active'); });
                 this.classList.add('active');
                 document.getElementById('animeLatest').style.display = 'none';
                 document.getElementById('animeUpcoming').style.display = 'none';
-                const tabName = this.dataset.tab;
+                var tabName = this.dataset.tab;
                 if (tabName === 'latest') { document.getElementById('animeLatest').style.display = 'block'; } else {
                     document.getElementById('animeUpcoming').style.display = 'block';
                 }
